@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark
 @namespace      ameer-jamal.github.io/
-@version        1.8.1
+@version        1.8.7
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -12,6 +12,7 @@
 @var color headingOutput "GPT Headings" #fff
 @var color boldOutput "GPT Bold words" #fff
 @var color linksOutput "GPT links" #53b7ff
+
 @var checkbox   wideMode  "GPT Wide Mode" 0
 
 
@@ -48,17 +49,19 @@
 		/* Vscode Dark+ */
 		--code-topbar: radial-gradient(circle at -5.9%, #2c5364 0%, #00283a 15.9%, #1E1E1E 24.5%, #1E1E1E 100%);
 		--user-input: linear-gradient(to right,
-		#2c536445 0%,
+		#2c53646e 0%,
 		#000000 50%,
 		#000000 100%);
+		--selected-chat-gradient: linear-gradient(to right, #23373f, #000 100%);
 
-		/*	Alternative user input text color: #B0C4DE */
+		/* Alternative user input text color: #B0C4DE */
 		--user-input-text: @userInputTextColor;
 		--main-body-output: @gptMainBodyOutputColor;
 		--code-key-words: @codeKeyWordsOutput;
 		--heading-output: @headingOutput;
 		--bold-output: @boldOutput;
 		--links-output: @linksOutput;
+		
 	}
 
 	/*********************************************************************************/
@@ -285,6 +288,12 @@
 		background: -webkit-linear-gradient(to bottom, #434343, #000000);
 		/* Chrome 10-25, Safari 5.1-6 */
 		background: var(--user-input)!important;
+	}
+	
+	/*small bar between last chat and entering user input*/
+	.dark .dark\:bg-gray-800:last-child{
+		background: #000!important;
+
 	}
 
 
@@ -579,7 +588,44 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	.bg-gray-900 {
 		background-color: transparent;
 	}
+	
+	
+	/*********************************************************************************/
 
+	/*2023 Novemeber update in progress*/
+	
+	/*Stick top*/
+	.sticky.top-0.flex.items-center.justify-between.z-10.h-14 {
+       background: linear-gradient(to right, black,rgba(0, 0, 0, 0) 50%, black);
+	}
+
+	/*Text Area to enter chat*/
+	textarea#prompt-textarea{
+		background: #00000096;
+	}
+	
+	div#radix {
+		background: #00000085 !important;
+	}
+	
+	/*Gpt Output*/
+	.text-token-text-primary{
+		background: black !important;
+		border-top: solid rgba(255, 255, 255, .2) 1px !important
+	}
+	
+	.p-2 {
+		padding-right: 2rem
+	}
+	.py-2\.5:not(:last-child) {
+		color:white;
+	}
+	.bg-token-surface-primary{
+		background: var(--selected-chat-gradient)
+	}
+	.icon-md {
+		padding-top: 0.1rem
+	}
 	/*********************************************************************************/
 	/* Current Chat edit or "remove" current chat buttons*/
 	button.p-1.hover\:text-white svg {
@@ -667,7 +713,14 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 		background: black !important;
 	}
 
-
+	/*********************************************************************************/
+	/* Applicable only for Grepper save to grepper in code boxs */
+	.open_grepper_editor.gpt_grepper_add_answer_trigger {
+	      top: 5px !important;
+	      width: 120px !important;
+	      right: 135px !important;
+	}	
+	
 	/*********************************************************************************/
 	/* Applicable only for ChatGPT Chat Organizer - Folders Extension https://chrome.google.com/webstore/detail/chatgpt-chat-organizer-fo/eaoimfbcncfnjkojlfjinakmflglmegk?hl=en-GB  */
 	.popup-container.fixed.top-0.left-0.w-screen.h-screen.flex.items-center.justify-center.z-50 {
