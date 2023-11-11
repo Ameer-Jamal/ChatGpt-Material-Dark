@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark
 @namespace      ameer-jamal.github.io/
-@version        1.8.7
+@version        1.8.10
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -10,7 +10,7 @@
 @var color gptMainBodyOutputColor "GPT Main Body Output Text Color" #C0C0C0
 @var color codeKeyWordsOutput "GPT Code Keywords Color" #E8922E
 @var color headingOutput "GPT Headings" #fff
-@var color boldOutput "GPT Bold words" #fff
+@var color boldOutput "GPT Bold words" #c5fbff
 @var color linksOutput "GPT links" #53b7ff
 
 @var checkbox   wideMode  "GPT Wide Mode" 0
@@ -289,8 +289,6 @@
 		/* Chrome 10-25, Safari 5.1-6 */
 		background: var(--user-input)!important;
 	}
-	
-	/*small bar between last chat and entering user input*/
 	.dark .dark\:bg-gray-800:last-child{
 		background: #000!important;
 
@@ -617,15 +615,38 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	.p-2 {
 		padding-right: 2rem
 	}
+	
 	.py-2\.5:not(:last-child) {
 		color:white;
 	}
+	
+	/*Current highlighted chat*/
 	.bg-token-surface-primary{
 		background: var(--selected-chat-gradient)
 	}
+	
+	/*Icon in more text*/
 	.icon-md {
 		padding-top: 0.1rem
 	}
+	
+	/*Disclamer text*/
+	.relative.px-2.py-2.text-center.text-xs.text-gray-600.dark\:text-gray-300.md\:px-\[60px\] {
+	    color: black;
+	}
+	
+	.gizmo .markdown>:not(pre), .gizmo .markdown>:not(pre)>:not(a){
+		color: var(--main-body-output);
+	}
+	.markdown h1,
+	.markdown h2,
+	.markdown h3,
+	.markdown h4,
+	.markdown h4,
+	.markdown h4{
+		color: var(--heading-output) !important;
+	}
+	
 	/*********************************************************************************/
 	/* Current Chat edit or "remove" current chat buttons*/
 	button.p-1.hover\:text-white svg {
@@ -765,71 +786,66 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	/*********************************************************************************/
 	/************************************WIDE MODE************************************/
 	/*********************************************************************************/
-	& when(@wideMode =1) {
-		/********* MESSAGES *********/
-		/* ===== Main/Outer Div ===== */
-		div.group.w-full.border-b {
-			--pt: 1rem;
-			--pb: 1rem;
-			--pl: max(calc(1vw*1rem), 1rem);
-			--pr: max(calc(1vw*1rem), 1rem);
+	& when(@wideMode = 1) {
+	    .w-full.border-b {
+		  --padding-top-default: 1rem;
+		  --padding-bottom-default: 1rem;
+		  --padding-side-value: max(calc(1vw * 1rem), 1rem);
+		  --padding-top-expanded: 1.5rem;
+		  --padding-side-expanded: 2vw;
+		  --padding-top-large: min(calc(3vh * 1rem), 1.5rem);
+		  --padding-side-large: 1.5rem;
 
-			padding: var(--pt) var(--pr) var(--pb) var(--pl);
+		  padding: var(--padding-top-default) var(--padding-side-value) var(--padding-bottom-default) var(--padding-side-value);
 
-			@media (min-width: 768px) {
-				--pt: 1.5rem;
-				--pl: 2vw;
-				--pr: 2vw;
-				@media (min-width: 1536px) {
-					--pt: min(calc(3vh*1rem), 1.5rem);
-					--pl: 1.5rem;
-					--pr: 1.5rem;
-				}
+		  @media (min-width: 768px) {
+			padding-top: var(--padding-top-expanded);
+			padding-left: var(--padding-side-expanded);
+			padding-right: var(--padding-side-expanded);
+
+			@media (min-width: 1536px) {
+			    padding-top: var(--padding-top-large);
+			    padding-left: var(--padding-side-large);
+			    padding-right: var(--padding-side-large);
+			}
+		  }
+
+		  .gizmo {
+			& > .md\:max-w-2xl, & > .lg\:max-w-[38rem], & > .gizmo\:md\:max-w-3xl, & > .gizmo\:lg\:max-w-[40rem], & > .gizmo\:xl\:max-w-[48rem], & > .xl\:max-w-3xl {
+			    max-width: 90% !important;  
+			}
+		  }
+
+		  > .p-4.justify-center.m-auto {
+			padding-top: 0;
+			padding-bottom: 0;
+
+			@media (max-width: 768px) {
+			    padding-left: 0;
+			    padding-right: 0;
 			}
 
+			> .flex.flex-1.mx-auto.md\:max-w-3xl, > .flex.mx-auto.md\:max-w-2xl.lg\:max-w-\[38rem\].xl\:max-w-3xl, > .div:only-child {
+			    max-width: 90% !important;
+			    gap: 0.5rem;
+			    padding: 0;
 
-			/* ===== Inner Div ===== */
-			/* ===== Inner 1 ===== */
-			> div.p-4.justify-center.m-auto {
-				padding-top: 0;
-				padding-bottom: 0;
+			    @media (min-width: 1536px) {
+				  gap: 1rem;
+			    }
 
-				@media (max-width: 768px) {
-					padding-left: 0;
-					padding-right: 0;
-				}
+			    > .div:last-child {
+				  padding: 0 !important;
 
-				/* Inner #2: */
-				> div.flex.flex-1.mx-auto.md\:max-w-3xl,
-				/*set of classes when sidebar is closed*/
-				> div.flex.mx-auto.md\:max-w-2xl.lg\:max-w-\[38rem\].xl\:max-w-3xl,
-				/* classes when sidebar is open*/
-				> div:only-child {
-					max-width: none !important;
-					gap: 0.5rem;
-					padding: 0;
-
-					@media (min-width: 1536px) {
-						gap: 1rem;
+				  .lg\:absolute.lg\:top-0.lg\:translate-x-full.lg\:right-0.lg\:mt-0.lg\:pl-2 {
+					gap: 0;
+					button {
+					    padding: 3px;
 					}
-
-					/* ===== Message Content Div===== */
-					> div:last-child {
-						padding: 0 !important;
-
-						div.lg\:absolute.lg\:top-0.lg\:translate-x-full.lg\:right-0.lg\:mt-0.lg\:pl-2 {
-							&,
-							> div.flex.gap-1 {
-								gap: 0;
-							}
-
-							button {
-								padding: 3px
-							}
-						}
-					}
-				}
+				  }
+			    }
 			}
-		}
+		  }
+	    }
 	}
 }
