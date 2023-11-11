@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark
 @namespace      ameer-jamal.github.io/
-@version        1.8.10
+@version        1.8.11
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -10,7 +10,7 @@
 @var color gptMainBodyOutputColor "GPT Main Body Output Text Color" #C0C0C0
 @var color codeKeyWordsOutput "GPT Code Keywords Color" #E8922E
 @var color headingOutput "GPT Headings" #fff
-@var color boldOutput "GPT Bold words" #c5fbff
+@var color boldOutput "GPT Bold words" #e5fdff
 @var color linksOutput "GPT links" #53b7ff
 
 @var checkbox   wideMode  "GPT Wide Mode" 0
@@ -647,6 +647,9 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 		color: var(--heading-output) !important;
 	}
 	
+	.prose :where(strong):not(:where([class~=not-prose] *)) {
+		color: var(--bold-output) !important;
+	}
 	/*********************************************************************************/
 	/* Current Chat edit or "remove" current chat buttons*/
 	button.p-1.hover\:text-white svg {
