@@ -1,6 +1,6 @@
 # 🌙 ChatGPT Material Dark
-
-https://userstyles.world/style/11408/chatgpt-material-dark
+### Download and Install here:
+#### https://userstyles.world/style/11408/chatgpt-material-dark
 
 If you like it please review lets get this everywhere! 
 
