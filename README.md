@@ -2,15 +2,16 @@
 ### Download and Install here:
 #### https://userstyles.world/style/11408/chatgpt-material-dark
 
-If you like it please review lets get this everywhere! 
 
 ## 🔍 About this Theme:
-#### Transform your ChatGPT experience with a sleek material dark theme. This theme provides a visually pleasing dark mode with improved readability, ensuring a more comfortable and immersive user experience during extended chat sessions.
+### Transform your ChatGPT experience with a sleek material dark theme. This theme provides a visually pleasing dark mode with improved readability, ensuring a more comfortable and immersive user experience during extended chat sessions.
 
 
 ## 🎨 Features:
+- NEW Text Input Bar Maximum Height is adjustable  for better reading before submitting a question to chatGPT
+- NEW Remove Advertising in Chat History Option
 - NEW: GPT WIDE MODE! allow chats to be wide great for programmers that like bigger code blocks (details below)
-- Added the ability select your own input and output text colors (details below)
+- Added the ability **select your own input and output text colors** (details below)
 - A deep and consistent dark color scheme inspired by material design.
 - Better Selection Highlighting with HighContrast
 - User input and GPT output now are different colors for easier on the eyes reading and also faster distinguishing between input and output 

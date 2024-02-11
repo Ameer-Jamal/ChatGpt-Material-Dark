@@ -1,7 +1,7 @@
 /* ==UserStyle==
-@name           ChatGpt Material Dark
+@name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        1.8.11
+@version        1.9.1
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -14,7 +14,9 @@
 @var color linksOutput "GPT links" #53b7ff
 
 @var checkbox   wideMode  "GPT Wide Mode" 0
+@var checkbox   hideAddTeams "Hide Add Teams in chat history" 1
 
+@var number     textInputBarMaxHeight "Adjust the max height of text input (px)"     ['px', 450, 1, null, 1]
 
 ==/UserStyle== */
 /*
@@ -52,8 +54,11 @@
 		#2c53646e 0%,
 		#000000 50%,
 		#000000 100%);
-		--selected-chat-gradient: linear-gradient(to right, #23373f, #000 100%);
+		--selected-chat-gradient: linear-gradient(to right, #2b404c61, #000 100%);
+		--chat-history-list:#C0C0C0;
+	      --sidebar-surface-secondary: #676767a6; /*Highlight selected char*/
 
+		
 		/* Alternative user input text color: #B0C4DE */
 		--user-input-text: @userInputTextColor;
 		--main-body-output: @gptMainBodyOutputColor;
@@ -61,7 +66,6 @@
 		--heading-output: @headingOutput;
 		--bold-output: @boldOutput;
 		--links-output: @linksOutput;
-		
 	}
 
 	/*********************************************************************************/
@@ -88,8 +92,6 @@
 	.pb-64 {
 		padding-bottom: 0px !important;
 	}
-
-
 	/*********************************************************************************/
 	/*The word new chat in the new chat button*/
 	span.truncate {
@@ -307,9 +309,6 @@
 	}
 
 
-	.text-token-text-primary {
-		color: #c2c2c2 !important;
-	}
 
 	.sticky.top-0.z-\[9\].w-full {
 		background: #00000017;
@@ -500,11 +499,48 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	}
 
 	/*********************************************************************************/
-	/*All Chat history general */
+	/*All Chat history general Depricated!!*/
 	nav[aria-label="Chat history"] {
 		background: var(--all-chat-history);
 	}
+	/*All Chat history*/
 
+	/*Chat history list*/
+	.relative.grow.overflow-hidden.whitespace-nowrap{
+		color: var(--chat-history-list);
+		margin-right:20px;
+	}
+	
+	/*Explore gpts and Add team workspace*/
+	.text-sm {
+		color: var(--chat-history-list);
+	}
+
+
+	/*Username*/
+	.relative.-top-px.grow.-space-y-px.overflow-hidden.text-ellipsis.whitespace-nowrap.text-left.text-token-text-primary{
+		color: var(--chat-history-list) !important;
+		border:none !important;
+	}
+	
+	/*The word chat gpt top left*/
+	.grow.overflow-hidden.text-ellipsis.whitespace-nowrap.text-sm.text-token-text-primary{
+		color: var(--chat-history-list) !important;
+		border:none !important;
+	}
+	
+	/*Chat History Buttons fix */
+	button.text-token-text-primary {
+		color: var(--chat-history-list) !important;
+		border:none !important;
+		background: transparent !important;
+	}
+	
+		button.text-token-text-primary[aria-haspopup="menu"] {
+		background: transparent !important;
+	}
+	
+	
 	/*********************************************************************************/
 	/* hide chat icon in chat history */
 	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.flex-col.flex-1.transition-opacity.duration-500.overflow-y-auto > div > div > span > div > ol > li > a > svg {
@@ -600,18 +636,24 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	/*Text Area to enter chat*/
 	textarea#prompt-textarea{
 		background: #00000096;
+		max-height: @textInputBarMaxHeight !important;
 	}
 	
 	div#radix {
 		background: #00000085 !important;
 	}
 	
-	/*Gpt Output*/
+	/*Gpt input*/
 	.text-token-text-primary{
-		background: black !important;
+		color: var(--user-input-text) !important; /*input Color?*/
+		background: var(--selected-chat-gradient) !important;
 		border-top: solid rgba(255, 255, 255, .2) 1px !important
 	}
 	
+	/*Gpt Output Background*/
+	.text-token-text-primary:nth-child(odd){
+		background: black !important;
+	}
 	.p-2 {
 		padding-right: 2rem
 	}
@@ -620,14 +662,11 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 		color:white;
 	}
 	
-	/*Current highlighted chat*/
-	.bg-token-surface-primary{
-		background: var(--selected-chat-gradient)
-	}
-	
+
 	/*Icon in more text*/
 	.icon-md {
-		padding-top: 0.1rem
+		stroke:white;
+		stroke-width: 0px;
 	}
 	
 	/*Disclamer text*/
@@ -750,6 +789,9 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	.popup-container.fixed.top-0.left-0.w-screen.h-screen.flex.items-center.justify-center.z-50 {
 		background-color: rgba(69, 69, 69, .69) !important;
 	}
+	.groups-div-extension{
+		color: var(--chat-history-list);
+	}
 
 	.p-4.bg-gray-900.rounded-md.shadow-md {
 		background: var(--all-chat-history);
@@ -790,65 +832,27 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	/************************************WIDE MODE************************************/
 	/*********************************************************************************/
 	& when(@wideMode = 1) {
-	    .w-full.border-b {
-		  --padding-top-default: 1rem;
-		  --padding-bottom-default: 1rem;
-		  --padding-side-value: max(calc(1vw * 1rem), 1rem);
-		  --padding-top-expanded: 1.5rem;
-		  --padding-side-expanded: 2vw;
-		  --padding-top-large: min(calc(3vh * 1rem), 1.5rem);
-		  --padding-side-large: 1.5rem;
-
-		  padding: var(--padding-top-default) var(--padding-side-value) var(--padding-bottom-default) var(--padding-side-value);
-
-		  @media (min-width: 768px) {
-			padding-top: var(--padding-top-expanded);
-			padding-left: var(--padding-side-expanded);
-			padding-right: var(--padding-side-expanded);
-
-			@media (min-width: 1536px) {
-			    padding-top: var(--padding-top-large);
-			    padding-left: var(--padding-side-large);
-			    padding-right: var(--padding-side-large);
-			}
-		  }
-
-		  .gizmo {
-			& > .md\:max-w-2xl, & > .lg\:max-w-[38rem], & > .gizmo\:md\:max-w-3xl, & > .gizmo\:lg\:max-w-[40rem], & > .gizmo\:xl\:max-w-[48rem], & > .xl\:max-w-3xl {
-			    max-width: 90% !important;  
-			}
-		  }
-
-		  > .p-4.justify-center.m-auto {
-			padding-top: 0;
-			padding-bottom: 0;
-
-			@media (max-width: 768px) {
-			    padding-left: 0;
-			    padding-right: 0;
-			}
-
-			> .flex.flex-1.mx-auto.md\:max-w-3xl, > .flex.mx-auto.md\:max-w-2xl.lg\:max-w-\[38rem\].xl\:max-w-3xl, > .div:only-child {
-			    max-width: 90% !important;
-			    gap: 0.5rem;
-			    padding: 0;
-
-			    @media (min-width: 1536px) {
-				  gap: 1rem;
-			    }
-
-			    > .div:last-child {
-				  padding: 0 !important;
-
-				  .lg\:absolute.lg\:top-0.lg\:translate-x-full.lg\:right-0.lg\:mt-0.lg\:pl-2 {
-					gap: 0;
-					button {
-					    padding: 3px;
-					}
-				  }
-			    }
-			}
-		  }
-	    }
+		.gizmo .gizmo\:xl\:max-w-\[48rem\] {
+		    max-width: 95%;
+		}
+		.md\:max-w-3xl, .max-w-lg {
+		    max-width: 95%;
+		}
+		.max-h-\[75vh\] {
+		    max-height: 95%;
+		}
+		.prose {
+		    max-width: 100%;
+		}
 	}
+	
+	
+	/************************************Hide Add Teams Advertisment************************************/
+	& when (@hideAddTeams = 1){
+		a.group.flex.gap-2.p-2\.5.text-sm.cursor-pointer.focus\:ring-0.radix-disabled\:pointer-events-none.radix-disabled\:opacity-50.hover\:bg-token-sidebar-surface-secondary.m-0.rounded-lg.px-2 {
+	    display: none;
+	    background: transparent;
+	    height: 0px;
+	}
+   }
 }
