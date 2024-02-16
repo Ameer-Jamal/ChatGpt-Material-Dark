@@ -1,12 +1,17 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        1.9.1
+@version        1.9.89
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
 @preprocessor   less
 @var color userInputTextColor "User Input Text Color" #CD950C
+@var color userInputBackgroundGradientColor "User Input BG Gradient" #2b404c61
+
+@var color gptOutputBackground "Gpt Output Background" #0D0D0D
+
+
 @var color gptMainBodyOutputColor "GPT Main Body Output Text Color" #C0C0C0
 @var color codeKeyWordsOutput "GPT Code Keywords Color" #E8922E
 @var color headingOutput "GPT Headings" #fff
@@ -16,7 +21,7 @@
 @var checkbox   wideMode  "GPT Wide Mode" 0
 @var checkbox   hideAddTeams "Hide Add Teams in chat history" 1
 
-@var number     textInputBarMaxHeight "Adjust the max height of text input (px)"     ['px', 450, 1, null, 1]
+@var number     textInputBarMaxHeight "Adjust the max height of text input (px)"     ['px', 350, 1, null, 1]
 
 ==/UserStyle== */
 /*
@@ -38,27 +43,28 @@
 	@import (css) url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 	@import (css) url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 	@import (css) url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
+	@import (css) url('href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 	:root {
 		--futuristic-gradient: linear-gradient(to right, #0f2027, #203a43, #2c5364);
 		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 		--chat-background-gradient: linear-gradient(180deg, rgb(32 33 35 / 0%), rgb(32 33 35) 58.85%);
-		--all-chat-history: #121212;
+		--all-chat-history: @gptOutputBackground;
 		--main-chat-border-color: rgba(137, 126, 109, 0.35);
 		--deep-space: linear-gradient(to left, #000000, #434343);
+		--deep-space-to-top-transparent: linear-gradient(to top, #4343434f, #0D0D0D);
+
 		--alerts: linear-gradient(to right, #ff512ff0, #f09819f0);
 		--code-background: #1E1E1E;
 		/* Vscode Dark+ */
 		--code-topbar: radial-gradient(circle at -5.9%, #2c5364 0%, #00283a 15.9%, #1E1E1E 24.5%, #1E1E1E 100%);
 		--user-input: linear-gradient(to right,
 		#2c53646e 0%,
-		#000000 50%,
 		#000000 100%);
-		--selected-chat-gradient: linear-gradient(to right, #2b404c61, #000 100%);
-		--chat-history-list:#C0C0C0;
-	      --sidebar-surface-secondary: #676767a6; /*Highlight selected char*/
-
-		
+		--selected-chat-gradient: linear-gradient(to right, @userInputBackgroundGradientColor , #0D0D0D 100%);
+		--chat-history-list: #C0C0C0;
+		--sidebar-surface-secondary: #676767a6;
+		/*Highlight selected chat not used in favor of --sidebar-surface-tertiary*/
 		/* Alternative user input text color: #B0C4DE */
 		--user-input-text: @userInputTextColor;
 		--main-body-output: @gptMainBodyOutputColor;
@@ -92,6 +98,7 @@
 	.pb-64 {
 		padding-bottom: 0px !important;
 	}
+
 	/*********************************************************************************/
 	/*The word new chat in the new chat button*/
 	span.truncate {
@@ -139,9 +146,15 @@
 
 	/*********************************************************************************/
 	/* Code top bar */
-	.flex.items-center.relative.text-gray-200.bg-gray-800.px-4.py-2.text-xs.font-sans.justify-between.rounded-t-md {
+	.flex.items-center.relative.text-token-text-secondary.bg-token-main-surface-secondary.px-4.py-2.text-xs.font-sans.justify-between.rounded-t-md {
+		color: #d5d5d5 !important;
+		font-family: 'Fira Code', monospace !important;
+		font-size: 18px;
+		font-weight: bold;
 		background: var(--code-topbar);
 		border-bottom: 0.1px solid #fff9;
+		letter-spacing: 4px;
+		font-variant: small-caps;
 	}
 
 	/*Code background*/
@@ -165,7 +178,6 @@
 
 	code,
 	pre {
-
 		font-family: 'Fira Code', monospace !important;
 	}
 
@@ -291,9 +303,9 @@
 		/* Chrome 10-25, Safari 5.1-6 */
 		background: var(--user-input)!important;
 	}
-	.dark .dark\:bg-gray-800:last-child{
-		background: #000!important;
 
+	.dark .dark\:bg-gray-800:last-child {
+		background: black!important;
 	}
 
 
@@ -308,12 +320,30 @@
 		background-image: var(--chat-background-gradient)
 	}
 
-
-
 	.sticky.top-0.z-\[9\].w-full {
 		background: #00000017;
 	}
 
+	/*Gpt Output Background*/
+	.w-full.text-token-text-primary:nth-child(odd) {
+		background: var(--all-chat-history) !important;
+	}
+
+
+	/*sidebar underlying color*/
+	.text-token-text-primary:nth-child(odd) {
+		background: black !important;
+	}
+
+	/*Input box bottom middle to right*/
+	.w-full.pt-2.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:w-\[calc\(100\%-\.5rem\)\]:last-child {
+		background: var(--deep-space-to-top-transparent);
+	}
+
+	/*Input box padding to text*/
+	.flex.flex-col.pb-9.text-sm {
+		padding-bottom: 0;
+	}
 
 	/** Chat input text */
 	.dark .dark\:prose-invert {
@@ -342,15 +372,6 @@
 		background: var(--deep-space);
 	}
 
-	/*Recent Chat background Hover For Day/Times*/
-	h3.h-9.pb-2.pt-3.px-3.text-xs.text-gray-500.font-medium.text-ellipsis.overflow-hidden.break-all.bg-gray-50.gizmo\:bg-white.dark\:bg-gray-900:hover {
-		background: #121212;
-	}
-
-	h3.h-9.pb-2.pt-3.px-3.text-xs.text-gray-500.font-medium.text-ellipsis.overflow-hidden.break-all.bg-gray-50.gizmo\:bg-white.dark\:bg-gray-900 {
-		background: #121212;
-		color: #868796;
-	}
 
 	/*********************************************************************************/
 	/*Chat border seperation between AI and user*/
@@ -403,7 +424,7 @@
 
 
 
-/*Beautify issue so damn annoying*/
+	/*Beautify issue so damn annoying*/
 a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-white.cursor-pointer.text-sm.rounded-md.border.dark\:border-white\/20.gizmo\:min-h-0.hover\:bg-gray-500\/10.h-11.gizmo\:h-10.gizmo\:rounded-lg.gizmo\:border-\[rgba\(0\,0\,0\,0\.1\)\].w-11.flex-shrink-0.items-center.justify-center.bg-white.dark\:bg-transparent{
 		border: black;
 	}
@@ -499,18 +520,22 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	}
 
 	/*********************************************************************************/
-	/*All Chat history general Depricated!!*/
+	/*All Chat history general  background of the chat history behind elements */
 	nav[aria-label="Chat history"] {
-		background: var(--all-chat-history);
+		background: black;
+		font-family: "Montserrat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 600;
+		font-style: normal;
 	}
-	/*All Chat history*/
 
+	/*All Chat history*/
 	/*Chat history list*/
-	.relative.grow.overflow-hidden.whitespace-nowrap{
+	.relative.grow.overflow-hidden.whitespace-nowrap {
 		color: var(--chat-history-list);
-		margin-right:20px;
+		margin-right: 20px;
 	}
-	
+
 	/*Explore gpts and Add team workspace*/
 	.text-sm {
 		color: var(--chat-history-list);
@@ -518,29 +543,62 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 
 
 	/*Username*/
-	.relative.-top-px.grow.-space-y-px.overflow-hidden.text-ellipsis.whitespace-nowrap.text-left.text-token-text-primary{
+	.relative.-top-px.grow.-space-y-px.overflow-hidden.text-ellipsis.whitespace-nowrap.text-left.text-token-text-primary {
 		color: var(--chat-history-list) !important;
-		border:none !important;
+		border: none !important;
 	}
-	
+
 	/*The word chat gpt top left*/
-	.grow.overflow-hidden.text-ellipsis.whitespace-nowrap.text-sm.text-token-text-primary{
+	.grow.overflow-hidden.text-ellipsis.whitespace-nowrap.text-sm.text-token-text-primary {
 		color: var(--chat-history-list) !important;
-		border:none !important;
+		border: none !important;
 	}
-	
+
 	/*Chat History Buttons fix */
 	button.text-token-text-primary {
 		color: var(--chat-history-list) !important;
-		border:none !important;
+		border: none !important;
 		background: transparent !important;
 	}
-	
-		button.text-token-text-primary[aria-haspopup="menu"] {
+
+	button.text-token-text-primary[aria-haspopup="menu"] {
 		background: transparent !important;
 	}
-	
-	
+
+	/*username bottom left*/
+	.relative.-top-px.grow.-space-y-px.overflow-hidden.text-ellipsis.whitespace-nowrap.text-left.text-token-text-primary {
+		background: var(--text-token-tertiary) !important;
+	}
+
+	/*chat gpt text in button top left*/
+	.grow.overflow-hidden.text-ellipsis.whitespace-nowrap.text-sm.text-token-text-primary {
+		background: transparent !important;
+	}
+
+	/*chat gpt button top left*/
+	.bg-token-sidebar-surface-primary {
+		background: black !important;
+	}
+
+	/*Hover over chat gpt text in button top left*/
+	.group.flex.h-10.items-center.gap-2.rounded-lg.bg-token-sidebar-surface-primary.px-2.font-medium:hover {
+		background-color: var(--sidebar-surface-tertiary) !important;
+	}
+
+	/*Recent Chat background Hover For Day/Times*/
+	h3.h-9.pb-2.pt-3.px-2.text-xs.font-medium.text-ellipsis.overflow-hidden.break-all.text-token-text-tertiary {
+		background: black!important
+	}
+
+	a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary {
+		background-color: black !important;
+	}
+
+	/*GPTS Button top left in chat history*/
+	a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary:hover {
+		background-color: var(--sidebar-surface-tertiary) !important;
+	}
+
 	/*********************************************************************************/
 	/* hide chat icon in chat history */
 	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.flex-col.flex-1.transition-opacity.duration-500.overflow-y-auto > div > div > span > div > ol > li > a > svg {
@@ -548,7 +606,7 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	}
 
 	#__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div {
-		background: #121212;
+		background: var(--all-chat-history);
 	}
 
 	\/75 {
@@ -622,73 +680,77 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	.bg-gray-900 {
 		background-color: transparent;
 	}
-	
-	
-	/*********************************************************************************/
 
+
+	/*********************************************************************************/
 	/*2023 Novemeber update in progress*/
-	
 	/*Stick top*/
 	.sticky.top-0.flex.items-center.justify-between.z-10.h-14 {
-       background: linear-gradient(to right, black,rgba(0, 0, 0, 0) 50%, black);
+		background: linear-gradient(to right, black, rgba(0, 0, 0, 0) 50%, black);
 	}
 
 	/*Text Area to enter chat*/
-	textarea#prompt-textarea{
+	textarea#prompt-textarea {
 		background: #00000096;
 		max-height: @textInputBarMaxHeight !important;
 	}
-	
+
 	div#radix {
 		background: #00000085 !important;
 	}
-	
+
 	/*Gpt input*/
-	.text-token-text-primary{
-		color: var(--user-input-text) !important; /*input Color?*/
+	.text-token-text-primary {
+		color: var(--user-input-text) !important;
+		/*input Color?*/
 		background: var(--selected-chat-gradient) !important;
 		border-top: solid rgba(255, 255, 255, .2) 1px !important
 	}
-	
-	/*Gpt Output Background*/
-	.text-token-text-primary:nth-child(odd){
-		background: black !important;
+
+	/*Gpt main screen input */
+	.flex.h-full.flex-col.items-center.justify-center.text-token-text-primary {
+		background: var(--all-chat-history) !important;
 	}
+
+
+
 	.p-2 {
 		padding-right: 2rem
 	}
-	
+
 	.py-2\.5:not(:last-child) {
-		color:white;
+		color: white;
 	}
-	
+
 
 	/*Icon in more text*/
 	.icon-md {
-		stroke:white;
+		stroke: white;
 		stroke-width: 0px;
 	}
-	
+
 	/*Disclamer text*/
 	.relative.px-2.py-2.text-center.text-xs.text-gray-600.dark\:text-gray-300.md\:px-\[60px\] {
-	    color: black;
+		color: black;
 	}
-	
-	.gizmo .markdown>:not(pre), .gizmo .markdown>:not(pre)>:not(a){
+
+	.gizmo .markdown > :not(pre), .gizmo .markdown > :not(pre) > :not(a) {
 		color: var(--main-body-output);
 	}
+
 	.markdown h1,
 	.markdown h2,
 	.markdown h3,
 	.markdown h4,
 	.markdown h4,
-	.markdown h4{
+	.markdown h4 {
 		color: var(--heading-output) !important;
 	}
-	
+
 	.prose :where(strong):not(:where([class~=not-prose] *)) {
 		color: var(--bold-output) !important;
 	}
+
 	/*********************************************************************************/
 	/* Current Chat edit or "remove" current chat buttons*/
 	button.p-1.hover\:text-white svg {
@@ -713,9 +775,7 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 		border-color: transparent
 	}
 
-	.h-9.pb-2.pt-3.px-3.text-xs.text-gray-500.font-medium.text-ellipsis.overflow-hidden.break-all.bg-gray-900 {
-		background-color: black;
-	}
+
 
 	/*********************************************************************************/
 	/*Scroll Bars*/
@@ -779,17 +839,22 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	/*********************************************************************************/
 	/* Applicable only for Grepper save to grepper in code boxs */
 	.open_grepper_editor.gpt_grepper_add_answer_trigger {
-	      top: 5px !important;
-	      width: 120px !important;
-	      right: 135px !important;
-	}	
-	
+		top: 2px !important;
+		right: 195px !important;
+		color: #d5d5d5 !important;
+		font-size: 18px !important;
+		font-weight: bold;
+		background: var(--code-topbar);
+		letter-spacing: 1px;
+	}
+
 	/*********************************************************************************/
 	/* Applicable only for ChatGPT Chat Organizer - Folders Extension https://chrome.google.com/webstore/detail/chatgpt-chat-organizer-fo/eaoimfbcncfnjkojlfjinakmflglmegk?hl=en-GB  */
 	.popup-container.fixed.top-0.left-0.w-screen.h-screen.flex.items-center.justify-center.z-50 {
 		background-color: rgba(69, 69, 69, .69) !important;
 	}
-	.groups-div-extension{
+
+	.groups-div-extension {
 		color: var(--chat-history-list);
 	}
 
@@ -831,28 +896,34 @@ a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-
 	/*********************************************************************************/
 	/************************************WIDE MODE************************************/
 	/*********************************************************************************/
-	& when(@wideMode = 1) {
+	& when(@wideMode =1) {
 		.gizmo .gizmo\:xl\:max-w-\[48rem\] {
-		    max-width: 95%;
+			max-width: 95%;
 		}
+
 		.md\:max-w-3xl, .max-w-lg {
-		    max-width: 95%;
+			max-width: 95%;
 		}
+
 		.max-h-\[75vh\] {
-		    max-height: 95%;
+			max-height: 95%;
 		}
+
 		.prose {
-		    max-width: 100%;
+			max-width: 100%;
 		}
 	}
-	
-	
+
+
 	/************************************Hide Add Teams Advertisment************************************/
-	& when (@hideAddTeams = 1){
+	& when (@hideAddTeams =1) {
 		a.group.flex.gap-2.p-2\.5.text-sm.cursor-pointer.focus\:ring-0.radix-disabled\:pointer-events-none.radix-disabled\:opacity-50.hover\:bg-token-sidebar-surface-secondary.m-0.rounded-lg.px-2 {
-	    display: none;
-	    background: transparent;
-	    height: 0px;
+			display: none;
+			height: 0px;
+		}
+		/*Warning text*/
+		.relative.px-2.py-2.text-center.text-xs.text-token-text-secondary.md\:px-\[60px\]{
+		      color:transparent;
+		}
 	}
-   }
 }
