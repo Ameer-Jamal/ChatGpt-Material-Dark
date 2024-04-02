@@ -2,22 +2,43 @@
 ### Download and Install here:
 #### https://userstyles.world/style/11408/chatgpt-material-dark
 
+If you like it please review lets get this everywhere! 
+For feedback please contact me with information about your problem at www.linkedin.com/in/ameer-jamal or raise a github issue here : https://github.com/Ameer-Jamal/ChatGpt-Material-Dark
 
+and ill be happy to fix any arising issues.
+Note:
+- **Make sure chatGPT General Theme settings is set to dark for best results**
+- I prioritize High Customizability with this theme, check the theme settings (how to access below) to change colors to your liking
 ## 🔍 About this Theme:
 ### Transform your ChatGPT experience with a sleek material dark theme. This theme provides a visually pleasing dark mode with improved readability, ensuring a more comfortable and immersive user experience during extended chat sessions.
 
 
 ## 🎨 Features:
-- NEW Text Input Bar Maximum Height is adjustable  for better reading before submitting a question to chatGPT
-- NEW Remove Advertising in Chat History Option
-- NEW: GPT WIDE MODE! allow chats to be wide great for programmers that like bigger code blocks (details below)
+
+- 2.0 update!! : 
+Im trying to do LOTS of color customization in stylus settings (see how to access below) so you can make GPT look as you want
+Also:
+- Fixing many color issues
+- using better calibrated screen for better colors showing on devices
+- themed settings
+- better hover effects
+- themed menus
+- bug fixes in theme
+
+
+- NEW customizable feature for **adjusting the maximum height** of the User Text Input Bar directly from the Stylus settings, enhancing your reading experience for composing and reviewing larger questions.
+- NEW **Remove Team subscription Advertising** in Chat History Option from stylus settings (On By default)
+- NEW: **GPT WIDE MODE!** allow chats to be wide great for programmers that like bigger code blocks (details below)
+
+---
+
 - Added the ability **select your own input and output text colors** (details below)
 - A deep and consistent dark color scheme inspired by material design.
 - Better Selection Highlighting with HighContrast
 - User input and GPT output now are different colors for easier on the eyes reading and also faster distinguishing between input and output 
-- Better Code Syntax Highlight within text to function like Slack's embedded orange code ( when out of code-box)
+- Better Code Syntax Highlight within text to function like Slack's embedded orange code ( when code written out of code-box)
 - Strong white headings on silver easy on the eyes main text for GPT output
-- Border + Color separation in chat between AI and user to allow for easier to see differentiation of question and answer
+- Border + Color separation in chat between GPT and user to allow for easier to see differentiation of question and answer
 - Better Code Box! 
     - VS Code Dark+ Code Background
     - FIRA CODE Font 
@@ -26,37 +47,32 @@
     - Font smoothed/Antialiased (for low resolution displays)
     - Better horizontal scroll bar visibility
 - Clearer thicker scroll Bars for better navigation horizontally and vertically
-- Colored current chat and new chat buttons for easier navigation
-- Clearer hover effects
-- New aesthetic font for for chat history
 - Better Alert Colors
-- Enhanced chat bubbles and sidebar styling for better visibility.
-- Custom animations for smooth transitions and interactive elements.
-- Reduced visual noise by hiding redundant icons and elements.
 - Enhanced code sections with improved background and text contrast.
-- Smooth scrolling behavior for a seamless chat experience.
 - Integration with popular Google Fonts for enhanced readability.
+## 📦 Installation & Setup
 
-## 📦 Installation:
-Simply add this UserStyle if you're using a supported browser extension or app like Stylus, and navigate to ChatGPT to experience the transformation.
+Enhance your ChatGPT experience with these initial steps:
 
-# 🌈 Customizing Text Colors:
-Experience a chat that truly resonates with your style. Adjust the input and output text colors to your liking by following these simple steps:
+1. **Add UserStyle**: Install the "ChatGpt Material Dark With Wide Mode Option" UserStyle using Stylus or a similar supported browser extension. Make sure to navigate to ChatGPT post-installation.
+2. **Enable Dark Mode**: Switch to GPT Dark mode to prevent any style conflicts by:
+   - On https://chat.openai.com/ after logging in
+   - Click your username at the bottom left corner.
+   - Navigate to Settings > General.
+   - Click on the Theme and select Dark.
 
-Access Stylus Plugin: Begin by navigating to the Stylus browser extension on your toolbar.
+## 🔧 Customizing ChatGPT and enabling options with Stylus
 
-- Locate the Theme: Within the list of installed UserStyles, seek out "ChatGPT Material Dark".
-- Access Settings: To the right of the theme's name, you'll notice a gear icon. This is your gateway to customization. Click on it.
-- Choose Your Colors: You'll now be presented with options to alter the input and output text colors. Choose the hues that best suit your preference. Once selected, the changes will be automatically applied to your ChatGPT interface, offering a personalized experience.
+Tailor your ChatGPT interface effortlessly:
 
-# 🖥️ Activating GPT WIDE MODE:
-Dive deeper into your coding sessions with the GPT WIDE MODE, Simply switch it on to enjoy a wider chat experience.
-This mode especially shines during coding sessions, making the visualization of larger code blocks a breeze.
+1. **Open Stylus Plugin**: Click the Stylus extension icon on your browser's toolbar.
+2. **Find the Theme**: Search for "ChatGPT Material Dark" in your UserStyles list.
+3. **Customize Colors 🌈  & Activate Wide Mode 🖥️**: Utilize the gear icon next to the theme for customization. Here, you can alter the text colors and toggle the GPT WIDE MODE for an expanded chat interface, ideal for larger code blocks or extensive text.
 
-- Access Stylus Plugin: Click on the Stylus browser extension on your toolbar.
-- Locate the Theme: Find "ChatGPT Material Dark" in your installed UserStyles list.
-- Toggle Wide Mode: An easily accessible toggle for GPT WIDE MODE will be present. 
+#### 💡 Note: Compatibility
 
-#### 💡 Note: Compatible with DarkReader,  ChatGPT Chat Organizer, ChatGPT Plus Subscription Users :
-- https://chrome.google.com/webstore/detail/chatgpt-chat-organizer-fo/eaoimfbcncfnjkojlfjinakmflglmegk?hl=en-GB: 
-- https://darkreader.org/
+This setup is compatible with various extensions and features, enhancing your ChatGPT experience:
+
+- [ChatGPT Chat Organizer](https://chrome.google.com/webstore/detail/chatgpt-chat-organizer-fo/eaoimfbcncfnjkojlfjinakmflglmegk?hl=en-GB)
+- [Dark Reader](https://darkreader.org/)
+- Suitable for ChatGPT Plus Subscription users.
