@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        1.9.93
+@version        2.0.3
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -37,19 +37,20 @@
  * For any questions or concerns, please reach out to the original author.
  
 */
-@-moz-document regexp("https://chat.openai.com(/.*)?") {
+@-moz-document regexp("https://chat.openai.com(/.*)?"), regexp("https://auth.openai.com(/.*)?"), regexp("https://auth0.openai.com(/.*)?") {
+
 	@import (css) url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 	@import (css) url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 	@import (css) url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
 	@import (css) url('href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 	:root {
-		--futuristic-gradient: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+		--futuristic-gradient: linear-gradient(to right, #0f2027c4, #203a43b0, #2c5364cf);
 		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 		--chat-background-gradient: linear-gradient(180deg, rgb(32 33 35 / 0%), rgb(32 33 35) 58.85%);
 		--all-chat-history: @gptOutputBackground;
 		--main-chat-border-color: rgba(137, 126, 109, 0.35);
-		--deep-space: linear-gradient(to left, #000000, #434343);
+		--deep-space: linear-gradient(to left, #000, #434343cc);
 		--deep-space-to-top-transparent: linear-gradient(to top, #4343434f, #0D0D0D);
 
 		--alerts: linear-gradient(to right, #ff512ff0, #f09819f0);
@@ -74,6 +75,22 @@
 
 	/*********************************************************************************/
 	/**************HOME PAGE WHEN NEW CHAT STARTING **********************************/
+	/*logo*/
+	.mb-3.h-12.w-12 {
+		filter: invert(1);
+	}
+
+	/*Auto prompts on home screen*/
+	button.btn.relative.btn-neutral.group.w-full.whitespace-nowrap.rounded-xl.px-4.py-3.text-left.text-token-text-primary.md\:whitespace-normal:hover {
+		background: var(--futuristic-gradient)!important;
+		border-radius: 10px;
+	}
+
+	/*Stop Generating button*/
+	path[d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"] {
+		color: red;
+	}
+
 	.align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
 		background: black !important;
 	}
@@ -98,12 +115,6 @@
 	}
 
 	/*********************************************************************************/
-	/*The word new chat in the new chat button*/
-	span.truncate {
-		display: contents;
-		color: white;
-	}
-
 	/* replace bg color */
 	.dark body,
 	.dark html {
@@ -347,45 +358,48 @@
 	.flex.flex-col.pb-9.text-sm {
 		padding-bottom: 0;
 	}
-	
-	/*Input box send message animation*/
 
+	/*Input box send message animation*/
 	@keyframes heartbeat {
-	  0% {
-	    transform: scale(1);
-	  }
-	  14% {
-	    transform: scale(1.1);
-	  }
-	  28% {
-	    transform: scale(1);
-	  }
-	  42% {
-	    transform: scale(1.1);
-	  }
-	  70% {
-	    transform: scale(1);
-	  }
+		0% {
+			transform: scale(1);
+		}
+
+		14% {
+			transform: scale(1.1);
+		}
+
+		28% {
+			transform: scale(1);
+		}
+
+		42% {
+			transform: scale(1.1);
+		}
+
+		70% {
+			transform: scale(1);
+		}
 	}
-	
+
 	/*Add File button*/
-.btn.relative.p-0.text-black.dark\:text-white svg {
-transition: background-color 0.3s ease, border-color 0.3s ease;	
+	.btn.relative.p-0.text-black.dark\:text-white svg {
+		transition: background-color 0.3s ease, border-color 0.3s ease;
 	}
+
 	.btn.relative.p-0.text-black.dark\:text-white svg:hover {
 		color: var(--user-input-text);
-		 		animation: heartbeat 2s ease-in-out infinite;
-
+		animation: heartbeat 2s ease-in-out infinite;
 	}
-	
-	
-	button.absolute.bottom-1\.5.right-2.rounded-lg.border.border-black.bg-black.p-0\.5.text-white.transition-colors.enabled\:bg-black.disabled\:text-gray-400.disabled\:opacity-10.dark\:border-white.dark\:bg-white.dark\:hover\:bg-white.md\:bottom-3.md\:right-3:hover{
-transition: background-color 0.3s ease, border-color 0.3s ease;	
-	}
-	
-	button.absolute.bottom-1\.5.right-2.rounded-lg.border.border-black.bg-black.p-0\.5.text-white.transition-colors.enabled\:bg-black.disabled\:text-gray-400.disabled\:opacity-10.dark\:border-white.dark\:bg-white.dark\:hover\:bg-white.md\:bottom-3.md\:right-3:not(:disabled):hover{
 
- 		animation: heartbeat 2s ease-in-out infinite;
+
+	button.absolute.bottom-1\.5.right-2.rounded-lg.border.border-black.bg-black.p-0\.5.text-white.transition-colors.enabled\:bg-black.disabled\:text-gray-400.disabled\:opacity-10.dark\:border-white.dark\:bg-white.dark\:hover\:bg-white.md\:bottom-3.md\:right-3:hover {
+		transition: background-color 0.3s ease, border-color 0.3s ease;
+	}
+
+	button.absolute.bottom-1\.5.right-2.rounded-lg.border.border-black.bg-black.p-0\.5.text-white.transition-colors.enabled\:bg-black.disabled\:text-gray-400.disabled\:opacity-10.dark\:border-white.dark\:bg-white.dark\:hover\:bg-white.md\:bottom-3.md\:right-3:not(:disabled):hover {
+
+		animation: heartbeat 2s ease-in-out infinite;
 		background: var(--user-input-text);
 		border-color: var(--user-input-text);
 	}
@@ -434,15 +448,6 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 	}
 
 	/*********************************************************************************/
-	/* new chat button*/
-	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > a {
-		background: var(--futuristic-gradient);
-		border-radius: 10px;
-		font-size: 0.9rem;
-		transition: box-shadow 0.3s;
-		text-align: center;
-	}
-
 	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > a:hover {
 		box-shadow: 1px 1px 10px rgba(38, 198, 218, 0.9);
 	}
@@ -581,6 +586,14 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 		margin-right: 20px;
 	}
 
+	li.relative .group.relative.rounded-lg.active\:opacity-90.hover\:bg-token-sidebar-surface-secondary:hover {
+		background: var(--deep-space);
+	}
+
+	.group.relative.rounded-lg.active\:opacity-90.bg-token-sidebar-surface-tertiary {
+		background: var(--futuristic-gradient) !important;
+	}
+
 	/*Explore gpts and Add team workspace*/
 	.text-sm {
 		color: var(--chat-history-list);
@@ -588,9 +601,18 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 
 
 	/*Username*/
-	.relative.-top-px.grow.-space-y-px.overflow-hidden.text-ellipsis.whitespace-nowrap.text-left.text-token-text-primary {
+	.relative.-top-px.grow.-space-y-px.truncate.text-left.text-token-text-primary {
 		color: var(--chat-history-list) !important;
 		border: none !important;
+		background: transparent!important;
+	}
+
+	.flex.w-full.items-center.gap-2.rounded-lg.p-2.text-sm.hover\:bg-token-sidebar-surface-secondary.group-ui-open\:bg-token-sidebar-surface-secondary:hover {
+		background: var(--futuristic-gradient);
+	}
+
+	.flex.w-full.items-center.gap-2.rounded-lg.p-2.text-sm.hover\:bg-token-sidebar-surface-secondary.group-ui-open\:bg-token-sidebar-surface-secondary[aria-expanded="true"] {
+		background: var(--futuristic-gradient);
 	}
 
 	/*The word chat gpt top left*/
@@ -620,14 +642,14 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 		background: transparent !important;
 	}
 
-	/*chat gpt button top left*/
+	/*chat gpt button top left (New Chat)*/
 	.bg-token-sidebar-surface-primary {
 		background: black !important;
 	}
 
-	/*Hover over chat gpt text in button top left*/
+	/*Hover over chat gpt text in button top left (New Chat)*/
 	.group.flex.h-10.items-center.gap-2.rounded-lg.bg-token-sidebar-surface-primary.px-2.font-medium:hover {
-		background-color: var(--sidebar-surface-tertiary) !important;
+		background: var(--futuristic-gradient) !important;
 	}
 
 	/*Recent Chat background Hover For Day/Times*/
@@ -641,15 +663,10 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 
 	/*GPTS Button top left in chat history*/
 	a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary:hover {
-		background-color: var(--sidebar-surface-tertiary) !important;
+		background: var(--futuristic-gradient) !important;
 	}
 
 	/*********************************************************************************/
-	/* hide chat icon in chat history */
-	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.flex-col.flex-1.transition-opacity.duration-500.overflow-y-auto > div > div > span > div > ol > li > a > svg {
-		display: none;
-	}
-
 	#__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div {
 		background: var(--all-chat-history);
 	}
@@ -757,11 +774,6 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 		background: var(--all-chat-history) !important;
 	}
 
-	button.btn.relative.btn-neutral.group.w-full.whitespace-nowrap.rounded-xl.px-4.py-3.text-left.text-token-text-primary.md\:whitespace-normal :hover {
-		background: #646464;
-		border-radius: 10px;
-	}
-
 	.p-2 {
 		padding-right: 2rem
 	}
@@ -813,6 +825,10 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 		padding: 0.01rem
 	}
 
+	button.flex.items-center.justify-center.text-token-text-primary.transition.hover\:text-token-text-secondary.radix-state-open\:text-token-text-secondary:has(svg.icon-md) {
+		background: transparent !important
+	}
+
 	/*********************************************************************************/
 	/*Alerts*/
 	div[role="alert"] {
@@ -825,6 +841,24 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 	}
 
 	/*********************************************************************************/
+	/*Select GPT version menu*/
+	.popover[role="menu"] {
+		background: #0e0e0ea1 !important;
+		backdrop-filter: blur(4px);
+	}
+
+	.group.flex.cursor-pointer.items-center.gap-1.rounded-xl.py-2.px-3.text-lg.font-medium:hover {
+		background: var(--futuristic-gradient);
+	}
+
+	.group.flex.cursor-pointer.items-center.gap-1.rounded-xl.py-2.px-3.text-lg.font-medium[data-state="open"] {
+		background: var(--futuristic-gradient);
+	}
+
+	[role="menuitem"]:hover {
+		background: var(--deep-space);
+	}
+
 	/*GPT Settings*/
 	h2[as="h3"].text-token-text-primary {
 		color: white !important;
@@ -832,8 +866,8 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 	}
 
 	div[role="dialog"] {
-		background: #222222e6;
-		backdrop-filter: blur(1px);
+		background: #31313180;
+		backdrop-filter: blur(3px);
 	}
 
 	div[role="dialog"] button:hover {
@@ -872,7 +906,58 @@ transition: background-color 0.3s ease, border-color 0.3s ease;
 	.sticky.top-0.mb-1\.5.items-center.h-14.p-2.font-semibold.bg-token-main-surface-primary.z-30.mx-auto.flex.w-full.justify-center.gap-2.whitespace-nowrap.pt-\[1\.125rem\] {
 		background: transparent;
 	}
+	
+	/*********************************************************************************/
+	/*Before login*/
+	.relative.hidden.flex-1.flex-col.justify-center.px-5.pt-8.md\:flex.md\:px-6.md\:py-[22px].lg\:px-8 {
+		background: radial-gradient(@userInputBackgroundGradientColor , #0000) !important;
+		color: rgb(0 255 246) !important;
+	}
 
+	[data-testid="login-button"], button.relative.flex.h-12.items-center.justify-center.rounded-md.text-center.text-base.font-medium.bg-\[\#3C46FF\].text-\[\#fff\].hover\:bg-\[\#0000FF\], .continue-btn, ._button-login-id {
+		border: none;
+		background: radial-gradient(#810af8, #3300c7c4);
+		transition: background 0.3s ease, transform 0.3s ease;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.social-btn {
+		border: none;
+		color: white;
+		background: linear-gradient(to right, #112d33, #3b0059)
+	}
+
+	[data-testid="login-button"]:hover, button.relative.flex.h-12.items-center.justify-center.rounded-md.text-center.text-base.font-medium.bg-\[\#3C46FF\].text-\[\#fff\].hover\:bg-\[\#0000FF\]:hover, .continue-btn:hover, .social-btn:hover, [data-provider="windowslive"]:hover, [data-provider="google"]:hover, [data-provider="apple"]:hover, ._button-login-id:hover {
+		border: none;
+		background: linear-gradient(45deg, #3cceff, #b300ff);
+		box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+		animation: heartbeat 4s infinite;
+	}
+
+	main.main-container, .oai-header, .oai-footer, .login-container {
+		background: #000;
+		color: white;
+	}
+
+	.oai-header img {
+		filter: invert(1);
+	}
+
+	h1.title {
+		color: white;
+	}
+
+	label.email-label {
+		filter: invert(1);
+	}
+
+	input.email-input {
+		filter: invert(1);
+	}
+
+	._prompt-box-outer {
+		filter: invert(1);
+	}
 
 	/*********************************************************************************/
 	/*Scroll Bars*/
