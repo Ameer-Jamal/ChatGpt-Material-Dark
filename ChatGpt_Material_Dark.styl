@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.0.3
+@version        2.0.56
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -18,7 +18,7 @@
 
 @var checkbox   wideMode  "GPT Wide Mode" 0
 @var checkbox   hideAddTeams "Hide Add Teams in chat history" 1
-
+@var checkbox   noTextWrap "Show Full Chat Descriptions (No Text Wrap)" 0
 @var number     textInputBarMaxHeight "Adjust the max height of text input (px)"     ['px', 350, 1, null, 1]
 
 ==/UserStyle== */
@@ -37,7 +37,7 @@
  * For any questions or concerns, please reach out to the original author.
  
 */
-@-moz-document regexp("https://chat.openai.com(/.*)?"), regexp("https://auth.openai.com(/.*)?"), regexp("https://auth0.openai.com(/.*)?") {
+@-moz-document regexp("https://chat.openai.com(/.*)?"), regexp("https://auth.openai.com(/.*)?"), regexp("https://auth0.openai.com(/.*)?"), regexp("https://chatgpt.com(/.*)?") {
 
 	@import (css) url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 	@import (css) url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
@@ -46,6 +46,7 @@
 
 	:root {
 		--futuristic-gradient: linear-gradient(to right, #0f2027c4, #203a43b0, #2c5364cf);
+		--darker-futristic-gradient: linear-gradient(to right, #245062c4, #203a43b0, #000000cf);
 		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 		--chat-background-gradient: linear-gradient(180deg, rgb(32 33 35 / 0%), rgb(32 33 35) 58.85%);
 		--all-chat-history: @gptOutputBackground;
@@ -71,6 +72,9 @@
 		--heading-output: @headingOutput;
 		--bold-output: @boldOutput;
 		--links-output: @linksOutput;
+
+		/* Absolute black var */
+		--darkest-of-darks: #000
 	}
 
 	/*********************************************************************************/
@@ -86,23 +90,95 @@
 		border-radius: 10px;
 	}
 
-	/*Stop Generating button*/
-	path[d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"] {
-		color: red;
+	/* Keyframes for red to white background transition */
+	@keyframes redPulseBG {
+		0% {
+			background-color: #fb2727;
+		}
+
+		50% {
+			background-color: #ac0000;
+		}
+
+		100% {
+			background-color: #fb2727;
+		}
+	}
+
+	/* Input box send message animation */
+	@keyframes heartbeat {
+		0% {
+			transform: scale(1);
+		}
+
+		14% {
+			transform: scale(1.1);
+		}
+
+		28% {
+			transform: scale(1);
+		}
+
+		42% {
+			transform: scale(1.1);
+		}
+
+		70% {
+			transform: scale(1);
+		}
+	}
+
+	/* Stop Generating button */
+	button[data-testid="fruitjuice-stop-button"] {
+		animation: redPulseBG 6s ease-in-out infinite, heartbeat 6s ease-in-out infinite;
+	}
+
+
+	/* Send to GPT button */
+	button[data-testid="fruitjuice-send-button"]:not(:disabled) {
+		transition: background 0.5s ease-in-out;
+		/* Add transition for background */
+	}
+
+	/* Send to GPT button on hover */
+	button[data-testid="fruitjuice-send-button"]:not(:disabled):hover {
+		background: var(--user-input-text);
+		animation: heartbeat 4s ease-in-out infinite;
+		filter: saturate(1.5) contrast(1.5);
+	}
+
+	/* Attachments button */
+	button.flex.items-center.justify-center.text-token-text-primary.juice\:h-8.juice\:w-8.dark\:text-white.juice\:rounded-full.focus-visible\:outline-black.dark\:focus-visible\:outline-white.juice\:mb-1.juice\:ml-\[3px\] {
+		transition: background 0.5s ease-in-out;
+		/* Add transition for background */
+	}
+
+	/* Attachments button on hover */
+	button.flex.items-center.justify-center.text-token-text-primary.juice\:h-8.juice\:w-8.dark\:text-white.juice\:rounded-full.focus-visible\:outline-black.dark\:focus-visible\:outline-white.juice\:mb-1.juice\:ml-\[3px\]:hover {
+		background: var(--user-input-text) !important;
+		animation: heartbeat 4s ease-in-out infinite;
+		filter: saturate(1.5) contrast(1.5);
+	}
+
+	/* SVG inside the attachments button on hover */
+	button.flex.items-center.justify-center.text-token-text-primary.juice\:h-8.juice\:w-8.dark\:text-white.juice\:rounded-full.focus-visible\:outline-black.dark\:focus-visible\:outline-white.juice\:mb-1.juice\:ml-\[3px\]:hover svg {
+		filter: invert(1);
+		transform: scale(1.2);
+		transition: transform 0.5s ease-in-out;
 	}
 
 	.align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
-		background: black !important;
+		background: var(--darkest-of-darks) !important;
 	}
 
 	/* Input Dialog */
 	.absolute.bottom-0.left-0.w-full.border-t.md\:border-t-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:bg-vert-light-gradient.bg-white.dark\:bg-gray-800.md\:\!bg-transparent.dark\:md\:bg-vert-dark-gradient.pt-2.md\:pl-2.md\:w-\[calc\(100\%-\.5rem\)\] {
-		background: linear-gradient(to top, #2c2c2c, #000) !important;
+		background: linear-gradient(to top, #2c2c2c, var(--darkest-of-darks)) !important;
 		padding: 20px !important;
 	}
 
 	.align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
-		background: black;
+		background: var(--darkest-of-darks);
 	}
 
 	/* current Model */
@@ -306,22 +382,22 @@
 		--tw-bg-opacity: 1;
 		color: var(--user-input-text) !important;
 
-		background: #000000;
+		background: var(--darkest-of-darks);
 		/* fallback for old browsers */
-		background: -webkit-linear-gradient(to bottom, #434343, #000000);
+		background: -webkit-linear-gradient(to bottom, #434343, var(--darkest-of-darks));
 		/* Chrome 10-25, Safari 5.1-6 */
 		background: var(--user-input)!important;
 	}
 
 	.dark .dark\:bg-gray-800:last-child {
-		background: black!important;
+		background: var(--darkest-of-darks)!important;
 	}
 
 
 	/*Chat output */
 	.dark .dark\:bg-\[\#444654\] {
 		--tw-bg-opacity: 1;
-		background: black;
+		background: var(--darkest-of-darks);
 	}
 
 	/*The word ChatGpt in output*/
@@ -339,14 +415,14 @@
 	}
 
 	/*Gpt Output Background*/
-	.w-full.text-token-text-primary:nth-child(odd) {
+	.w-full.text-token-text-primary:nth-child(odd):not(svg, button) {
 		background: var(--all-chat-history) !important;
 	}
 
 
 	/*sidebar underlying color*/
-	.text-token-text-primary:nth-child(odd) {
-		background: black !important;
+	.text-token-text-primary:nth-child(odd):not(svg, button) {
+		background: var(--darkest-of-darks) !important;
 	}
 
 	/*Input box bottom middle to right*/
@@ -357,29 +433,6 @@
 	/*Input box padding to text*/
 	.flex.flex-col.pb-9.text-sm {
 		padding-bottom: 0;
-	}
-
-	/*Input box send message animation*/
-	@keyframes heartbeat {
-		0% {
-			transform: scale(1);
-		}
-
-		14% {
-			transform: scale(1.1);
-		}
-
-		28% {
-			transform: scale(1);
-		}
-
-		42% {
-			transform: scale(1.1);
-		}
-
-		70% {
-			transform: scale(1);
-		}
 	}
 
 	/*Add File button*/
@@ -459,7 +512,7 @@
 
 	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > a {
 		padding-right: 7.3rem;
-		border-color: black;
+		border-color: var(--darkest-of-darks);
 	}
 
 	/*********************************************************************************/
@@ -476,7 +529,7 @@
 
 	/*Beautify issue so damn annoying*/
 	a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-white.cursor-pointer.text-sm.rounded-md.border.dark\:border-white\/20.gizmo\:min-h-0.hover\:bg-gray-500\/10.h-11.gizmo\:h-10.gizmo\:rounded-lg.gizmo\:border-\[rgba\(0\, 0\, 0\, 0\.1\)\].w-11.flex-shrink-0.items-center.justify-center.bg-white.dark\:bg-transparent {
-		border: black;
+		border: var(--darkest-of-darks);
 	}
 
 	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > span:hover {
@@ -572,18 +625,22 @@
 	/*********************************************************************************/
 	/*All Chat history general  background of the chat history behind elements */
 	nav[aria-label="Chat history"] {
-		background: black;
+		background: var(--darkest-of-darks);
 		font-family: "Montserrat", sans-serif;
 		font-optical-sizing: auto;
 		font-weight: 600;
 		font-style: normal;
 	}
 
+	/* Highlighted Current Selected Chat May 24*/
+	.bg-token-sidebar-surface-secondary {
+		background: var(--darker-futristic-gradient)
+	}
+
 	/*All Chat history*/
 	/*Chat history list*/
 	.relative.grow.overflow-hidden.whitespace-nowrap {
 		color: var(--chat-history-list);
-		margin-right: 20px;
 	}
 
 	li.relative .group.relative.rounded-lg.active\:opacity-90.hover\:bg-token-sidebar-surface-secondary:hover {
@@ -644,7 +701,13 @@
 
 	/*chat gpt button top left (New Chat)*/
 	.bg-token-sidebar-surface-primary {
-		background: black !important;
+		background: var(--darkest-of-darks) !important;
+	}
+
+	.juice\:sticky.juice\:top-0.juice\:z-20.juice\:bg-token-sidebar-surface-primary {
+		position: -webkit-sticky;
+		/* For Safari */
+		background-color: var(--darkest-of-darks);
 	}
 
 	/*Hover over chat gpt text in button top left (New Chat)*/
@@ -654,11 +717,11 @@
 
 	/*Recent Chat background Hover For Day/Times*/
 	h3.h-9.pb-2.pt-3.px-2.text-xs.font-medium.text-ellipsis.overflow-hidden.break-all.text-token-text-tertiary {
-		background: black!important
+		background: var(--darkest-of-darks) !important
 	}
 
 	a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary {
-		background-color: black !important;
+		background-color: var(--darkest-of-darks) !important;
 	}
 
 	/*GPTS Button top left in chat history*/
@@ -753,8 +816,16 @@
 
 	/*Text Area to enter chat*/
 	textarea#prompt-textarea {
-		background: #00000096;
+		background: var(--deep-space) !important;
 		max-height: @textInputBarMaxHeight !important;
+		border-top: none !important;
+		border-radius: 30px !important;
+		padding: 15px !important;
+	}
+
+	.w-full.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:w-\[calc\(100\%-\.5rem\)\].juice\:w-full {
+		background: var(--all-chat-history);
+		padding-bottom: 10px
 	}
 
 	div#radix {
@@ -762,11 +833,18 @@
 	}
 
 	/*Gpt input*/
+	.text-token-text-primary:not(svg, button, a) {
+		border-top: solid rgba(255, 255, 255, .2) 1px;
+		background: var(--selected-chat-gradient) !important;
+	}
+
+	.flex.flex-col.gap-2.pb-2.text-token-text-primary.text-sm.juice\:mt-5 {
+		border-top: none !important;
+	}
+
 	.text-token-text-primary {
 		color: var(--user-input-text) !important;
 		/*input Color?*/
-		background: var(--selected-chat-gradient) !important;
-		border-top: solid rgba(255, 255, 255, .2) 1px !important
 	}
 
 	/*Gpt main screen input Welcome Screen */
@@ -791,7 +869,7 @@
 
 	/*Disclamer text*/
 	.relative.px-2.py-2.text-center.text-xs.text-gray-600.dark\:text-gray-300.md\:px-\[60px\] {
-		color: black;
+		color: var(--darkest-of-darks);
 	}
 
 	.gizmo .markdown > :not(pre), .gizmo .markdown > :not(pre) > :not(a) {
@@ -827,6 +905,10 @@
 
 	button.flex.items-center.justify-center.text-token-text-primary.transition.hover\:text-token-text-secondary.radix-state-open\:text-token-text-secondary:has(svg.icon-md) {
 		background: transparent !important
+	}
+
+	.radix-state-open\:bg-\[\#f5f5f5\][data-state=open] {
+		background-color: rgb(107 107 107 / 54%);
 	}
 
 	/*********************************************************************************/
@@ -906,7 +988,7 @@
 	.sticky.top-0.mb-1\.5.items-center.h-14.p-2.font-semibold.bg-token-main-surface-primary.z-30.mx-auto.flex.w-full.justify-center.gap-2.whitespace-nowrap.pt-\[1\.125rem\] {
 		background: transparent;
 	}
-	
+
 	/*********************************************************************************/
 	/*Before login*/
 	.relative.hidden.flex-1.flex-col.justify-center.px-5.pt-8.md\:flex.md\:px-6.md\:py-[22px].lg\:px-8 {
@@ -935,7 +1017,7 @@
 	}
 
 	main.main-container, .oai-header, .oai-footer, .login-container {
-		background: #000;
+		background: var(--darkest-of-darks);
 		color: white;
 	}
 
@@ -957,6 +1039,17 @@
 
 	._prompt-box-outer {
 		filter: invert(1);
+	}
+
+	/* Icons in dropdown gpt type */
+	.bg-token-main-surface-secondary {
+		background-color: transparent !important
+	}
+
+
+
+	.dark .dark\:bg-token-main-surface-secondary {
+		background-color: transparent !important
 	}
 
 	/*********************************************************************************/
@@ -1015,14 +1108,14 @@
 	/*********************************************************************************/
 	/* Applicable only for keepchatgpt userscript  */
 	div#kcg {
-		background: black !important;
+		background: var(--darkest-of-darks) !important;
 	}
 
 	/*********************************************************************************/
 	/* Applicable only for Grepper save to grepper in code boxs */
 	.open_grepper_editor.gpt_grepper_add_answer_trigger {
 		top: 2px !important;
-		right: 195px !important;
+		right: 230px !important;
 		color: #d5d5d5 !important;
 		font-size: 18px !important;
 		font-weight: bold;
@@ -1063,6 +1156,12 @@
 		display: none;
 	}
 
+
+	/*Stylus setting Box stupidty todo 
+	#stylus-popup #message-box > div {
+		overflow: none !important;
+	}
+*/
 	/*********************************************************************************/
 	/*New Chat Input Text Color ?? */
 	.empty\:hidden {
@@ -1107,6 +1206,15 @@
 		/*Warning text*/
 		.relative.px-2.py-2.text-center.text-xs.text-token-text-secondary.md\:px-\[60px\] {
 			color: transparent;
+			display: none;
 		}
+	}
+}
+
+
+/******************************* Display No Text Wrap ********************************/
+& when (@noTextWrap =1) {
+	.whitespace-nowrap {
+		white-space: normal;
 	}
 }
