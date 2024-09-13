@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.0.56
+@version        2.0.9
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -93,15 +93,15 @@
 	/* Keyframes for red to white background transition */
 	@keyframes redPulseBG {
 		0% {
-			background-color: #fb2727;
+			background-color: #585858;
 		}
 
 		50% {
-			background-color: #ac0000;
+			background-color: #979797;
 		}
 
 		100% {
-			background-color: #fb2727;
+			background-color: #585858;
 		}
 	}
 
@@ -129,39 +129,46 @@
 	}
 
 	/* Stop Generating button */
-	button[data-testid="fruitjuice-stop-button"] {
-		animation: redPulseBG 6s ease-in-out infinite, heartbeat 6s ease-in-out infinite;
+	button[aria-label*="Stop"] {
+		animation: heartbeat 4s ease-in-out infinite;
+
+		background: #cf2500eb !important;
+	}
+
+	/* Stop Generating button */
+	button[aria-label*="Stop"] {
+		background: #cf2500eb !important;
 	}
 
 
 	/* Send to GPT button */
-	button[data-testid="fruitjuice-send-button"]:not(:disabled) {
-		transition: background 0.5s ease-in-out;
-		/* Add transition for background */
+	button[data-testid="send-button"]:not(:disabled) {
+		transition: background 2s ease-in-out;
 	}
 
 	/* Send to GPT button on hover */
-	button[data-testid="fruitjuice-send-button"]:not(:disabled):hover {
+	button[data-testid="send-button"]:not(:disabled):hover {
+		transition: background 0.5s ease-in-out;
 		background: var(--user-input-text);
 		animation: heartbeat 4s ease-in-out infinite;
 		filter: saturate(1.5) contrast(1.5);
 	}
 
 	/* Attachments button */
-	button.flex.items-center.justify-center.text-token-text-primary.juice\:h-8.juice\:w-8.dark\:text-white.juice\:rounded-full.focus-visible\:outline-black.dark\:focus-visible\:outline-white.juice\:mb-1.juice\:ml-\[3px\] {
+	button.flex.items-center.justify-center.text-token-text-primary {
 		transition: background 0.5s ease-in-out;
 		/* Add transition for background */
 	}
 
 	/* Attachments button on hover */
-	button.flex.items-center.justify-center.text-token-text-primary.juice\:h-8.juice\:w-8.dark\:text-white.juice\:rounded-full.focus-visible\:outline-black.dark\:focus-visible\:outline-white.juice\:mb-1.juice\:ml-\[3px\]:hover {
+	button.flex.items-center.justify-center.text-token-text-primary:hover {
 		background: var(--user-input-text) !important;
-		animation: heartbeat 4s ease-in-out infinite;
+		animation: heartbeat 2s ease-in-out infinite;
 		filter: saturate(1.5) contrast(1.5);
 	}
 
 	/* SVG inside the attachments button on hover */
-	button.flex.items-center.justify-center.text-token-text-primary.juice\:h-8.juice\:w-8.dark\:text-white.juice\:rounded-full.focus-visible\:outline-black.dark\:focus-visible\:outline-white.juice\:mb-1.juice\:ml-\[3px\]:hover svg {
+	button.flex.items-center.justify-center.text-token-text-primary:hover svg {
 		filter: invert(1);
 		transform: scale(1.2);
 		transition: transform 0.5s ease-in-out;
@@ -169,6 +176,17 @@
 
 	.align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
 		background: var(--darkest-of-darks) !important;
+	}
+
+	circle.origin-\[50\%_50\%\].-rotate-90.transition-\[stroke-dashoffset\] {
+		stroke: var(--user-input-text);
+		filter: saturate(3) brightness(3) contrast(200%);
+	}
+
+	/*Xs for images attached*/
+	button.absolute.right-1.top-1.-translate-y-1\/2.translate-x-1\/2.rounded-full.border.border-token-border-heavy.bg-token-main-surface-secondary.p-0\.5.text-token-text-primary.transition-colors.hover\:opacity-100.group-hover\:opacity-100.md\:opacity-0 {
+		color: var(--user-input-text) !important;
+		filter: saturate(3) brightness(3) contrast(200%);
 	}
 
 	/* Input Dialog */
@@ -182,8 +200,30 @@
 	}
 
 	/* current Model */
-	.px-2.w-full.flex.flex-col.py-2.md\:py-6.sticky.top-0 {
-		background: linear-gradient(to bottom, #43434385, black) !important;
+	.draggable.no-draggable-children.sticky.top-0.p-3.mb-1\.5.flex.items-center.justify-between.z-10.h-header-height.font-semibold.bg-token-main-surface-primary.max-md\:hidden {
+		background: linear-gradient( to bottom,
+		rgb(0, 0, 0), /* Darker at the top */
+		rgba(0, 0, 0, 0.0)/* Fully transparent at the bottom */
+		);
+		backdrop-filter: blur(1px);
+		/* Apply blur effect */
+	}
+
+	/* current Model Text*/
+	[aria-label^="model" i] .text-token-text-secondary {
+		/* Your styles here */
+		color: var(--user-input-text);
+		/* Example style */
+		filter: saturate(0.7) contrast(1.1);
+	}
+
+	.draggable.no-draggable-children.sticky.top-0.p-3.mb-1\.5.items-center.h-header-height.font-semibold.bg-token-main-surface-primary.z-30.mx-auto.flex.w-full.justify-center.gap-2.whitespace-nowrap.pt-\[1\.125rem\] {
+		background: linear-gradient( to bottom,
+		rgb(0, 0, 0), /* Darker at the top */
+		rgba(0, 0, 0, 0.0)/* Fully transparent at the bottom */
+		);
+		backdrop-filter: blur(1px);
+		/* Apply blur effect */
 	}
 
 	.pb-64 {
@@ -410,8 +450,18 @@
 		background-image: var(--chat-background-gradient)
 	}
 
+	/*Background Base*/
+	[class*="react-scroll-to-bottom--css-"] {
+		background: var(--all-chat-history) !important;
+	}
+
 	.sticky.top-0.z-\[9\].w-full {
 		background: #00000017;
+	}
+
+	/* Model icons */
+	.\[\&_svg\]\:h-full.\[\&_svg\]\:w-full.h-4.w-4.text-token-text-primary {
+		border: initial !important
 	}
 
 	/*Gpt Output Background*/
@@ -419,6 +469,9 @@
 		background: var(--all-chat-history) !important;
 	}
 
+	.w-full.text-token-text-primary:last-child:not(svg, button) {
+		background: var(--all-chat-history) !important;
+	}
 
 	/*sidebar underlying color*/
 	.text-token-text-primary:nth-child(odd):not(svg, button) {
@@ -429,6 +482,7 @@
 	.w-full.pt-2.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:w-\[calc\(100\%-\.5rem\)\]:last-child {
 		background: var(--deep-space-to-top-transparent);
 	}
+
 
 	/*Input box padding to text*/
 	.flex.flex-col.pb-9.text-sm {
@@ -787,6 +841,10 @@
 		display: none;
 	}
 
+	/* Double click on chat to rename chat */
+	.absolute.bottom-0.left-\[7px\].right-2.top-0.flex.items-center.bg-token-sidebar-surface-secondary {
+		background: var(--darkest-of-darks)
+	}
 
 	/* chatgpt title */
 	#__next > div.overflow-hidden.w-full.h-full.relative.flex > div.flex.h-full.max-w-full.flex-1.flex-col > main > div.flex-1.overflow-hidden > div > div > div > div.text-gray-800.w-full.md\:max-w-2xl.lg\:max-w-3xl.md\:h-full.md\:flex.md\:flex-col.px-6.dark\:text-gray-100 > h1 {
@@ -828,6 +886,11 @@
 		padding-bottom: 10px
 	}
 
+	/* Black background underneath the inpujt box */
+	.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.w-full {
+		background: var(--all-chat-history);
+	}
+
 	div#radix {
 		background: #00000085 !important;
 	}
@@ -839,6 +902,10 @@
 	}
 
 	.flex.flex-col.gap-2.pb-2.text-token-text-primary.text-sm.juice\:mt-5 {
+		border-top: none !important;
+	}
+
+	.font-semibold.text-token-text-primary {
 		border-top: none !important;
 	}
 
@@ -941,6 +1008,11 @@
 		background: var(--deep-space);
 	}
 
+	[role="menuitem"]:hover:last-child {
+		background: var(--futuristic-gradient);
+	}
+
+
 	/*GPT Settings*/
 	h2[as="h3"].text-token-text-primary {
 		color: white !important;
@@ -985,8 +1057,22 @@
 
 	/*********************************************************************************/
 	/*GPTs*/
-	.sticky.top-0.mb-1\.5.items-center.h-14.p-2.font-semibold.bg-token-main-surface-primary.z-30.mx-auto.flex.w-full.justify-center.gap-2.whitespace-nowrap.pt-\[1\.125rem\] {
-		background: transparent;
+	.sticky.top-14.z-10.-ml-4.mb-12.w-screen.bg-token-main-surface-primary.py-2.text-sm.md\:ml-0.md\:w-full.md\:pb-0 {
+		background: rgba(0, 0, 0, .77);
+	}
+
+	input.z-10.w-full.rounded-xl.border.border-token-border-light.bg-token-main-surface-primary.py-2.pr-3.font-normal.outline-0.delay-100.md\:h-14.h-12.text-base.pl-12 {
+		background: rgba(0, 0, 0, .77);
+		outline: 1px #ffffff42 solid;
+	}
+
+	div#headlessui-popover-panel-\:rk\: {
+		background: black;
+		outline: 1px #ffffff42 solid;
+	}
+
+	.relative.flex.flex-grow.flex-col.gap-4.overflow-y-auto.px-6.pb-20.pt-16 {
+		background: black;
 	}
 
 	/*********************************************************************************/
@@ -1050,6 +1136,15 @@
 
 	.dark .dark\:bg-token-main-surface-secondary {
 		background-color: transparent !important
+	}
+
+	/*Side bar glitch of background of white smear when trying to select a chat or hover over */
+	.absolute.bottom-0.top-0.to-transparent.ltr\:right-0.ltr\:bg-gradient-to-l.rtl\:left-0.rtl\:bg-gradient-to-r.from-token-sidebar-surface-secondary.w-20.from-60\%.juice\:w-10 {
+		background: transparent;
+	}
+
+	.ltr\:bg-gradient-to-l:where([dir=ltr], [dir=ltr] *) {
+		background: transparent;
 	}
 
 	/*********************************************************************************/
@@ -1192,6 +1287,10 @@
 
 		.prose {
 			max-width: 100%;
+		}
+
+		.mx-auto.max-w-3xl.overflow-x-clip.px-4 {
+			min-width: 95%
 		}
 	}
 
