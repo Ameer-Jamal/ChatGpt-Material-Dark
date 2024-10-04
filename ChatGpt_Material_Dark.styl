@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.0.9
+@version        2.1.0
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -62,6 +62,7 @@
 		#2c53646e 0%,
 		#000000 100%);
 		--selected-chat-gradient: linear-gradient(to right, @userInputBackgroundGradientColor , #0D0D0D 100%);
+		--canvas-top-bar-gradient: linear-gradient(to right, #0D0D0D, @userInputBackgroundGradientColor);
 		--chat-history-list: #C0C0C0;
 		--sidebar-surface-secondary: #676767a6;
 		/*Highlight selected chat not used in favor of --sidebar-surface-tertiary*/
@@ -1185,17 +1186,17 @@
 
 	/*********************************************************************************/
 	/*Highlighing text*/
-	::selection {
+	*:not(.cm-content.cm-lineWrapping)::selection {
 		background-color: white !important;
 		color: blue !important;
 	}
 
-	::-moz-selection {
+	*:not(.cm-content.cm-lineWrapping)::-moz-selection {
 		background-color: white !important;
 		color: blue !important;
 	}
 
-	-webkit-selection {
+	*:not(.cm-content.cm-lineWrapping)-webkit-selection {
 		background-color: white !important;
 		color: blue !important;
 	}
@@ -1267,6 +1268,36 @@
 	/*Send Button*/
 	svg.icon-sm.m-1.md\:m-0 {
 		margin: .5rem;
+	}
+
+	/*********************************************************************************/
+	/************************************GPT Canvas************************************/
+	/*********************************************************************************/
+	span.text-sm.text-token-text-primary.truncate {
+		border-top: none;
+		background: transparent !important;
+	}
+
+	header.flex.items-center.justify-between.p-3.h-14 {
+		height: 50px;
+		background: var(--canvas-top-bar-gradient) !important
+	}
+
+	.flex.justify-start.pt-2.h-full {
+		padding: 0;
+	}
+
+	.cm-content.cm-lineWrapping {
+		font-family: 'Fira Code', monospace !important;
+		background: var(--code-background);
+	}
+
+	.cm-gutters {
+		background: black !important;
+	}
+
+	.absolute.bottom-0.z-20.h-24.w-full.transition-colors {
+		background: linear-gradient(rgb(0 0 0 / 0%), rgb(0 0 0));
 	}
 
 	/*********************************************************************************/
