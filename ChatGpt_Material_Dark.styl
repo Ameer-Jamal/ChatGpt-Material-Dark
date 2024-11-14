@@ -1,13 +1,14 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.1.1
+@version        2.1.2
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
 @preprocessor   less
 
 @var color userInputTextColor "User Input Text Color" #69bbc5
+@var color roundedBubbleBackground "Background color of user input bubble" rgba(0, 0, 0, 0)
 @var color userInputBackgroundGradientColor "User Input BG Gradient" #2b404c61
 @var color gptOutputBackground "Gpt Output Background" #0D0D0D
 @var color gptMainBodyOutputColor "GPT Main Body Output Text Color" #C0C0C0
@@ -73,7 +74,8 @@
 		--heading-output: @headingOutput;
 		--bold-output: @boldOutput;
 		--links-output: @linksOutput;
-
+		--rounded-bubble-background: @roundedBubbleBackground;
+		
 		/* Absolute black var */
 		--darkest-of-darks: #000
 	}
@@ -901,6 +903,11 @@
 		border-top: solid rgba(255, 255, 255, .2) 1px;
 		background: var(--selected-chat-gradient) !important;
 	}
+	
+	/*Gpt input background*/
+	.relative.max-w-\[70\%\].rounded-3xl.bg-token-message-surface.px-5.py-2\.5{
+		background: var(--rounded-bubble-background) !important;
+	}
 
 	.flex.flex-col.gap-2.pb-2.text-token-text-primary.text-sm.juice\:mt-5 {
 		border-top: none !important;
@@ -1310,6 +1317,7 @@
 	.absolute.bottom-0.z-20.h-24.w-full.transition-colors {
 		background: linear-gradient(rgb(0 0 0 / 0%), rgb(0 0 0)) !important;
 	}
+
 
 	/*********************************************************************************/
 	/************************************WIDE MODE************************************/
