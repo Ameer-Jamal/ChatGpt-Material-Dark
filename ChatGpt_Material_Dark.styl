@@ -1,13 +1,13 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.1.2
+@version        2.1.3
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
 @preprocessor   less
 
-@var color userInputTextColor "User Input Text Color" #69bbc5
+@var color userInputTextColor "User Input Text Color" rgb(105,187,197)
 @var color roundedBubbleBackground "Background color of user input bubble" rgba(0, 0, 0, 0)
 @var color userInputBackgroundGradientColor "User Input BG Gradient" #2b404c61
 @var color gptOutputBackground "Gpt Output Background" #0D0D0D
@@ -17,7 +17,7 @@
 @var color boldOutput "GPT Bold words" #e5fdff
 @var color linksOutput "GPT links" #53b7ff
 
-@var checkbox   wideMode  "GPT Wide Mode" 0
+@var checkbox   wideMode  "GPT Wide Mode" 1
 @var checkbox   hideAddTeams "Hide Add Teams in chat history" 1
 @var checkbox   noTextWrap "Show Full Chat Descriptions (No Text Wrap)" 0
 @var number     textInputBarMaxHeight "Adjust the max height of text input (px)"     ['px', 350, 1, null, 1]
@@ -69,13 +69,14 @@
 		/*Highlight selected chat not used in favor of --sidebar-surface-tertiary*/
 		/* Alternative user input text color: #B0C4DE */
 		--user-input-text: @userInputTextColor;
+		--user-input-text-less-transparent: rgba(@userInputTextColor, 0.5);
 		--main-body-output: @gptMainBodyOutputColor;
 		--code-key-words: @codeKeyWordsOutput;
 		--heading-output: @headingOutput;
 		--bold-output: @boldOutput;
 		--links-output: @linksOutput;
 		--rounded-bubble-background: @roundedBubbleBackground;
-		
+
 		/* Absolute black var */
 		--darkest-of-darks: #000
 	}
@@ -192,10 +193,14 @@
 		filter: saturate(3) brightness(3) contrast(200%);
 	}
 
-	/* Input Dialog */
-	.absolute.bottom-0.left-0.w-full.border-t.md\:border-t-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:bg-vert-light-gradient.bg-white.dark\:bg-gray-800.md\:\!bg-transparent.dark\:md\:bg-vert-dark-gradient.pt-2.md\:pl-2.md\:w-\[calc\(100\%-\.5rem\)\] {
-		background: linear-gradient(to top, #2c2c2c, var(--darkest-of-darks)) !important;
-		padding: 20px !important;
+	/* Input Dialog Bottom Bar */
+	._prosemirror-parent_15ceg_1.text-token-text-primary.max-h-\[25dvh\].max-h-52.overflow-auto.default-browser {
+		background: linear-gradient(to top, #121212, var(--darkest-of-darks)) !important;
+		border: 1px solid var(--user-input-text-less-transparent);
+
+		border-radius: 30px;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 
 	.align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
@@ -903,9 +908,9 @@
 		border-top: solid rgba(255, 255, 255, .2) 1px;
 		background: var(--selected-chat-gradient) !important;
 	}
-	
+
 	/*Gpt input background*/
-	.relative.max-w-\[70\%\].rounded-3xl.bg-token-message-surface.px-5.py-2\.5{
+	.relative.max-w-\[70\%\].rounded-3xl.bg-token-message-surface.px-5.py-2\.5 {
 		background: var(--rounded-bubble-background) !important;
 	}
 
