@@ -1,7 +1,7 @@
 	/* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.1.5
+@version        2.1.6
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -79,7 +79,6 @@
 			--bold-output: @boldOutput;
 			--links-output: @linksOutput;
 			--rounded-bubble-background: @roundedBubbleBackground;
-
 			/* Absolute black var */
 			--darkest-of-darks: #000
 		}
@@ -930,9 +929,13 @@
 
 		/*Gpt input*/
 		.text-token-text-primary:not(svg, button, a, .flex) {
-			border-top: solid rgba(255, 255, 255, .2) 1px;
 			background: var(--selected-chat-gradient) !important;
 		}
+
+		article:not(:last-child) {
+			border-bottom: solid rgba(255, 255, 255, .2) 1px;
+		}
+
 
 		/*Gpt input background*/
 		.relative.max-w-\[70\%\].rounded-3xl.bg-token-message-surface.px-5.py-2\.5 {
@@ -1409,12 +1412,14 @@
 		.p-2 {
 			padding: 0;
 		}
+
 		li.relative {
-    margin-bottom: 7px;
-}
-.no-draggable.group.rounded-lg.active\:opacity-90.bg-\[var\(--item-background-color\)\].h-9.text-sm.relative {
-    --item-background-color: #000 !important;
-}
+			margin-bottom: 7px;
+		}
+
+		.no-draggable.group.rounded-lg.active\:opacity-90.bg-\[var\(--item-background-color\)\].h-9.text-sm.relative {
+			--item-background-color: #000 !important;
+		}
 
 		.mt-5 {
 			padding-top: 0rem;
