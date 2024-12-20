@@ -1,7 +1,7 @@
 	/* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.1.6
+@version        2.1.7
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -158,6 +158,11 @@
 			background: var(--user-input-text);
 			animation: heartbeat 4s ease-in-out infinite;
 			filter: saturate(1.5) contrast(1.5);
+		}
+
+		/* Talk with GPT */
+		button[data-testid="composer-speech-button"] {
+			background: var(--user-input-text);
 		}
 
 		/* Attachments button */
@@ -515,9 +520,15 @@
 		}
 
 
-		/*Input box padding to text*/
-		.flex.flex-col.pb-9.text-sm {
-			padding-bottom: 0;
+		/*Input box*/
+		[class*="min-h-"].flex.items-start.pl-2 {
+			border-radius: 20px;
+			border: solid rgba(255, 255, 255, .2) 1px;
+		}
+
+		/*Input box inner */
+		._prosemirror-parent_cy42l_1.text-token-text-primary.max-h-\[25dvh\].max-h-52.overflow-auto.default-browser {
+			background: var(--all-chat-history) !important;
 		}
 
 		/*Add File button*/
