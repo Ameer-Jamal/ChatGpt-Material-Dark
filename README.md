@@ -1,6 +1,7 @@
 # 🌙 ChatGPT Material Dark
 ### Download and Install here:
 #### https://userstyles.world/style/11408/chatgpt-material-dark
+![image](https://github.com/user-attachments/assets/adc1071d-ec15-4288-98e2-4ea88e3325ea)
 
 If you like it please review lets get this everywhere! 
 For feedback please contact me with information about your problem at www.linkedin.com/in/ameer-jamal or raise a github issue here : https://github.com/Ameer-Jamal/ChatGpt-Material-Dark
