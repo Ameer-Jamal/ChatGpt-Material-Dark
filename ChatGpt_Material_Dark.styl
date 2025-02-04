@@ -1,7 +1,7 @@
 	/* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.1.9
+@version        2.2.0
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -9,6 +9,7 @@
 
 @var color userInputTextColor "User Input Text Color" rgb(105,187,197)
 @var color userInputBackgroundGradientColor "User Input BG Gradient" #2b404c61
+@var color userInputBubbleColor "User Input Background Bubble" rgba(0,0,0,0)
 @var color gptOutputBackground "Gpt Output Background" #000000
 @var color gptMainBodyOutputColor "GPT Main Body Output Text Color" #C0C0C0
 @var color codeKeyWordsOutput "GPT Code Keywords Color" #E8922E
@@ -71,6 +72,7 @@
 			/*Highlight selected chat not used in favor of --sidebar-surface-tertiary*/
 			/* Alternative user input text color: #B0C4DE */
 			--user-input-text: @userInputTextColor;
+			--user-input-bubble-color: @userInputBubbleColor;
 			--user-input-text-less-transparent: rgba(@userInputTextColor, 0.5);
 			--main-body-output: @gptMainBodyOutputColor;
 			--code-key-words: @codeKeyWordsOutput;
@@ -453,7 +455,7 @@
 
 		/*User input bubble*/
 		[data-message-author-role="user"] > * > *:not(.flex-row.items-center.justify-end.gap-1):not([class*="image"]) {
-			background: var(--all-chat-history) !important;
+			background: var(--user-input-bubble-color);
 		}
 
 		/* Ensure all image divs in user input and images remain transparent */
