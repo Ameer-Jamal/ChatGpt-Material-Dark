@@ -1,22 +1,22 @@
 	/* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.1.8
+@version        2.1.9
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
 @preprocessor   less
 
 @var color userInputTextColor "User Input Text Color" rgb(105,187,197)
-@var color userInputBubbleColor "User Input Background Bubble" rgba(0,0,0,0)
-@var color roundedBubbleBackground "Background color of user input bubble" rgba(0, 0, 0, 0)
 @var color userInputBackgroundGradientColor "User Input BG Gradient" #2b404c61
-@var color gptOutputBackground "Gpt Output Background" #0D0D0D
+@var color gptOutputBackground "Gpt Output Background" #000000
 @var color gptMainBodyOutputColor "GPT Main Body Output Text Color" #C0C0C0
 @var color codeKeyWordsOutput "GPT Code Keywords Color" #E8922E
 @var color headingOutput "GPT Headings" #fff
 @var color boldOutput "GPT Bold words" #e5fdff
 @var color linksOutput "GPT links" #53b7ff
+@var color verticalChatLines "Paragraph line split color" #2fffd2
+@var color lineColor "Line work/borders color" rgba(255, 255, 255, .2)
 
 @var checkbox   wideMode  "GPT Wide Mode" 1
 @var checkbox   hideAddTeams "Hide Add Teams in chat history" 1
@@ -72,13 +72,14 @@
 			/* Alternative user input text color: #B0C4DE */
 			--user-input-text: @userInputTextColor;
 			--user-input-text-less-transparent: rgba(@userInputTextColor, 0.5);
-			--user-input-bubble-color: @userInputBubbleColor;
 			--main-body-output: @gptMainBodyOutputColor;
 			--code-key-words: @codeKeyWordsOutput;
 			--heading-output: @headingOutput;
 			--bold-output: @boldOutput;
 			--links-output: @linksOutput;
-			--rounded-bubble-background: @roundedBubbleBackground;
+			--line-color: @lineColor;
+			--vertical-chat-lines: @verticalChatLines;
+
 			/* Absolute black var */
 			--darkest-of-darks: #000
 		}
@@ -310,8 +311,7 @@
 		}
 
 		/* Code snippet font and settings*/
-		code,
-		pre,
+		code, border- pre,
 		kbd,
 		samp {
 			letter-spacing: 0.5px;
@@ -453,7 +453,7 @@
 
 		/*User input bubble*/
 		[data-message-author-role="user"] > * > *:not(.flex-row.items-center.justify-end.gap-1):not([class*="image"]) {
-			background: var(--user-input-bubble-color);
+			background: var(--all-chat-history) !important;
 		}
 
 		/* Ensure all image divs in user input and images remain transparent */
@@ -561,7 +561,7 @@
 			--tw-prose-code: var(--code-key-words) !important;
 			--tw-prose-links: var(--links-output) !important;
 			--tw-prose-quotes: #ffc7f8;
-			--tw-prose-hr: #2fffd2;
+			--tw-prose-hr: var(--vertical-chat-lines) !important;
 		}
 
 		/** Chat input links */
@@ -944,13 +944,14 @@
 		}
 
 		article:not(:last-child) {
-			border-bottom: solid rgba(255, 255, 255, .2) 1px;
+			border-bottom: solid rgba(@lineColor, .2) 1px;
 		}
 
 
 		/*Gpt input background*/
-		.relative.max-w-\[70\%\].rounded-3xl.bg-token-message-surface.px-5.py-2\.5 {
-			background: var(--rounded-bubble-background) !important;
+		div#composer-background {
+			background: var(--all-chat-history) !important;
+			border: 1px solid rgba(@lineColor, 0.3);
 		}
 
 		.flex.flex-col.gap-2.pb-2.text-token-text-primary.text-sm.juice\:mt-5 {
@@ -1238,6 +1239,10 @@
 			border-radius: 5px;
 		}
 
+		* {
+			--sidebar-mask: transparent !important;
+			scrollbar-color: var(--futuristic-gradient) !important;
+		}
 
 		/* The empty space “below” the scrollbar bar */
 		::-webkit-scrollbar-track {
