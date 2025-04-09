@@ -1,7 +1,7 @@
 		/* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.85
+@version        2.2.86
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -27,10 +27,10 @@
 ==/UserStyle== */
 		/*
  * License: Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
- *
+ * 
  * You are free to:
  * - Share — copy and redistribute the material in any medium or format.
- *
+ * 
  * Under the following terms:
  * - Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
  *   You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
@@ -38,7 +38,7 @@
  * - No Commercial Use — You may not use t
  * For the full license text, visit https://creativecommons.org/licenses/by-nd/4.0/
  * For any questions or concerns, please reach out to the original author.
-
+ 
 */
 		@-moz-document regexp("https://chat.openai.com(/.*)?"),
 		regexp("https://auth.openai.com(/.*)?"),
@@ -87,7 +87,7 @@
 				--links-output: @linksOutput;
 				--line-color: @lineColor;
 				--vertical-chat-lines: @verticalChatLines;
-				--darkest-of-darks: #000;
+				--sidebar-surface-primary: @userInputBackgroundColor;
 			}
 
 			/*********************************************************************************/
@@ -212,7 +212,7 @@
 			}
 
 			.align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
-				background: var(--darkest-of-darks) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			circle.origin-\[50\%_50\%\].-rotate-90.transition-\[stroke-dashoffset\] {
@@ -237,7 +237,7 @@
 			}
 
 			.align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
-				background: var(--darkest-of-darks);
+				background: var(--user-input-background);
 			}
 
 			/* current Model */
@@ -303,7 +303,6 @@
 			.mt-5 {
 				padding-top: 1.25rem;
 				margin-top: 0;
-				background-color: black;
 				box-sizing: border-box;
 			}
 
@@ -482,9 +481,9 @@
 				--tw-bg-opacity: 1;
 				color: var(--user-input-text) !important;
 
-				background: var(--darkest-of-darks);
+				background: var(--user-input-background);
 				/* fallback for old browsers */
-				background: -webkit-linear-gradient(to bottom, #434343, var(--darkest-of-darks));
+				background: -webkit-linear-gradient(to bottom, #434343, var(--user-input-background));
 				/* Chrome 10-25, Safari 5.1-6 */
 				background: var(--user-input)!important;
 			}
@@ -498,14 +497,14 @@
 
 
 			.dark .dark\:bg-gray-800:last-child {
-				background: var(--darkest-of-darks)!important;
+				background: var(--user-input-background)!important;
 			}
 
 
 			/*Chat output */
 			.dark .dark\:bg-\[\#444654\] {
 				--tw-bg-opacity: 1;
-				background: var(--darkest-of-darks);
+				background: var(--user-input-background);
 			}
 
 			/*The word ChatGpt in output*/
@@ -654,7 +653,7 @@
 
 			#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > a {
 				padding-right: 7.3rem;
-				border-color: var(--darkest-of-darks);
+				border-color: var(--user-input-background);
 			}
 
 			/*********************************************************************************/
@@ -674,11 +673,15 @@
 			0\,
 			0\,
 			0\.1\)\].w-11.flex-shrink-0.items-center.justify-center.bg-white.dark\:bg-transparent {
-				border: var(--darkest-of-darks);
+				border: var(--user-input-background);
 			}
 
 			#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > span:hover {
 				box-shadow: 1px 1px 10px rgba(38, 198, 218, 0.9);
+			}
+
+			a.no-draggable.group.rounded-lg.active\:opacity-90.bg-\[var\(--item-background-color\)\].h-9.text-sm.screen-arch\:relative.screen-arch\:bg-transparent.screen-arch\:py-\[7px\].flex.items-center.gap-2\.5.p-2 {
+				background: var(--user-input-background) !important;
 			}
 
 
@@ -776,7 +779,7 @@
 			/*********************************************************************************/
 			/*All Chat history general  background of the chat history behind elements */
 			nav[aria-label="Chat history"] {
-				background: var(--darkest-of-darks);
+				background: var(--user-input-background);
 				font-family: "Montserrat", sans-serif;
 				font-optical-sizing: auto;
 				font-weight: 600;
@@ -852,13 +855,13 @@
 
 			/*chat gpt button top left (New Chat)*/
 			.bg-token-sidebar-surface-primary {
-				background: var(--darkest-of-darks) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			.juice\:sticky.juice\:top-0.juice\:z-20.juice\:bg-token-sidebar-surface-primary {
 				position: -webkit-sticky;
 				/* For Safari */
-				background-color: var(--darkest-of-darks);
+				background-color: var(--user-input-background);
 			}
 
 			/*Hover over chat gpt text in button top left (New Chat)*/
@@ -869,11 +872,11 @@
 
 			/*Recent Chat background Hover For Day/Times Updated*/
 			h3.px-2.text-xs.font-semibold.text-ellipsis.overflow-hidden.break-all.pt-3.pb-2.text-token-text-primary {
-				background: var(--darkest-of-darks) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary {
-				background-color: var(--darkest-of-darks) !important;
+				background-color: var(--user-input-background) !important;
 			}
 
 			/*GPTS Button top left in chat history*/
@@ -941,7 +944,7 @@
 
 			/* Double click on chat to rename chat */
 			.absolute.bottom-0.left-\[7px\].right-2.top-0.flex.items-center.bg-token-sidebar-surface-secondary {
-				background: var(--darkest-of-darks)
+				background: var(--user-input-background)
 			}
 
 			/* chatgpt title */
@@ -1066,7 +1069,7 @@
 
 			/*Disclamer text*/
 			.relative.px-2.py-2.text-center.text-xs.text-gray-600.dark\:text-gray-300.md\:px-\[60px\] {
-				color: var(--darkest-of-darks);
+				color: var(--user-input-background);
 			}
 
 			.gizmo .markdown > :not(pre),
@@ -1267,7 +1270,7 @@
 			.oai-header,
 			.oai-footer,
 			.login-container {
-				background: var(--darkest-of-darks);
+				background: var(--user-input-background);
 				color: white;
 			}
 
@@ -1385,7 +1388,7 @@
 			/*********************************************************************************/
 			/* Applicable only for keepchatgpt userscript  */
 			div#kcg {
-				background: var(--darkest-of-darks) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			/*********************************************************************************/
@@ -1606,7 +1609,6 @@
 			.mt-5 {
 				padding-top: 0rem;
 				margin-top: 0;
-				background-color: black !important;
 				box-sizing: border-box;
 			}
 		}
