@@ -1,17 +1,17 @@
 		/* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.84
+@version        2.2.85
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
 @preprocessor   less
 
 @var color userInputTextColor "User Input Text Color" rgb(105,187,197)
-@var color userInputBackgroundGradientColor "User Input BG Gradient" #2b404c61
+@var color userInputBackgroundColor "User Input Background" #000000
 @var color userInputBubbleColor "User Input Background Bubble" rgba(0,0,0,0)
-@var color gptOutputBackground "Gpt Output Background" #000000
-@var color gptMainBodyOutputColor "GPT Main Body Output Text Color" #C0C0C0
+@var color gptOutputBackgroundColor "GPT Output Background" #2b404c61
+@var color gptMainBodyOutputTextColor "GPT Main Body Output Text Color" #C0C0C0
 @var color codeKeyWordsOutput "GPT Code Keywords Color" #E8922E
 @var color headingOutput "GPT Headings" #fff
 @var color boldOutput "GPT Bold words" #e5fdff
@@ -27,10 +27,10 @@
 ==/UserStyle== */
 		/*
  * License: Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
- * 
+ *
  * You are free to:
  * - Share — copy and redistribute the material in any medium or format.
- * 
+ *
  * Under the following terms:
  * - Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
  *   You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
@@ -38,7 +38,7 @@
  * - No Commercial Use — You may not use t
  * For the full license text, visit https://creativecommons.org/licenses/by-nd/4.0/
  * For any questions or concerns, please reach out to the original author.
- 
+
 */
 		@-moz-document regexp("https://chat.openai.com(/.*)?"),
 		regexp("https://auth.openai.com(/.*)?"),
@@ -55,20 +55,21 @@
 				--darker-futristic-gradient: linear-gradient(to right, #245062c4, #203a43b0, #000000cf);
 				/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 				--chat-background-gradient: linear-gradient(180deg, rgb(32 33 35 / 0%), rgb(32 33 35) 58.85%);
-				--all-chat-history: @gptOutputBackground;
+				--user-input-background: @userInputBackgroundColor;
 				--main-chat-border-color: rgba(137, 126, 109, 0.35);
 				--deep-space: linear-gradient(to left, #000, #434343cc);
 				--deep-space-to-top-transparent: linear-gradient(to top, #4343434f, #0D0D0D);
 
 				--alerts: linear-gradient(to right, #ff512ff0, #f09819f0);
+
 				--code-background: #1E1E1E;
-				/* Vscode Dark+ */
 				--code-topbar: radial-gradient(circle at -5.9%, #2c5364 0%, #00283a 15.9%, #1E1E1E 24.5%, #1E1E1E 100%);
-				--user-input: linear-gradient(to right,
-				#2c53646e 0%,
-				#000000 100%);
-				--selected-chat-gradient: linear-gradient(to right, @userInputBackgroundGradientColor , #0D0D0D 100%);
-				--canvas-top-bar-gradient: linear-gradient(to right, #0D0D0D, @userInputBackgroundGradientColor);
+
+				--table-header: linear-gradient(to right, @gptOutputBackgroundColor 0%, @gptOutputBackgroundColor 20%, transparent 50%, @gptOutputBackgroundColor 80%, @gptOutputBackgroundColor 100%);
+				--table-hover: #ffffff30;
+
+				--selected-chat-gradient: linear-gradient(to right, @gptOutputBackgroundColor , #0D0D0D 100%);
+				--canvas-top-bar-gradient: linear-gradient(to right, #0D0D0D, @gptOutputBackgroundColor);
 				--chat-history-list: #C0C0C0;
 				--sidebar-surface-secondary: #676767a6;
 
@@ -79,14 +80,14 @@
 				--message-surface: @userInputBubbleColor;
 				--user-input-text-less-transparent: rgba(@userInputTextColor, 0.4);
 
-				--main-body-output: @gptMainBodyOutputColor;
+				--main-body-output-text-color: @gptMainBodyOutputTextColor;
 				--code-key-words: @codeKeyWordsOutput;
 				--heading-output: @headingOutput;
 				--bold-output: @boldOutput;
 				--links-output: @linksOutput;
 				--line-color: @lineColor;
 				--vertical-chat-lines: @verticalChatLines;
-				--darkest-of-darks: #000
+				--darkest-of-darks: #000;
 			}
 
 			/*********************************************************************************/
@@ -172,7 +173,7 @@
 			}
 
 			[data-testid="share-chat-button"] {
-				color: var(--all-chat-history)
+				color: var(--user-input-background)
 			}
 
 			/* Attachments button */
@@ -227,7 +228,7 @@
 
 			/* Input Dialog Bottom Bar */
 			.relative.flex.w-full.items-end.py-3.pl-3 {
-				background: var(--all-chat-history);
+				background: var(--user-input-background);
 				border: 1px solid var(--user-input-text-less-transparent);
 
 				border-radius: 30px;
@@ -509,7 +510,7 @@
 
 			/*The word ChatGpt in output*/
 			.agent-turn .font-semibold.select-none {
-				color: var(--main-body-output) !important;
+				color: var(--main-body-output-text-color) !important;
 			}
 
 			/*Chat Background*/
@@ -519,7 +520,7 @@
 
 			/*Background Base*/
 			[class*="react-scroll-to-bottom--css-"] {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			.sticky.top-0.z-\[9\].w-full {
@@ -534,19 +535,24 @@
 			/*Gpt Output Background*/
 			.w-full.text-token-text-primary:nth-child(odd):not(svg,
 			button) {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			.w-full.text-token-text-primary:last-child:not(svg,
 			button) {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			/*sidebar underlying color*/
+			.screen-arch\:sticky.screen-arch\:top-\[var\(--sticky-title-offset\)\].z-20.text-token-text-primary.screen-arch\:-me-2.screen-arch\:h-10.screen-arch\:min-w-\[50cqw\].screen-arch\:-translate-x-2.screen-arch\:bg-\[var\(--sidebar-surface\)\].screen-arch\:py-1.screen-arch\:text-token-text-secondary.overflow-clip.ps-2.pt-7.text-xs.font-semibold.break-all.text-ellipsis.select-none {
+				background: var(--user-input-background) !important;
+			}
+
 			[data-discover="true"] {
 				transition: background-color 0.2s ease-in;
-				background: var(--darkest-of-darks) !important;
-				font-size: 16px
+				background: var(--user-input-background) !important;
+				font-size: 16px;
+				border-bottom: 0;
 			}
 
 			[data-discover="true"]:hover {
@@ -555,12 +561,12 @@
 
 			/*Input box bottom middle to right*/
 			.relative.z-\[1\].flex.max-w-full.flex-1.flex-col.h-full.max-xs\:\[--force-hide-label\:none\] {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 				border-radius: 20px;
 			}
 
 			.relative.flex.w-full.items-end.px-3.py-3 {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			.border-token-border-xlight.flex.w-full.cursor-text.flex-col.items-center.justify-center.rounded-\[28px\].border.bg-clip-padding.contain-inline-size.overflow-clip.shadow-sm.sm\:shadow-lg.dark\:shadow-none\!.bg-token-main-surface-primary.dark\:bg-\[\#303030\] {
@@ -592,7 +598,7 @@
 			/** Chat input text */
 			.dark .dark\:prose-invert {
 				--tw-prose-headings: var(--heading-output) !important;
-				--tw-prose-body: var(--main-body-output) !important;
+				--tw-prose-body: var(--main-body-output-text-color) !important;
 				--tw-prose-bold: var(--bold-output) !important;
 				--tw-prose-code: var(--code-key-words) !important;
 				--tw-prose-links: var(--links-output) !important;
@@ -731,7 +737,7 @@
 			}
 
 			.flex.flex-1.grow.basis-auto.flex-col.overflow-hidden {
-				background: var(--all-chat-history);
+				background: var(--user-input-background);
 				color: var(--text-secondary)
 			}
 
@@ -877,7 +883,7 @@
 
 			/*********************************************************************************/
 			#__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div {
-				background: var(--all-chat-history);
+				background: var(--user-input-background);
 			}
 
 			\/75 {
@@ -979,13 +985,13 @@
 			}
 
 			.w-full.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:w-\[calc\(100\%-\.5rem\)\].juice\:w-full {
-				background: var(--all-chat-history);
+				background: var(--user-input-background);
 				padding-bottom: 10px
 			}
 
 			/* Black background underneath the inpujt box */
 			.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.w-full {
-				background: var(--all-chat-history);
+				background: var(--user-input-background);
 			}
 
 			div#radix {
@@ -1008,12 +1014,12 @@
 
 			/*Gpt input background*/
 			div#composer-background {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 				border: 1px solid rgba(@lineColor, 0.3);
 			}
 
 			.flex.flex-col.text-sm.md\:pb-9 {
-				background: var(--all-chat-history);
+				background: var(--user-input-background);
 			}
 
 			.flex.flex-col.gap-2.pb-2.text-token-text-primary.text-sm.juice\:mt-5 {
@@ -1036,11 +1042,11 @@
 
 			/*Gpt main screen input Welcome Screen */
 			.flex.h-full.flex-col.items-center.justify-center.text-token-text-primary {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			.flex.h-full.flex-col.overflow-y-auto {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			.p-2 {
@@ -1065,7 +1071,7 @@
 
 			.gizmo .markdown > :not(pre),
 			.gizmo .markdown > :not(pre) > :not(a) {
-				color: var(--main-body-output);
+				color: var(--main-body-output-text-color);
 			}
 
 			.markdown h1,
@@ -1122,7 +1128,7 @@
 			}
 
 			.draggable.no-draggable-children {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 			}
 
 
@@ -1213,7 +1219,7 @@
 
 			/*Home before chat*/
 			.text-base.my-auto.mx-auto.px-3.md\:px-4.w-full.md\:px-5.lg\:px-4.xl\:px-5.h-full {
-				background: var(--all-chat-history);
+				background: var(--user-input-background);
 			}
 
 			._prosemirror-parent_11fu7_1.text-token-text-primary.max-h-\[25dvh\].max-h-52.overflow-auto.\[scrollbar-width\:thin\].default-browser {
@@ -1223,7 +1229,7 @@
 			/*********************************************************************************/
 			/*Before login*/
 			.relative.hidden.flex-1.flex-col.justify-center.px-5.pt-8.md\:flex.md\:px-6.md\:py-[22px].lg\:px-8 {
-				background: radial-gradient(@userInputBackgroundGradientColor , #0000) !important;
+				background: radial-gradient(@gptOutputBackgroundColor , #0000) !important;
 				color: rgb(0 255 246) !important;
 			}
 
@@ -1405,7 +1411,7 @@
 			}
 
 			.p-4.bg-gray-900.rounded-md.shadow-md {
-				background: var(--all-chat-history);
+				background: var(--user-input-background);
 				margin-bottom: 3%;
 				text-align: center;
 				line-height: 1.5;
@@ -1427,6 +1433,44 @@
 				display: none;
 			}
 
+			/********************* Tables *************************/
+			.tableContainer.horzScrollShadows {
+				background: transparent;
+				border: 0;
+			}
+
+			article table {
+				width: 100%;
+				border-collapse: collapse;
+				font-family: 'Segoe UI', sans-serif;
+				color: white;
+			}
+
+			article thead {
+				background: var(--table-header);
+			}
+
+			article thead th {
+				text-align: left;
+				padding: 12px 16px;
+				border: 1px solid var(--line-color);
+				font-weight: 600;
+				letter-spacing: 0.5px;
+			}
+
+			article tbody td {
+				padding: 12px 16px;
+				border: 1px solid var(--line-color);
+			}
+
+			article tbody tr:nth-child(even) {
+				background: var(--user-input);
+			}
+
+			article tbody tr:hover {
+				background: var(--table-hover);
+				transition: background-color 0.3s ease;
+			}
 
 			/*********************************************************************************/
 			/*New Chat Input Text Color ?? */
@@ -1444,11 +1488,11 @@
 			/************************************GPT Canvas************************************/
 			/*********************************************************************************/
 			.flex.w-full.min-w-0.items-center.justify-between.gap-2.self-start.border-token-border-light.px-4.transition-colors.duration-700.border-token-border-light.py-3.text-sm.font-medium.text-token-text-secondary {
-				background: var(--all-chat-history) !important;
+				background: var(--user-input-background) !important;
 			}
 
 			header.\@container.flex.h-14.flex-none.items-center.justify-between.gap-1.px-3 {
-				background: var(--all-chat-history);
+				background: var(--user-input-background);
 			}
 
 			span.text-sm.text-token-text-primary.truncate {
@@ -1491,35 +1535,30 @@
 
 			/*Safety text bottom*/
 			.relative.mt-auto.flex.min-h-8.w-full.items-center.justify-center.p-2.text-center.text-xs.text-token-text-secondary.md\:px-\[60px\] {
-				color: var(--all-chat-history);
+				color: var(--user-input-background);
 			}
 
 			/*********************************************************************************/
 			/************************************WIDE MODE************************************/
 			/*********************************************************************************/
-			& when(@wideMode =1) {
-				.gizmo .gizmo\:xl\:max-w-\[48rem\] {
-					max-width: 95%;
-				}
-
-				.md\:max-w-3xl,
-				.max-w-lg {
-					max-width: 95%;
-				}
-
-				.max-h-\[75vh\] {
-					max-height: 95%;
+			& when (@wideMode =1) {
+				.md\:max-w-3xl, /* Common medium breakpoint limit */
+				.lg\:max-w-3xl, /* Common large breakpoint limit */
+				.\!max-w-3xl, /* Another variation seen */
+				.xl\:max-w-\[48rem\], /* Common extra-large breakpoint limit (48rem = 768px) */
+				.gizmo .xl\:max-w-\[48rem\], /* Sometimes nested */
+				/* Target the direct parent containers of message groups */
+				div[class*="react-scroll-to-bottom"] > div > div > .mx-auto,
+				/* Target the main content area wrapper if others fail */
+				main .w-full .mx-auto {
+					max-width: 95% !important;
 				}
 
 				.prose {
-					max-width: 100%;
-				}
-
-				.mx-auto.max-w-3xl.overflow-x-clip.px-4 {
-					min-width: 95%
+					max-width: none !important;
+					/* Allow prose to fill its widened container */
 				}
 			}
-
 
 			/************************************Hide Add Teams Advertisment************************************/
 			& when (@hideAddTeams =1) {
