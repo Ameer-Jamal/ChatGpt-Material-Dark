@@ -1,7 +1,7 @@
 		/* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.86
+@version        2.2.88
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -27,10 +27,10 @@
 ==/UserStyle== */
 		/*
  * License: Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
- *
+ * 
  * You are free to:
  * - Share — copy and redistribute the material in any medium or format.
- *
+ * 
  * Under the following terms:
  * - Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
  *   You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
@@ -38,7 +38,7 @@
  * - No Commercial Use — You may not use t
  * For the full license text, visit https://creativecommons.org/licenses/by-nd/4.0/
  * For any questions or concerns, please reach out to the original author.
-
+ 
 */
 		@-moz-document regexp("https://chat.openai.com(/.*)?"),
 		regexp("https://auth.openai.com(/.*)?"),
@@ -88,6 +88,7 @@
 				--line-color: @lineColor;
 				--vertical-chat-lines: @verticalChatLines;
 				--sidebar-surface-primary: @userInputBackgroundColor;
+				--bg-elevated-secondary: @userInputBackgroundColor
 			}
 
 			/*********************************************************************************/
@@ -247,16 +248,19 @@
 				rgba(0, 0, 0, 0.0)/* Fully transparent at the bottom */
 				);
 				backdrop-filter: blur(1px);
-				/* Apply blur effect */
 			}
 
 			/* current Model Text*/
-			[aria-label^="model" i] .text-token-text-secondary {
-				/* Your styles here */
+			[data-testid="model-switcher-dropdown-button"] {
 				color: var(--user-input-text);
-				/* Example style */
 				filter: saturate(0.7) contrast(1.1);
 			}
+
+			[data-testid="model-switcher-dropdown-button"] .text-token-text-tertiary {
+				color: var(--user-input-text);
+				filter: hue-rotate(90deg);
+			}
+
 
 			.draggable.no-draggable-children.sticky.top-0.p-3.mb-1\.5.items-center.h-header-height.font-semibold.bg-token-main-surface-primary.z-30.mx-auto.flex.w-full.justify-center.gap-2.whitespace-nowrap.pt-\[1\.125rem\] {
 				background: linear-gradient( to bottom,
@@ -871,7 +875,7 @@
 
 
 			/*Recent Chat background Hover For Day/Times Updated*/
-			h3.px-2.text-xs.font-semibold.text-ellipsis.overflow-hidden.break-all.pt-3.pb-2.text-token-text-primary {
+			span.flex.h-9.items-center {
 				background: var(--user-input-background) !important;
 			}
 
@@ -1006,6 +1010,7 @@
 			button,
 			a,
 			.flex,
+			h3,
 			.default-browser) {
 				background: var(--selected-chat-gradient) !important;
 			}
@@ -1367,6 +1372,10 @@
 				background-color: transparent;
 			}
 
+			/*Image issues for shopping*/
+			.mix-blend-darken {
+				mix-blend-mode: normal;
+			}
 
 			/*********************************************************************************/
 			/*Highlighing text*/
