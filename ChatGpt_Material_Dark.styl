@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.942
+@version        2.2.945
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -45,1632 +45,1651 @@ regexp("https://auth.openai.com(/.*)?"),
 regexp("https://auth0.openai.com(/.*)?"),
 regexp("https://chatgpt.com(/.*)?") {
 
-      @import (css) url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-      @import (css) url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
-      @import (css) url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
-      @import (css) url('href="https://fonts.googleapis.com/css2?family=Montserrat: taal,wght@0,100..900;1,100..900&display=swap');
-
-      :root {
-            --futuristic-gradient: linear-gradient(to right, #0f2027c4, #203a43b0, #2c5364cf);
-            --darker-futristic-gradient: linear-gradient(to right, #245062c4, #203a43b0, #000000cf);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            --chat-background-gradient: linear-gradient(180deg, rgb(32 33 35 / 0%), rgb(32 33 35) 58.85%);
-            --user-input-background: @userInputBackgroundColor;
-            --main-chat-border-color: rgba(137, 126, 109, 0.35);
-            --deep-space: linear-gradient(to left, #000, #434343cc);
-            --deep-space-to-top-transparent: linear-gradient(to top, #4343434f, #0D0D0D);
-
-            --alerts: linear-gradient(to right, #ff512ff0, #f09819f0);
-
-            --code-background: #1E1E1E;
-            --code-topbar: radial-gradient(circle at -5.9%, #2c5364 0%, #00283a 15.9%, #1E1E1E 24.5%, #1E1E1E 100%);
-
-            --table-header: linear-gradient(to right, @gptOutputBackgroundColor 0%, @gptOutputBackgroundColor 20%, transparent 50%, @gptOutputBackgroundColor 80%, @gptOutputBackgroundColor 100%);
-            --table-hover: #ffffff30;
-
-            --selected-chat-gradient: linear-gradient(to right, @gptOutputBackgroundColor , #0D0D0D 100%);
-            --canvas-top-bar-gradient: linear-gradient(to right, #0D0D0D, @gptOutputBackgroundColor);
-            --chat-history-list: #C0C0C0;
-            --sidebar-surface-secondary: #676767a6;
-
-            /*Highlight selected chat not used in favor of --sidebar-surface-tertiary*/
-            /* Alternative user input text color: #B0C4DE */
-            --user-input-text: @userInputTextColor;
-            --text-secondary: @userInputTextColor;
-            --message-surface: @userInputBubbleColor;
-            --user-input-text-less-transparent: rgba(@userInputTextColor, 0.4);
-
-            --main-body-output-text-color: @gptMainBodyOutputTextColor;
-            --code-key-words: @codeKeyWordsOutput;
-            --heading-output: @headingOutput;
-            --bold-output: @boldOutput;
-            --links-output: @linksOutput;
-            --line-color: @lineColor;
-            --vertical-chat-lines: @verticalChatLines;
-            --sidebar-surface-primary: @userInputBackgroundColor;
-            --bg-elevated-secondary: @userInputBackgroundColor
-      }
-
-      /*********************************************************************************/
-      /**************HOME PAGE WHEN NEW CHAT STARTING **********************************/
-      /*logo*/
-      .mb-3.h-12.w-12 {
-            filter: invert(1);
-      }
-
-      .content-fade:after {
-            background: var(--user-input-background);
-      }
-
-      /*Auto prompts on home screen*/
-      button.btn.relative.btn-neutral.group.w-full.whitespace-nowrap.rounded-xl.px-4.py-3.text-left.text-token-text-primary.md\:whitespace-normal:hover {
-            background: var(--futuristic-gradient)!important;
-            border-radius: 10px;
-      }
-
-      /* Keyframes for red to white background transition */
-      @keyframes redPulseBG {
-            0% {
-                  background-color: #585858;
-            }
-
-            50% {
-                  background-color: #979797;
-            }
-
-            100% {
-                  background-color: #585858;
-            }
-      }
-
-      /* Input box send message animation */
-      @keyframes heartbeat {
-            0% {
-                  transform: scale(1);
-            }
-
-            14% {
-                  transform: scale(1.1);
-            }
-
-            28% {
-                  transform: scale(1);
-            }
-
-            42% {
-                  transform: scale(1.1);
-            }
-
-            70% {
-                  transform: scale(1);
-            }
-      }
-
-      /* Stop Generating button */
-      button[aria-label*="Stop"] {
-            animation: heartbeat 4s ease-in-out infinite;
-
-            background: #cf2500eb !important;
-      }
-
-      /* Stop Generating button */
-      button[aria-label*="Stop"] {
-            background: #cf2500eb !important;
-      }
-
-
-      /* Send to GPT button */
-      button[data-testid="send-button"]:not(:disabled) {
-            transition: background 2s ease-in-out;
-      }
-
-      /* Send to GPT button on hover */
-      button[data-testid="send-button"]:not(:disabled):hover {
-            transition: background 0.5s ease-in-out;
-            background: var(--user-input-text);
-            animation: heartbeat 4s ease-in-out infinite;
-            filter: saturate(1.5) contrast(1.5);
-      }
-
-      /* Talk with GPT */
-      button[data-testid="composer-speech-button"] {
-            background: var(--user-input-text);
-      }
-
-      [data-testid="share-chat-button"] {
-            color: var(--user-input-background)
-      }
-
-      /* Attachments button */
-      button.flex.items-center.justify-center.text-token-text-primary {
-            transition: background 0.5s ease-in-out, filter 0.5s ease-in-out;
-      }
-
-      button.flex.items-center.justify-center.text-token-text-primary .truncate:hover {
-            filter: invert(1);
-      }
-
-      /* Buttons in input box */
-      button.flex.h-full.min-w-8.items-center.justify-center.p-2 {
-            padding: 15px
-      }
-
-      div#thread-bottom {
-            background: var(--user-input-background);
-      }
-
-      /*Speach Button*/
-      button.relative.flex.h-9.items-center.justify-center.rounded-full.bg-black.text-white.transition-colors.focus-visible\:outline-none.focus-visible\:outline-black.disabled\:text-gray-50.disabled\:opacity-30.can-hover\:hover\:opacity-70.dark\:bg-white.dark\:text-black.w-9 {
-            background: var(--user-input-text);
-            filter: saturate(0.9);
-      }
-
-      button.relative.flex.h-9.items-center.justify-center.rounded-full.bg-black.text-white.transition-colors.focus-visible\:outline-none.focus-visible\:outline-black.disabled\:text-gray-50.disabled\:opacity-30.can-hover\:hover\:opacity-70.dark\:bg-white.dark\:text-black.w-9:hover {
-            filter: saturate(1.5), brightness(4)contrast(4);
-      }
-
-      /* Attachments button on hover */
-      button.flex.items-center.justify-center.text-token-text-primary:hover {
-            background: var(--user-input-text) !important;
-            animation: heartbeat 2s ease-in-out infinite;
-            filter: saturate(1.5) contrast(1.5);
-      }
-
-      /* SVG inside the attachments button on hover */
-      button.flex.items-center.justify-center.text-token-text-primary:hover svg {
-            filter: invert(1);
-            transform: scale(1.2);
-            transition: transform 0.5s ease-in-out;
-      }
-
-      .align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
-            background: var(--user-input-background) !important;
-      }
-
-      circle.origin-\[50\%_50\%\].-rotate-90.transition-\[stroke-dashoffset\] {
-            stroke: var(--user-input-text);
-            filter: saturate(3) brightness(3) contrast(200%);
-      }
-
-      /*Xs for images attached*/
-      button.absolute.right-1.top-1.-translate-y-1\/2.translate-x-1\/2.rounded-full.border.border-token-border-heavy.bg-token-main-surface-secondary.p-0\.5.text-token-text-primary.transition-colors.hover\:opacity-100.group-hover\:opacity-100.md\:opacity-0 {
-            color: var(--user-input-text) !important;
-            filter: saturate(3) brightness(3) contrast(200%);
-      }
-
-      /* Input Dialog Bottom Bar */
-      .relative.flex.w-full.items-end.py-3.pl-3 {
-            background: var(--user-input-background);
-            border: 1px solid var(--user-input-text-less-transparent);
-
-            border-radius: 30px;
-            padding-left: 20px;
-            padding-right: 20px;
-      }
-
-      .align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
-            background: var(--user-input-background);
-      }
-
-      /* current Model */
-      .draggable.no-draggable-children.sticky.top-0.p-3.mb-1\.5.flex.items-center.justify-between.z-10.h-header-height.font-semibold.bg-token-main-surface-primary.max-md\:hidden {
-            background: linear-gradient( to bottom,
-            rgb(0, 0, 0), /* Darker at the top */
-            rgba(0, 0, 0, 0.0)/* Fully transparent at the bottom */
-            );
-            backdrop-filter: blur(1px);
-      }
-
-      /* current Model Text*/
-      [data-testid="model-switcher-dropdown-button"] {
-            color: var(--user-input-text);
-            filter: saturate(0.7) contrast(1.1);
-      }
-
-      [data-testid="model-switcher-dropdown-button"] .text-token-text-tertiary {
-            color: var(--user-input-text);
-            filter: hue-rotate(90deg);
-      }
-
-
-      .draggable.no-draggable-children.sticky.top-0.p-3.mb-1\.5.items-center.h-header-height.font-semibold.bg-token-main-surface-primary.z-30.mx-auto.flex.w-full.justify-center.gap-2.whitespace-nowrap.pt-\[1\.125rem\] {
-            background: linear-gradient( to bottom,
-            rgb(0, 0, 0), /* Darker at the top */
-            rgba(0, 0, 0, 0.0)/* Fully transparent at the bottom */
-            );
-            backdrop-filter: blur(1px);
-            /* Apply blur effect */
-      }
-
-      .pb-64 {
-            padding-bottom: 0px !important;
-      }
-
-      /*********************************************************************************/
-      /* replace bg color */
-      .dark body,
-      .dark html {
-            background-color: rgba(18, 18, 18, 1);
-      }
-
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden {
-            background-color: rgba(18, 18, 18, var(--tw-bg-opacity));
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div > div.flex.items-center.justify-center.gap-1.border-b.border-black\/10.bg-gray-50.p-3.text-gray-500.dark\:border-gray-900\/50.dark\:bg-gray-700.dark\:text-gray-300 {
-            background-color: rgba(18, 18, 18);
-      }
-
-      /* First launch new chat suggested chat buttons */
-      .dark .btn-neutral {
-            background: var(--code-background);
-      }
-
-      /*change the background of model type*/
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div > header > div {
-            backdrop-filter: blur(4px) saturate(100%);
-            -webkit-backdrop-filter: blur(1px) saturate(200%);
-            background-color: rgba(18, 18, 18, 0.2);
-            color: rgb(255, 255, 255);
-      }
-
-      .mt-5 {
-            padding-top: 1.25rem;
-            margin-top: 0;
-            box-sizing: border-box;
-      }
-
-
-      /* code section styling */
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div > div > div.relative.flex.w-\[calc\(100\%-50px\)\].flex-col.gap-1.md\:gap-3.lg\:w-\[calc\(100\%-115px\)\] > div.flex.flex-grow.flex-col.gap-3 > div > div > pre > div > div.flex.items-center.relative.text-gray-200.bg-gray-800.px-4.py-2.text-xs.font-sans.justify-between.rounded-t-md {
-            background: #1c1d1f;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div > div > div.relative.flex.w-\[calc\(100\%-50px\)\].flex-col.gap-1.md\:gap-3.lg\:w-\[calc\(100\%-115px\)\] > div.flex.flex-grow.flex-col.gap-3 > div > div > pre > div > div.p-4.overflow-y-auto {
-            background: #1c1d1f;
-      }
-
-      /*********************************************************************************/
-      /* Code top bar */
-      .flex.items-center.text-token-text-secondary.px-4.py-2.text-xs.font-sans.justify-between.rounded-t-\[5px\].h-9.bg-token-sidebar-surface-primary.dark\:bg-token-main-surface-secondary.select-none {
-            color: #d5d5d5 !important;
-            font-family: 'Fira Code', monospace !important;
-            font-size: 18px;
-            font-weight: bold;
-            background: var(--code-topbar) !important;
-            border-bottom: 0.1px solid #fff9;
-            letter-spacing: 4px;
-            font-variant: small-caps;
-      }
-
-      /*Code background*/
-      .p-4.overflow-y-auto {
-            background: var(--code-background);
-      }
-
-      /* Code snippet font and settings*/
-      code,
-      border- pre,
-      kbd,
-      samp {
-            letter-spacing: 0.5px;
-            font-variant-ligatures: contextual;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-            /* for Chrome, Safari */
-            -moz-osx-font-smoothing: grayscale;
-            /* for Firefox */
-      }
-
-      /*Code copy button*/
-      button.flex.gap-1.items-center.select-none.px-4.py-1 {
-            color: white;
-            font-size: 1.2em;
-            font-weight: bold;
-      }
-
-      .icon-xs {
-            height: 1.2rem;
-            width: 1.2rem;
-      }
-
-      code,
-      pre {
-            font-family: 'Fira Code', monospace !important;
-      }
-
-
-
-      /* fading cursor */
-      @-webkit-keyframes fade {
-            0% {
-                  opacity: 0;
-            }
-
-            100% {
-                  opacity: 1;
-            }
-      }
-
-      @keyframes fade {
-            0% {
-                  opacity: 0;
-            }
-
-            100% {
-                  opacity: 1;
-            }
-      }
-
-      .result-streaming > :not(ol):not(ul):not(pre):last-child:after,
-      .result-streaming > ol:last-child li:last-child:after,
-      .result-streaming > pre:last-child code:after,
-      .result-streaming > ul:last-child li:last-child:after {
-            -webkit-animation: fade 1s ease-in-out infinite;
-            animation: fade 1s ease-in-out infinite;
-            content: "▋";
-            margin-left: .25rem;
-            vertical-align: baseline;
-      }
-
-
-
-      /* load chat animation*/
-      @keyframes fade-in {
-            0% {
-                  opacity: 0;
-            }
-
-            100% {
-                  opacity: 1;
-            }
-      }
-
-      @keyframes fade-out {
-            0% {
-                  opacity: 1;
-            }
-
-            100% {
-                  opacity: 0;
-            }
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div {
-            animation: fade-in 0.25s ease-in forwards;
-            opacity: 0;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div.fade-out {
-            animation: fade-out 0.25s ease-out forwards;
-      }
-
-
-      /* scroll smoothly */
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div {
-            scroll-behavior: smooth;
-      }
-
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.absolute.bottom-0.left-0.w-full.border-t.md\:border-t-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:bg-vert-light-gradient.bg-white.dark\:bg-gray-800.md\:\!bg-transparent.dark\:md\:bg-vert-dark-gradient.pt-2.md\:pl-2.md\:w-\[calc\(100\%-\.5rem\)\] > form > div > div.flex.flex-col.w-full.py-\[10px\].flex-grow.md\:py-4.md\:pl-4.relative.border.border-black\/10.bg-white.dark\:border-gray-900\/50.dark\:text-white.dark\:bg-gray-700.rounded-xl.shadow-xs.dark\:shadow-xs {
-            backdrop-filter: blur(5px) saturate(100%);
-            -webkit-backdrop-filter: blur(1px) saturate(200%);
-            background-color: rgba(18, 18, 18, 0.2);
-            border-radius: 12px;
-            border: 1px solid rgba(67, 69, 71, .7);
-            color: rgb(255, 255, 255);
-      }
-
-      /*********************************************************************************/
-      /*Send a message Box*/
-      .dark .dark\:bg-gray-700 {
-            backdrop-filter: blur(5px) saturate(100%);
-            -webkit-backdrop-filter: blur(1px) saturate(200%);
-            background-color: rgba(18, 18, 18, 0.2);
-            border-radius: 12px;
-            border: 1px solid rgba(67, 69, 71, .7);
-            color: rgb(255, 255, 255);
-      }
-
-
-      /*********************************************************************************/
-      /* regenerate response */
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.absolute.bottom-0.left-0.w-full.border-t.md\:border-t-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:bg-vert-light-gradient.bg-white.dark\:bg-gray-800.md\:\!bg-transparent.dark\:md\:bg-vert-dark-gradient.pt-2.md\:pl-2.md\:w-\[calc\(100\%-\.5rem\)\] > form > div > div:nth-child(1) > div > button {
-            backdrop-filter: blur(5px) saturate(100%);
-            -webkit-backdrop-filter: blur(1px) saturate(200%);
-            background-color: rgba(18, 18, 18, 0.2);
-            border-radius: 122px;
-            border: 1px solid rgba(54, 55, 57, .7);
-            color: rgb(255, 255, 255);
-      }
-
-      .rounded-sm {
-            border-radius: 122px;
-      }
-
-
-      /*********************************************************************************/
-      /*Chat input */
-      .dark .dark\:bg-gray-800 {
-            --tw-bg-opacity: 1;
-            color: var(--user-input-text) !important;
-
-            background: var(--user-input-background);
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to bottom, #434343, var(--user-input-background));
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: var(--user-input)!important;
-      }
-
-      /* Ensure all image divs in user input and images remain transparent */
-      [data-message-author-role="user"] img,
-      [data-message-author-role="user"] div[class*="image"],
-      [data-message-author-role="user"] div.overflow-hidden {
-            background: transparent !important;
-      }
-
-
-      .dark .dark\:bg-gray-800:last-child {
-            background: var(--user-input-background)!important;
-      }
-
-
-      /*Chat output */
-      .dark .dark\:bg-\[\#444654\] {
-            --tw-bg-opacity: 1;
-            background: var(--user-input-background);
-      }
-
-      /*The word ChatGpt in output*/
-      .agent-turn .font-semibold.select-none {
-            color: var(--main-body-output-text-color) !important;
-      }
-
-      /*Chat Background*/
-      .dark .dark\:md\:bg-vert-dark-gradient {
-            background-image: var(--chat-background-gradient)
-      }
-
-      /*Background Base*/
-      [class*="react-scroll-to-bottom--css-"] {
-            background: var(--user-input-background) !important;
-      }
-
-      .sticky.top-0.z-\[9\].w-full {
-            background: #00000017;
-      }
-
-      /* Model icons */
-      .\[&_svg\]\:h-full.\[&_svg\]\:w-full.h-4.w-4.text-token-text-primary {
-            border: initial !important
-      }
-
-      /*Gpt Output Background*/
-      .w-full.text-token-text-primary:nth-child(odd):not(svg,
-      button) {
-            background: var(--user-input-background) !important;
-      }
-
-      .w-full.text-token-text-primary:last-child:not(svg,
-      button) {
-            background: var(--user-input-background) !important;
-      }
-
-      /*sidebar underlying color*/
-      .screen-arch\:sticky.screen-arch\:top-\[var\(--sticky-title-offset\)\].z-20.text-token-text-primary.screen-arch\:-me-2.screen-arch\:h-10.screen-arch\:min-w-\[50cqw\].screen-arch\:-translate-x-2.screen-arch\:bg-\[var\(--sidebar-surface\)\].screen-arch\:py-1.screen-arch\:text-token-text-secondary.overflow-clip.ps-2.pt-7.text-xs.font-semibold.break-all.text-ellipsis.select-none {
-            background: var(--user-input-background) !important;
-      }
-
-      [data-discover="true"] {
-            transition: background-color 0.2s ease-in;
-            background: var(--user-input-background) !important;
-            font-size: 16px;
-            border-bottom: 0;
-      }
-
-      [data-discover="true"]:hover {
-            background: var(--selected-chat-gradient) !important;
-      }
-
-      /*Input box bottom middle to right*/
-      .bg-token-bg-primary.shadow-short.flex.w-full.cursor-text.flex-col.items-center.justify-center.overflow-clip.bg-clip-padding.contain-inline-size.dark\:bg-\[\#303030\].rounded-\[28px\] {
-            background: transparent;
-      }
-
-
-      /*Input box first question ask*/
-      ._prosemirror-parent_276o5_2.text-token-text-primary.max-h-\[25dvh\].max-h-52.overflow-auto.\[scrollbar-width\:thin\].default-browser.vertical-scroll-fade-mask {
-            width: 100%;
-            border-radius: 10px;
-      }
-
-      .relative.flex.w-full.items-end.px-2\.5.py-2\.5 {
-            background: var(--user-input-background) !important;
-      }
-
-      .border-token-border-xlight.flex.w-full.cursor-text.flex-col.items-center.justify-center.rounded-\[28px\].border.bg-clip-padding.contain-inline-size.overflow-clip.shadow-sm.sm\:shadow-lg.dark\:shadow-none\!.bg-token-main-surface-primary.dark\:bg-\[\#303030\] {
-            border: 1px solid var(--line-color);
-      }
-
-      /*Add File button*/
-      .btn.relative.p-0.text-black.dark\:text-white svg {
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-      }
-
-      .btn.relative.p-0.text-black.dark\:text-white svg:hover {
-            color: var(--user-input-text);
-            animation: heartbeat 2s ease-in-out infinite;
-      }
-
-
-      button.absolute.bottom-1\.5.right-2.rounded-lg.border.border-black.bg-black.p-0\.5.text-white.transition-colors.enabled\:bg-black.disabled\:text-gray-400.disabled\:opacity-10.dark\:border-white.dark\:bg-white.dark\:hover\:bg-white.md\:bottom-3.md\:right-3:hover {
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-      }
-
-      button.absolute.bottom-1\.5.right-2.rounded-lg.border.border-black.bg-black.p-0\.5.text-white.transition-colors.enabled\:bg-black.disabled\:text-gray-400.disabled\:opacity-10.dark\:border-white.dark\:bg-white.dark\:hover\:bg-white.md\:bottom-3.md\:right-3:not(:disabled):hover {
-
-            animation: heartbeat 2s ease-in-out infinite;
-            background: var(--user-input-text);
-            border-color: var(--user-input-text);
-      }
-
-      /** Chat input text */
-      .dark .dark\:prose-invert {
-            --tw-prose-headings: var(--heading-output) !important;
-            --tw-prose-body: var(--main-body-output-text-color) !important;
-            --tw-prose-bold: var(--bold-output) !important;
-            --tw-prose-code: var(--code-key-words) !important;
-            --tw-prose-links: var(--links-output) !important;
-            --tw-prose-quotes: #ffc7f8;
-            --tw-prose-hr: var(--vertical-chat-lines) !important;
-      }
-
-      /** Chat input links */
-      .markdown a {
-            color: var(--links-output) !important;
-      }
-
-      /*********************************************************************************/
-      /*Recent Chat background*/
-      .dark .dark\:bg-gray-900 {
-            background-color: rgba(18, 18, 18, var(--tw-bg-opacity));
-      }
-
-      /*Recent Chat background Hover*/
-      .dark .dark\:bg-gray-900:hover {
-            background: var(--deep-space);
-      }
-
-
-      /*********************************************************************************/
-      /*Chat border seperation between AI and user*/
-      .dark .dark\:border-gray-900\/50 {
-            border-color: var(--main-chat-border-color)
-      }
-
-      #__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div > div > div.w-full.h-48.flex-shrink-0 {
-            background-color: rgba(18, 18, 18, var(--tw-bg-opacity));
-      }
-
-
-      #__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div > div > div > div > div.relative.flex.w-\[calc\(100\%-50px\)\].md\:flex-col.lg\:w-\[calc\(100\%-115px\)\] > div.flex.flex-grow.flex-col.gap-3 > div {
-            font-size: 26px
-      }
-
-      .flex-1.overflow-hidden.\@container\/thread.translate-y-\[2rem\].-mt-\[2rem\].pb-\[1\.5rem\] {
-            padding-bottom: 0;
-      }
-
-      /*********************************************************************************/
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > a:hover {
-            box-shadow: 1px 1px 10px rgba(38, 198, 218, 0.9);
-      }
-
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 {
-            width: 8px!important;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > a {
-            padding-right: 7.3rem;
-            border-color: var(--user-input-background);
-      }
-
-      /*********************************************************************************/
-      /* hide sidebar icon */
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > span {
-            background: var(--futuristic-gradient);
-            border-radius: 10px;
-            font-size: 0.9rem;
-            transition: box-shadow 0.3s;
-            text-align: center;
-      }
-
-
-
-      /*Beautify issue so damn annoying*/
-      a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-white.cursor-pointer.text-sm.rounded-md.border.dark\:border-white\/20.gizmo\:min-h-0.hover\:bg-gray-500\/10.h-11.gizmo\:h-10.gizmo\:rounded-lg.gizmo\:border-\[rgba\(0,
-      0,
-      0,
-      0\.1\)\].w-11.flex-shrink-0.items-center.justify-center.bg-white.dark\:bg-transparent {
-            border: var(--user-input-background);
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > span:hover {
-            box-shadow: 1px 1px 10px rgba(38, 198, 218, 0.9);
-      }
-
-      a.no-draggable.group.rounded-lg.active\:opacity-90.bg-\[var\(--item-background-color\)\].h-9.text-sm.screen-arch\:relative.screen-arch\:bg-transparent.screen-arch\:py-\[7px\].flex.items-center.gap-2\.5.p-2 {
-            background: var(--user-input-background) !important;
-      }
-
-
-      /*********************************************************************************/
-      /* Current Selected Chat*/
-      .bg-gray-800 {
-            background: var(--futuristic-gradient);
-
-            box-shadow: 1px 1px 0 rgba(38, 198, 218, 0);
-            transition: background 0.1s;
-      }
-
-      .hover\:bg-\[\#2A2B32\]:hover {
-            background: var(--deep-space);
-      }
-
-      .from-gray-800 {
-            --tw-gradient-from: rgba(18, 18, 18, 0) var(--tw-gradient-from-position);
-            --tw-gradient-to: rgba(52, 53, 65, 0) var(--tw-gradient-to-position);
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-      }
-
-      .from-gray-900 {
-            --tw-gradient-from: rgba(32, 33, 35) var(--tw-gradient-from-position);
-            --tw-gradient-to: rgba(32, 33, 35, 0) var(--tw-gradient-to-position);
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-      }
-
-      .group:hover .group-hover\:from-\[\#2A2B32\] {
-            --tw-gradient-from: #0000 var(--tw-gradient-from-position);
-            --tw-gradient-to: rgba(42, 43, 50, 0) var(--tw-gradient-to-position);
-            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-      }
-
-      .hover\:bg-gray-800:hover {
-            --tw-bg-opacity: 1;
-            background-color: rgba(50, 50, 52, var(--tw-bg-opacity));
-      }
-
-
-      #__next > div > div.dark.hidden.bg-gray-900.md\:fixed.md\:inset-y-0.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a.flex.py-3.px-3.items-center.gap-3.rounded-md.hover\:bg-gray-500\/10.transition-colors.duration-200.text-white.cursor-pointer.text-sm.mb-2.flex-shrink-0.border.border-white\/20:hover {
-            opacity: 90%
-      }
-
-
-      #__next > div > div.dark.hidden.bg-gray-900.md\:fixed.md\:inset-y-0.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a.flex.py-3.px-3.items-center.gap-3.rounded-md.hover\:bg-gray-500\/10.transition-colors.duration-200.text-white.cursor-pointer.text-sm.mb-2.flex-shrink-0.border.border-white\/20 span {
-            color: white;
-            font-size: 18px;
-            font-weight: 100;
-      }
-
-      #__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div > div > div > div > div > div.relative.flex.w-\[calc\(100\%-50px\)\].md\:flex-col.lg\:w-\[calc\(100\%-115px\)\] > div.flex.flex-grow.flex-col.gap-3 {
-            color: white;
-            font-size: 18px;
-            font-weight: 400;
-      }
-
-      .flex.flex-1.grow.basis-auto.flex-col.overflow-hidden {
-            background: var(--user-input-background);
-            color: var(--text-secondary)
-      }
-
-
-      body {
-            font-family: 'Open Sans', sans-serif;
-      }
-
-      ::-moz-selection {
-            /* Code for Firefox */
-            background: #c2c2ce2b;
-      }
-
-      ::selection {
-            background: #c2c2ce2b;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div {
-            padding-top: 5px;
-            margin-left: 5px;
-            font-family: 'Roboto', sans-serif;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div {
-            padding-left: 5px;
-            width: 300px !important;
-            background: transparent;
-            padding-top: 5px;
-            font-family: 'JetBrains Mono', sans-serif;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 {
-            width: 300px !important;
-      }
-
-      /*********************************************************************************/
-      /*All Chat history general  background of the chat history behind elements */
-      nav[aria-label="Chat history"] {
-            background: var(--user-input-background);
-            font-family: "Montserrat", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 600;
-            font-style: normal;
-      }
-
-      /* Highlighted Current Selected Chat jun 18 25*/
-      a.__menu-item[data-active] {
-            color: var(--user-input-text);
-            border: 2px solid transparent;
-            border-image: linear-gradient(to right, var(--user-input-text), transparent) 1;
-      }
-
-      /*All Chat history*/
-      /*Chat history list*/
-      .relative.grow.overflow-hidden.whitespace-nowrap {
-            color: var(--chat-history-list);
-      }
-
-      li.relative .group.relative.rounded-lg.active\:opacity-90.hover\:bg-token-sidebar-surface-secondary:hover {
-            background: var(--deep-space);
-      }
-
-      .group.relative.rounded-lg.active\:opacity-90.bg-token-sidebar-surface-tertiary {
-            background: var(--futuristic-gradient) !important;
-      }
-
-      /*Explore gpts and Add team workspace*/
-      .text-sm {
-            color: var(--chat-history-list);
-      }
-
-
-      /*Username*/
-      .relative.-top-px.grow.-space-y-px.truncate.text-left.text-token-text-primary {
-            color: var(--chat-history-list) !important;
-            border: none !important;
-            background: transparent!important;
-      }
-
-      .flex.w-full.items-center.gap-2.rounded-lg.p-2.text-sm.hover\:bg-token-sidebar-surface-secondary.group-ui-open\:bg-token-sidebar-surface-secondary:hover {
-            background: var(--futuristic-gradient);
-      }
-
-      .flex.w-full.items-center.gap-2.rounded-lg.p-2.text-sm.hover\:bg-token-sidebar-surface-secondary.group-ui-open\:bg-token-sidebar-surface-secondary[aria-expanded="true"] {
-            background: var(--futuristic-gradient);
-      }
-
-      /*The word chat gpt top left*/
-      .grow.overflow-hidden.text-ellipsis.whitespace-nowrap.text-sm.text-token-text-primary {
-            color: var(--chat-history-list) !important;
-            border: none !important;
-      }
-
-      /*Chat History Buttons fix */
-      button.text-token-text-primary {
-            color: var(--chat-history-list);
-            border: none !important;
-            background: transparent !important;
-      }
-
-      button.text-token-text-primary[aria-haspopup="menu"] {
-            background: transparent !important;
-      }
-
-      /*username bottom left*/
-      .relative.-top-px.grow.-space-y-px.overflow-hidden.text-ellipsis.whitespace-nowrap.text-left.text-token-text-primary {
-            background: var(--text-token-tertiary) !important;
-      }
-
-      /*chat gpt text in button top left*/
-      .grow.overflow-hidden.text-ellipsis.whitespace-nowrap.text-sm.text-token-text-primary {
-            background: transparent !important;
-      }
-
-      /*chat gpt button top left (New Chat)*/
-      .bg-token-sidebar-surface-primary {
-            background: var(--user-input-background) !important;
-      }
-
-      .juice\:sticky.juice\:top-0.juice\:z-20.juice\:bg-token-sidebar-surface-primary {
-            position: -webkit-sticky;
-            /* For Safari */
-            background-color: var(--user-input-background);
-      }
-
-      /*Hover over chat gpt text in button top left (New Chat)*/
-      .group.flex.h-10.items-center.gap-2.rounded-lg.bg-token-sidebar-surface-primary.px-2.font-medium:hover {
-            background: var(--futuristic-gradient) !important;
-      }
-
-
-      /*Recent Chat background Hover For Day/Times Updated*/
-      span.flex.h-9.items-center {
-            background: var(--user-input-background) !important;
-      }
-
-      a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary {
-            background-color: var(--user-input-background) !important;
-      }
-
-      /*GPTS Button top left in chat history*/
-      a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary:hover {
-            background: var(--futuristic-gradient) !important;
-      }
-
-      /*********************************************************************************/
-      #__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div {
-            background: var(--user-input-background);
-      }
-
-      \/75 {
-            background-color: rgb(185 185 185 / 25%);
-      }
-
-      #headlessui-dialog-panel-\:r8\: {
-            backdrop-filter: blur(5px) saturate(100%);
-            -webkit-backdrop-filter: blur(1px) saturate(100%);
-            background-color: rgba(18, 18, 18, 0.2);
-            border-radius: 12px;
-            border: 1px solid rgba(67, 69, 71, .7);
-            color: rgb(255, 255, 255);
-      }
-
-      /*********************************************************************************/
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(4) > span > span.rounded-md.bg-yellow-200.py-0\.5.px-1\.5.text-xs.font-medium.uppercase.text-gray-800 {
-            display: none;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(3) {
-            font-size: 0;
-            width: 60px;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(4) {
-            font-size: 0;
-            width: 60px;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(5) {
-            font-size: 0;
-            width: 60px;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(6) {
-            font-size: 0;
-            width: 60px;
-      }
-
-      /* .result-streaming {display: none;} */
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(7) {
-            font-size: 0;
-            width: 60px;
-      }
-
-      .h-4.w-4 {
-            display: none;
-      }
-
-      /*hide disclaimer and version */
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.absolute.bottom-0.left-0.w-full.border-t.md\:border-t-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:bg-vert-light-gradient.bg-white.dark\:bg-gray-800.md\:\!bg-transparent.dark\:md\:bg-vert-dark-gradient.pt-2.md\:-left-2 > div > span {
-            display: none;
-      }
-
-      /* Double click on chat to rename chat */
-      .absolute.bottom-0.left-\[7px\].right-2.top-0.flex.items-center.bg-token-sidebar-surface-secondary {
-            background: var(--user-input-background)
-      }
-
-      /* chatgpt title */
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex > div.flex.h-full.max-w-full.flex-1.flex-col > main > div.flex-1.overflow-hidden > div > div > div > div.text-gray-800.w-full.md\:max-w-2xl.lg\:max-w-3xl.md\:h-full.md\:flex.md\:flex-col.px-6.dark\:text-gray-100 > h1 {
-            font-size: 0px;
-      }
-
-      #__next > div.overflow-hidden.w-full.h-full.relative.flex > div.flex.h-full.max-w-full.flex-1.flex-col > main > div.flex-1.overflow-hidden > div > div > div > div.text-gray-800.w-full.md\:max-w-2xl.lg\:max-w-3xl.md\:h-full.md\:flex.md\:flex-col.px-6.dark\:text-gray-100 > div {
-            display: none;
-      }
-
-      /* Chat history backgroud plus remove gradient*/
-      .bg-gradient-to-l {
-            display: none;
-      }
-
-      .bg-gray-900 {
-            background-color: transparent;
-      }
-
-      /* What can I help you with*/
-      .grid.min-h-\[74px\].grid-cols-1.items-center.justify-end {
-            color: var(--user-input-text)
-      }
-
-
-      /*********************************************************************************/
-      /*2023 Novemeber update in progress*/
-      /*Stick top*/
-      .sticky.top-0.flex.items-center.justify-between.z-10.h-14 {
-            background: linear-gradient(to right, black, rgba(0, 0, 0, 0) 50%, black);
-      }
-
-      /*Text Area to enter chat*/
-      textarea#prompt-textarea {
-            background: var(--deep-space) !important;
-            max-height: @textInputBarMaxHeight !important;
-            border-top: none !important;
-            border-radius: 30px !important;
-            padding: 15px !important;
-      }
-
-      .w-full.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:w-\[calc\(100\%-\.5rem\)\].juice\:w-full {
-            background: var(--user-input-background);
-            padding-bottom: 10px
-      }
-
-      /* Black background underneath the inpujt box */
-      .md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.w-full {
-            background: var(--user-input-background);
-      }
-
-      div#radix {
-            background: #00000085 !important;
-      }
-
-      /*Gpt input*/
-      .text-token-text-primary:not(svg,
-      button,
-      a,
-      .flex,
-      h3,
-      .default-browser,
-      .text-start) {
-            background: var(--selected-chat-gradient) !important;
-      }
-
-      article:not(:last-child) {
-            border-bottom: solid rgba(@lineColor, .2) 1px;
-      }
-
-
-      /*Gpt input background*/
-      div#composer-background {
-            background: var(--user-input-background) !important;
-            border: 1px solid rgba(@lineColor, 0.3);
-      }
-
-      .flex.flex-col.text-sm.md\:pb-9 {
-            background: var(--user-input-background);
-      }
-
-      .flex.flex-col.gap-2.pb-2.text-token-text-primary.text-sm.juice\:mt-5 {
-            border-top: none !important;
-      }
-
-      .flex.flex-col.gap-3.sm\:flex-row-reverse.mt-5.sm\:mt-4 {
-            background: transparent !important;
-            margin-top: 25px;
-      }
-
-      .font-semibold.text-token-text-primary {
-            border-top: none !important;
-      }
-
-      .text-token-text-primary {
-            color: var(--user-input-text) !important;
-            /*input Color?*/
-      }
-
-      /*Gpt main screen input Welcome Screen */
-      .flex.h-full.flex-col.items-center.justify-center.text-token-text-primary {
-            background: var(--user-input-background) !important;
-      }
-
-      .flex.h-full.flex-col.overflow-y-auto {
-            background: var(--user-input-background) !important;
-      }
-
-      .p-2 {
-            padding-right: 2rem
-      }
-
-      .py-2\.5:not(:last-child) {
-            color: white;
-      }
-
-
-      /*Icon in more text*/
-      .icon-md {
-            stroke: white;
-            stroke-width: 0px;
-      }
-
-      /*Disclamer text*/
-      .relative.px-2.py-2.text-center.text-xs.text-gray-600.dark\:text-gray-300.md\:px-\[60px\] {
-            color: var(--user-input-background);
-      }
-
-      .gizmo .markdown > :not(pre),
-      .gizmo .markdown > :not(pre) > :not(a) {
-            color: var(--main-body-output-text-color);
-      }
-
-      .markdown h1,
-      .markdown h2,
-      .markdown h3,
-      .markdown h4,
-      .markdown h4,
-      .markdown h4 {
-            color: var(--heading-output) !important;
-      }
-
-      .prose :where(strong):not(:where([class~=not-prose] *)) {
-            color: var(--bold-output) !important;
-      }
-
-      /*********************************************************************************/
-      /* Current Chat edit or "remove" current chat buttons*/
-      button.p-1.hover\:text-white svg {
-            stroke: #cacaca;
-      }
-
-      button.p-1.hover\:text-white svg:hover {
-            stroke: white;
-      }
-
-      .p-1 {
-            padding: 0.01rem
-      }
-
-      button.flex.items-center.justify-center.text-token-text-primary.transition.hover\:text-token-text-secondary.radix-state-open\:text-token-text-secondary:has(svg.icon-md) {
-            background: transparent !important
-      }
-
-      .radix-state-open\:bg-\[\#f5f5f5\][data-state=open] {
-            background-color: rgb(107 107 107 / 54%);
-      }
-
-      /*********************************************************************************/
-      /*Alerts*/
-      div[role="alert"] {
-            background: var(--alerts);
-            border: transparent;
-      }
-
-      .border-white\/20 {
-            border-color: transparent
-      }
-
-      /*********************************************************************************/
-      /*Select GPT version menu*/
-      .popover[role="menu"] {
-            background: #0e0e0ea1 !important;
-            backdrop-filter: blur(4px);
-      }
-
-      .draggable.no-draggable-children {
-            background: var(--user-input-background) !important;
-      }
-
-
-      .group.flex.cursor-pointer.items-center.gap-1.rounded-xl.py-2.px-3.text-lg.font-medium:hover {
-            background: var(--futuristic-gradient);
-      }
-
-      .group.flex.cursor-pointer.items-center.gap-1.rounded-xl.py-2.px-3.text-lg.font-medium[data-state="open"] {
-            background: var(--futuristic-gradient);
-      }
-
-      [role="menuitem"]:hover {
-            background: var(--deep-space);
-      }
-
-      [role="menuitem"]:hover:last-child {
-            background: var(--futuristic-gradient);
-      }
-
-
-      /*GPT Settings*/
-      [role="tablist"] {
-            padding: 0 !important;
-            margin: 1vh;
-      }
-
-      .m-2.md\:m-0.md\:px-4.md\:pl-6.md\:pt-4.flex.flex-shrink-0.flex-wrap.md\:ml-\[-8px\].md\:min-w-\[180px\].max-w-\[200px\].flex-col.gap-2 {
-            padding-left: 0.5rem;
-            height: 100%;
-            overflow: auto;
-      }
-
-      h2[as="h3"].text-token-text-primary {
-            color: white !important;
-            border-top: 0;
-      }
-
-      div[role="dialog"] {
-            background: #31313180;
-            backdrop-filter: blur(3px);
-      }
-
-      div[role="dialog"] button:hover {
-            background: #c6c6c6b3;
-      }
-
-
-      div[role="dialog"] [type="button"][role="tab"][aria-selected="true"] {
-            background: #c6c6c647 !important;
-      }
-
-      div[role="dialog"] [type="button"][role="tab"][aria-selected="false"]:hover {
-            background: #c6c6c699 !important;
-      }
-
-      div[role="dialog"] .text-token-text-primary {
-            color: #cacaca !important;
-            border: none !important;
-            background: transparent !important;
-      }
-
-      div[role="dialog"] .focus-none.flex.h-full.flex-col.items-center.justify-start.outline-none {
-            background: #ea000000;
-      }
-
-      div[role="dialog"] .focus-none.flex.h-full.flex-col.items-center.justify-start.outline-none .relative:not(button) {
-            background: initial;
-      }
-
-
-
-
-
-      /*********************************************************************************/
-      /*GPTs*/
-      .sticky.top-14.z-10.-ml-4.mb-12.w-screen.bg-token-main-surface-primary.py-2.text-sm.md\:ml-0.md\:w-full.md\:pb-0 {
-            background: rgba(0, 0, 0, .77);
-      }
-
-      input.z-10.w-full.rounded-xl.border.border-token-border-light.bg-token-main-surface-primary.py-2.pr-3.font-normal.outline-0.delay-100.md\:h-14.h-12.text-base.pl-12 {
-            background: rgba(0, 0, 0, .77);
-            outline: 1px #ffffff42 solid;
-      }
-
-      div#headlessui-popover-panel-\:rk\: {
-            background: black;
-            outline: 1px #ffffff42 solid;
-      }
-
-      .relative.flex.flex-grow.flex-col.gap-4.overflow-y-auto.px-6.pb-20.pt-16 {
-            background: black;
-      }
-
-      /*Home before chat*/
-      .text-base.my-auto.mx-auto.px-3.md\:px-4.w-full.md\:px-5.lg\:px-4.xl\:px-5.h-full {
-            background: var(--user-input-background);
-      }
-
-      ._prosemirror-parent_11fu7_1.text-token-text-primary.max-h-\[25dvh\].max-h-52.overflow-auto.\[scrollbar-width\:thin\].default-browser {
-            background: transparent !important;
-      }
-
-      /*********************************************************************************/
-      /*Before login*/
-      .relative.hidden.flex-1.flex-col.justify-center.px-5.pt-8.md\:flex.md\:px-6.md\:py-[22px].lg\:px-8 {
-            background: radial-gradient(@gptOutputBackgroundColor , #0000) !important;
-            color: rgb(0 255 246) !important;
-      }
-
-      [data-testid="login-button"],
-      button.relative.flex.h-12.items-center.justify-center.rounded-md.text-center.text-base.font-medium.bg-\[\#3C46FF\].text-\[\#fff\].hover\:bg-\[\#0000FF\],
-      .continue-btn,
-      ._button-login-id {
-            border: none;
-            background: radial-gradient(#810af8, #3300c7c4);
-            transition: background 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .social-btn {
-            border: none;
-            color: white;
-            background: linear-gradient(to right, #112d33, #3b0059)
-      }
-
-      [data-testid="login-button"]:hover,
-      button.relative.flex.h-12.items-center.justify-center.rounded-md.text-center.text-base.font-medium.bg-\[\#3C46FF\].text-\[\#fff\].hover\:bg-\[\#0000FF\]:hover,
-      .continue-btn:hover,
-      .social-btn:hover,
-      [data-provider="windowslive"]:hover,
-      [data-provider="google"]:hover,
-      [data-provider="apple"]:hover,
-      ._button-login-id:hover {
-            border: none;
-            background: linear-gradient(45deg, #3cceff, #b300ff);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-            animation: heartbeat 4s infinite;
-      }
-
-      main.main-container,
-      .oai-header,
-      .oai-footer,
-      .login-container {
-            background: var(--user-input-background);
-            color: white;
-      }
-
-      .oai-header img {
-            filter: invert(1);
-      }
-
-      h1.title {
-            color: white;
-      }
-
-      label.email-label {
-            filter: invert(1);
-      }
-
-      input.email-input {
-            filter: invert(1);
-      }
-
-      ._prompt-box-outer {
-            filter: invert(1);
-      }
-
-      /* Icons in dropdown gpt type */
-      .bg-token-main-surface-secondary {
-            background-color: transparent !important
-      }
-
-
-
-      .dark .dark\:bg-token-main-surface-secondary {
-            background-color: transparent !important
-      }
-
-      /*Side bar glitch of background of white smear when trying to select a chat or hover over */
-      .absolute.bottom-0.top-0.to-transparent.ltr\:right-0.ltr\:bg-gradient-to-l.rtl\:left-0.rtl\:bg-gradient-to-r.from-token-sidebar-surface-secondary.w-20.from-60\%.juice\:w-10 {
-            background: transparent;
-      }
-
-      .ltr\:bg-gradient-to-l:where([dir=ltr],
-      [dir=ltr] *) {
-            background: transparent;
-      }
-
-      /*Projects background on sidebar bug*/
-      .z-20.screen-arch\:sticky.screen-arch\:top-\[var\(--sticky-title-offset\)\].select-none.overflow-clip.text-ellipsis.break-all.pl-2.pt-7.text-xs.font-semibold.text-token-text-primary.screen-arch\:-mr-2.screen-arch\:h-10.screen-arch\:min-w-\[50cqw\].screen-arch\:-translate-x-2.screen-arch\:bg-\[var\(--sidebar-surface\)\].screen-arch\:py-1.screen-arch\:text-token-text-secondary {
-            background: transparent !important;
-      }
-
-      [title="Sora"] {
-            background: transparent !important;
-      }
-
-      .max-w-md.text-center.text-sm.font-normal.text-token-text-primary {
-            background: transparent !important;
-      }
-
-      /*********************************************************************************/
-      /*Scroll Bars*/
-      /* Hide the entire scrollbar by default */
-      ::-webkit-scrollbar {
-            opacity: 0;
-            transition: opacity 0.5s;
-      }
-
-      /* The width for vertical and height for horizontal scrollbars */
-      ::-webkit-scrollbar:vertical {
-            width: 10px;
-      }
-
-      ::-webkit-scrollbar:horizontal {
-            height: 10px;
-      }
-
-      /* Show the entire scrollbar on hover over the body or any scrollable container */
-      body:hover::-webkit-scrollbar,
-      .scrollable-container:hover::-webkit-scrollbar {
-            opacity: 1;
-      }
-
-      /* The draggable scrolling handle */
-      ::-webkit-scrollbar-thumb {
-            background: var(--futuristic-gradient);
-            border-radius: 5px;
-      }
-
-      * {
-            --sidebar-mask: transparent !important;
-            scrollbar-color: var(--futuristic-gradient) !important;
-      }
-
-      /* The empty space “below” the scrollbar bar */
-      ::-webkit-scrollbar-track {
-            background-color: transparent;
-      }
-
-      /*Image issues for shopping*/
-      .mix-blend-darken {
-            mix-blend-mode: normal;
-      }
-
-      /*********************************************************************************/
-      /*Highlighing text*/
-      *:not(.cm-content.cm-lineWrapping)::selection {
-            background-color: white !important;
-            color: blue !important;
-      }
-
-      *:not(.cm-content.cm-lineWrapping)::-moz-selection {
-            background-color: white !important;
-            color: blue !important;
-      }
-
-      *:not(.cm-content.cm-lineWrapping)-webkit-selection {
-            background-color: white !important;
-            color: blue !important;
-      }
-
-      /*********************************************************************************/
-      /* Applicable only for keepchatgpt userscript  */
-      div#kcg {
-            background: var(--user-input-background) !important;
-      }
-
-      /*********************************************************************************/
-      /* Applicable only for Grepper save to grepper in code boxs */
-      .open_grepper_editor.gpt_grepper_add_answer_trigger {
-            top: 2px !important;
-            right: 230px !important;
-            color: #d5d5d5 !important;
-            font-size: 18px !important;
-            font-weight: bold;
-            background: var(--code-topbar);
-            letter-spacing: 1px;
-      }
-
-      /*********************************************************************************/
-      /* Applicable only for ChatGPT Chat Organizer - Folders Extension https://chrome.google.com/webstore/detail/chatgpt-chat-organizer-fo/eaoimfbcncfnjkojlfjinakmflglmegk?hl=en-GB  */
-      .popup-container.fixed.top-0.left-0.w-screen.h-screen.flex.items-center.justify-center.z-50 {
-            background-color: rgba(69, 69, 69, .69) !important;
-      }
-
-      .groups-div-extension {
-            color: var(--chat-history-list);
-      }
-
-      .p-4.bg-gray-900.rounded-md.shadow-md {
-            background: var(--user-input-background);
-            margin-bottom: 3%;
-            text-align: center;
-            line-height: 1.5;
-      }
-
-      .pb-2.border-b.border-gray-300.cursor-pointer.px-1 {
-            transition: border-radius .5s ease, color 0.5s ease, background 0.5s ease;
-            padding: 8px;
-      }
-
-      .pb-2.border-b.border-gray-300.cursor-pointer.px-1:hover {
-            color: white;
-            background: var(--futuristic-gradient);
-            border-radius: 55px;
-      }
-
-
-      a.flex.py-1.px-3.items-center.gap-1.relative.rounded-md.break-all.mb-2 {
-            display: none;
-      }
-
-      /********************* Tables *************************/
-      .tableContainer.horzScrollShadows {
-            background: transparent;
-            border: 0;
-      }
-
-      article table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: 'Segoe UI', sans-serif;
-            color: white;
-      }
-
-      article thead {
-            background: var(--table-header);
-      }
-
-      article thead th {
-            text-align: left;
-            padding: 12px 16px;
-            border: 1px solid var(--line-color);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-      }
-
-      article tbody td {
-            padding: 12px 16px;
-            border: 1px solid var(--line-color);
-      }
-
-      article tbody tr:nth-child(even) {
-            background: var(--user-input);
-      }
-
-      article tbody tr:hover {
-            background: var(--table-hover);
-            transition: background-color 0.3s ease;
-      }
-
-      /*********************************************************************************/
-      /*New Chat Input Text Color ?? */
-      .empty\:hidden {
-            color: var(--user-input-text) !important;
-      }
-
-      /*********************************************************************************/
-      /*Send Button*/
-      svg.icon-sm.m-1.md\:m-0 {
-            margin: .5rem;
-      }
-
-      /*********************************************************************************/
-      /************************************GPT Canvas************************************/
-      /*********************************************************************************/
-      .flex.w-full.min-w-0.items-center.justify-between.gap-2.self-start.border-token-border-light.px-4.transition-colors.duration-700.border-token-border-light.py-3.text-sm.font-medium.text-token-text-secondary {
-            background: var(--user-input-background) !important;
-      }
-
-      header.\@container.flex.h-14.flex-none.items-center.justify-between.gap-1.px-3 {
-            background: var(--user-input-background);
-      }
-
-      span.text-sm.text-token-text-primary.truncate {
-            border-top: none;
-            background: transparent !important;
-      }
-
-      header.flex.items-center.justify-between.p-3.h-14 {
-            height: 50px;
-            background: var(--canvas-top-bar-gradient) !important
-      }
-
-      .flex.justify-start.pt-2.h-full {
-            padding: 0;
-      }
-
-      .cm-content.cm-lineWrapping {
-            font-family: 'Fira Code', monospace !important;
-            background: var(--code-background);
-      }
-
-      svg.icon-sm.mr-0\.5.text-token-text-tertiary {
-            background: #2F2F2F !important;
-            margin: 0;
-            border: none;
-      }
-
-      textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-text-primary.outline-0.placeholder\:text-token-text-secondary.focus\:ring-0.focus-visible\:ring-0 {
-            background: #3E3E3E !important;
-            border: none;
-      }
-
-      .cm-gutters {
-            background: black !important;
-      }
-
-      .absolute.bottom-0.z-20.h-24.w-full.transition-colors {
-            background: linear-gradient(rgb(0 0 0 / 0%), rgb(0 0 0)) !important;
-      }
-
-      /*Safety text bottom*/
-      .relative.mt-auto.flex.min-h-8.w-full.items-center.justify-center.p-2.text-center.text-xs.text-token-text-secondary.md\:px-\[60px\] {
-            background: var(--user-input-background);
-            color: var(--user-input-background);
-      }
-
-      .composer-parent {
-            background: var(--user-input-background);
-      }
-
-      /*********************************************************************************/
-      /************************************WIDE MODE************************************/
-      /*********************************************************************************/
-      & when (@wideMode =1) {
-            .md\:max-w-3xl,
-            /* Common medium breakpoint limit */
-            .lg\:max-w-3xl,
-            /* Common large breakpoint limit */
-            .\!max-w-3xl,
-            /* Another variation seen */
-            .xl\:max-w-\[48rem\],
-            /* Common extra-large breakpoint limit (48rem = 768px) */
-            .gizmo .xl\:max-w-\[48rem\],
-            /* Sometimes nested */
-            /* Target the direct parent containers of message groups */
-            div[class*="react-scroll-to-bottom"] > div > div > .mx-auto,
-            /* Target the main content area wrapper if others fail */
-            main .w-full .mx-auto {
-                  max-width: 95% !important;
-            }
-
-            .prose {
-                  max-width: none !important;
-                  /* Allow prose to fill its widened container */
-            }
-      }
-
-      /************************************Hide Add Teams Advertisment************************************/
-      & when (@hideJunk =1) {
-            a.group.flex.gap-2.p-2\.5.text-sm.cursor-pointer.focus\:ring-0.radix-disabled\:pointer-events-none.radix-disabled\:opacity-50.hover\:bg-token-sidebar-surface-secondary.m-0.rounded-lg.px-2 {
-                  display: none;
-                  height: 0px;
-            }
-
-            .bg-token-bg-elevated-secondary.sticky.bottom-0.z-30.py-1\.5.group-data-scrolled-from-end\/scrollport\:shadow-\(--sharp-edge-bottom-shadow\).empty\:hidden {
-                  display: none;
-                  height: 0px;
-            }
-
-            /*Warning text*/
-            .relative.px-2.py-2.text-center.text-xs.text-token-text-secondary.md\:px-\[60px\] {
-                  color: transparent;
-                  display: none;
-            }
-
-            .w-full.translate-y-4.px-2.py-2.text-center.text-xs.text-token-text-secondary.empty\:hidden.xs\:translate-y-8.md\:px-\[60px\].\@lg\/thread\:absolute.\@lg\/thread\:bottom-0.\@lg\/thread\:left-0 {
-                  color: transparent;
-                  display: none;
-            }
-
-            .bg-token-bg-elevated-secondary.sticky.bottom-0.z-30.px-\[3px\].py-1\.5.group-data-scrolled-from-end\/scrollport\:shadow-\(--sharp-edge-bottom-shadow\).empty\:hidden {
-                  display: none;
-            }
-      }
-
-      /******************************* Display No Text Wrap ********************************/
-      & when (@noTextWrap =1) {
-            .whitespace-nowrap {
-                  white-space: break-spaces;
-            }
-
-            .truncate {
-                  text-overflow: initial;
-                  white-space: break-spaces;
-            }
-
-            a.p-2 {
-                  padding-right: 0;
-            }
-
-            .p-2 {
-                  padding: 0;
-            }
-
-            li.relative {
-                  margin-bottom: 7px;
-            }
-
-            .no-draggable.group.rounded-lg.active\:opacity-90.bg-\[var\(--item-background-color\)\].h-9.text-sm.relative {
-                  --item-background-color: #000 !important;
-            }
-
-            .mt-5 {
-                  padding-top: 0rem;
-                  margin-top: 0;
-                  box-sizing: border-box;
-            }
-      }
-
-      /******************************* Codex ********************************/
-      .bg-token-bg-primary.sticky.top-0.z-50.flex.flex-col.items-center {
-            background: transparent;
-      }
+	@import (css) url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+	@import (css) url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+	@import (css) url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
+	@import (css) url('href="https://fonts.googleapis.com/css2?family=Montserrat: taal,wght@0,100..900;1,100..900&display=swap');
+
+	:root {
+		--futuristic-gradient: linear-gradient(to right, #0f2027c4, #203a43b0, #2c5364cf);
+		--darker-futristic-gradient: linear-gradient(to right, #245062c4, #203a43b0, #000000cf);
+		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		--chat-background-gradient: linear-gradient(180deg, rgb(32 33 35 / 0%), rgb(32 33 35) 58.85%);
+		--user-input-background: @userInputBackgroundColor;
+		--main-chat-border-color: rgba(137, 126, 109, 0.35);
+		--deep-space: linear-gradient(to left, #000, #434343cc);
+		--deep-space-to-top-transparent: linear-gradient(to top, #4343434f, #0D0D0D);
+
+		--alerts: linear-gradient(to right, #ff512ff0, #f09819f0);
+
+		--code-background: #1E1E1E;
+		--code-topbar: radial-gradient(circle at -5.9%, #2c5364 0%, #00283a 15.9%, #1E1E1E 24.5%, #1E1E1E 100%);
+
+		--table-header: linear-gradient(to right, @gptOutputBackgroundColor 0%, @gptOutputBackgroundColor 20%, transparent 50%, @gptOutputBackgroundColor 80%, @gptOutputBackgroundColor 100%);
+		--table-hover: #ffffff30;
+
+		--selected-chat-gradient: linear-gradient(to right, @gptOutputBackgroundColor , #0D0D0D 100%);
+		--canvas-top-bar-gradient: linear-gradient(to right, #0D0D0D, @gptOutputBackgroundColor);
+		--chat-history-list: #C0C0C0;
+		--sidebar-surface-secondary: #676767a6;
+
+		/*Highlight selected chat not used in favor of --sidebar-surface-tertiary*/
+		/* Alternative user input text color: #B0C4DE */
+		--user-input-text: @userInputTextColor;
+		--text-secondary: @userInputTextColor;
+		--message-surface: @userInputBubbleColor;
+		--user-input-text-less-transparent: rgba(@userInputTextColor, 0.4);
+
+		--main-body-output-text-color: @gptMainBodyOutputTextColor;
+		--code-key-words: @codeKeyWordsOutput;
+		--heading-output: @headingOutput;
+		--bold-output: @boldOutput;
+		--links-output: @linksOutput;
+		--line-color: @lineColor;
+		--vertical-chat-lines: @verticalChatLines;
+		--sidebar-surface-primary: @userInputBackgroundColor;
+		--bg-elevated-secondary: @userInputBackgroundColor
+	}
+
+	/*********************************************************************************/
+	/**************HOME PAGE WHEN NEW CHAT STARTING **********************************/
+	/*logo*/
+	.mb-3.h-12.w-12 {
+		filter: invert(1);
+	}
+
+	.content-fade:after {
+		background: var(--user-input-background);
+	}
+
+	/*user input updated*/
+	.user-message-bubble-color {
+		color: var(--user-input-text);
+		background: var(--message-surface);
+	}
+
+	/*Auto prompts on home screen*/
+	button.btn.relative.btn-neutral.group.w-full.whitespace-nowrap.rounded-xl.px-4.py-3.text-left.text-token-text-primary.md\:whitespace-normal:hover {
+		background: var(--futuristic-gradient)!important;
+		border-radius: 10px;
+	}
+
+	/* Keyframes for red to white background transition */
+	@keyframes redPulseBG {
+		0% {
+			background-color: #585858;
+		}
+
+		50% {
+			background-color: #979797;
+		}
+
+		100% {
+			background-color: #585858;
+		}
+	}
+
+	/* Input box send message animation */
+	@keyframes heartbeat {
+		0% {
+			transform: scale(1);
+		}
+
+		14% {
+			transform: scale(1.1);
+		}
+
+		28% {
+			transform: scale(1);
+		}
+
+		42% {
+			transform: scale(1.1);
+		}
+
+		70% {
+			transform: scale(1);
+		}
+	}
+
+	/* Stop Generating button */
+	button[aria-label*="Stop"] {
+		animation: heartbeat 4s ease-in-out infinite;
+
+		background: #cf2500eb !important;
+	}
+
+	/* Stop Generating button */
+	button[aria-label*="Stop"] {
+		background: #cf2500eb !important;
+	}
+
+
+	/* Send to GPT button */
+	button[data-testid="send-button"]:not(:disabled) {
+		transition: background 2s ease-in-out;
+	}
+
+	/* Send to GPT button on hover */
+	button[data-testid="send-button"]:not(:disabled):hover {
+		transition: background 0.5s ease-in-out;
+		background: var(--user-input-text);
+		animation: heartbeat 4s ease-in-out infinite;
+		filter: saturate(1.5) contrast(1.5);
+	}
+
+	/* Talk with GPT */
+	button[data-testid="composer-speech-button"] {
+		background: var(--user-input-text);
+	}
+
+	[data-testid="share-chat-button"] {
+		color: var(--user-input-background)
+	}
+
+	/* Attachments button */
+	button.flex.items-center.justify-center.text-token-text-primary {
+		transition: background 0.5s ease-in-out, filter 0.5s ease-in-out;
+	}
+
+	button.flex.items-center.justify-center.text-token-text-primary .truncate:hover {
+		filter: invert(1);
+	}
+
+	/* Buttons in input box */
+	button.flex.h-full.min-w-8.items-center.justify-center.p-2 {
+		padding: 15px
+	}
+
+	div#thread-bottom {
+		background: var(--user-input-background);
+	}
+
+	/*Speach Button*/
+	button.relative.flex.h-9.items-center.justify-center.rounded-full.bg-black.text-white.transition-colors.focus-visible\:outline-none.focus-visible\:outline-black.disabled\:text-gray-50.disabled\:opacity-30.can-hover\:hover\:opacity-70.dark\:bg-white.dark\:text-black.w-9 {
+		background: var(--user-input-text);
+		filter: saturate(0.9);
+	}
+
+	button.relative.flex.h-9.items-center.justify-center.rounded-full.bg-black.text-white.transition-colors.focus-visible\:outline-none.focus-visible\:outline-black.disabled\:text-gray-50.disabled\:opacity-30.can-hover\:hover\:opacity-70.dark\:bg-white.dark\:text-black.w-9:hover {
+		filter: saturate(1.5), brightness(4)contrast(4);
+	}
+
+	/* Attachments button on hover */
+	button.flex.items-center.justify-center.text-token-text-primary:hover {
+		background: var(--user-input-text) !important;
+		animation: heartbeat 2s ease-in-out infinite;
+		filter: saturate(1.5) contrast(1.5);
+	}
+
+	/* SVG inside the attachments button on hover */
+	button.flex.items-center.justify-center.text-token-text-primary:hover svg {
+		filter: invert(1);
+		transform: scale(1.2);
+		transition: transform 0.5s ease-in-out;
+	}
+
+	.align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
+		background: var(--user-input-background) !important;
+	}
+
+	circle.origin-\[50\%_50\%\].-rotate-90.transition-\[stroke-dashoffset\] {
+		stroke: var(--user-input-text);
+		filter: saturate(3) brightness(3) contrast(200%);
+	}
+
+	/*Xs for images attached*/
+	button.absolute.right-1.top-1.-translate-y-1\/2.translate-x-1\/2.rounded-full.border.border-token-border-heavy.bg-token-main-surface-secondary.p-0\.5.text-token-text-primary.transition-colors.hover\:opacity-100.group-hover\:opacity-100.md\:opacity-0 {
+		color: var(--user-input-text) !important;
+		filter: saturate(3) brightness(3) contrast(200%);
+	}
+
+	/* Input Dialog Bottom Bar */
+	.relative.flex.w-full.items-end.py-3.pl-3 {
+		background: var(--user-input-background);
+		border: 1px solid var(--user-input-text-less-transparent);
+
+		border-radius: 30px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.align-center.flex.h-full.w-full.flex-col.justify-center.self-center.px-2.pb-2.md\:pb-\[8vh\] {
+		background: var(--user-input-background);
+	}
+
+	/* current Model */
+	.draggable.no-draggable-children.sticky.top-0.p-3.mb-1\.5.flex.items-center.justify-between.z-10.h-header-height.font-semibold.bg-token-main-surface-primary.max-md\:hidden {
+		background: linear-gradient( to bottom,
+		rgb(0, 0, 0), /* Darker at the top */
+		rgba(0, 0, 0, 0.0)/* Fully transparent at the bottom */
+		);
+		backdrop-filter: blur(1px);
+	}
+
+	/* current Model Text*/
+	[data-testid="model-switcher-dropdown-button"] {
+		color: var(--user-input-text);
+		filter: saturate(0.7) contrast(1.1);
+	}
+
+	[data-testid="model-switcher-dropdown-button"] .text-token-text-tertiary {
+		color: var(--user-input-text);
+		filter: hue-rotate(90deg);
+	}
+
+
+	.draggable.no-draggable-children.sticky.top-0.p-3.mb-1\.5.items-center.h-header-height.font-semibold.bg-token-main-surface-primary.z-30.mx-auto.flex.w-full.justify-center.gap-2.whitespace-nowrap.pt-\[1\.125rem\] {
+		background: linear-gradient( to bottom,
+		rgb(0, 0, 0), /* Darker at the top */
+		rgba(0, 0, 0, 0.0)/* Fully transparent at the bottom */
+		);
+		backdrop-filter: blur(1px);
+		/* Apply blur effect */
+	}
+
+	.pb-64 {
+		padding-bottom: 0px !important;
+	}
+
+	/*********************************************************************************/
+	/* replace bg color */
+	.dark body,
+	.dark html {
+		background-color: rgba(18, 18, 18, 1);
+	}
+
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden {
+		background-color: rgba(18, 18, 18, var(--tw-bg-opacity));
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div > div.flex.items-center.justify-center.gap-1.border-b.border-black\/10.bg-gray-50.p-3.text-gray-500.dark\:border-gray-900\/50.dark\:bg-gray-700.dark\:text-gray-300 {
+		background-color: rgba(18, 18, 18);
+	}
+
+	/* First launch new chat suggested chat buttons */
+	.dark .btn-neutral {
+		background: var(--code-background);
+	}
+
+	/*change the background of model type*/
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div > header > div {
+		backdrop-filter: blur(4px) saturate(100%);
+		-webkit-backdrop-filter: blur(1px) saturate(200%);
+		background-color: rgba(18, 18, 18, 0.2);
+		color: rgb(255, 255, 255);
+	}
+
+	.mt-5 {
+		padding-top: 1.25rem;
+		margin-top: 0;
+		box-sizing: border-box;
+	}
+
+
+	/* code section styling */
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div > div > div.relative.flex.w-\[calc\(100\%-50px\)\].flex-col.gap-1.md\:gap-3.lg\:w-\[calc\(100\%-115px\)\] > div.flex.flex-grow.flex-col.gap-3 > div > div > pre > div > div.flex.items-center.relative.text-gray-200.bg-gray-800.px-4.py-2.text-xs.font-sans.justify-between.rounded-t-md {
+		background: #1c1d1f;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div > div > div.relative.flex.w-\[calc\(100\%-50px\)\].flex-col.gap-1.md\:gap-3.lg\:w-\[calc\(100\%-115px\)\] > div.flex.flex-grow.flex-col.gap-3 > div > div > pre > div > div.p-4.overflow-y-auto {
+		background: #1c1d1f;
+	}
+
+	/*********************************************************************************/
+	/* Code top bar */
+	.flex.items-center.text-token-text-secondary.px-4.py-2.text-xs.font-sans.justify-between.rounded-t-\[5px\].h-9.bg-token-sidebar-surface-primary.dark\:bg-token-main-surface-secondary.select-none {
+		color: #d5d5d5 !important;
+		font-family: 'Fira Code', monospace !important;
+		font-size: 18px;
+		font-weight: bold;
+		background: var(--code-topbar) !important;
+		border-bottom: 0.1px solid #fff9;
+		letter-spacing: 4px;
+		font-variant: small-caps;
+	}
+
+	/*Code background*/
+	.p-4.overflow-y-auto {
+		background: var(--code-background);
+	}
+
+	/* Code snippet font and settings*/
+	code,
+	border- pre,
+	kbd,
+	samp {
+		letter-spacing: 0.5px;
+		font-variant-ligatures: contextual;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		/* for Chrome, Safari */
+		-moz-osx-font-smoothing: grayscale;
+		/* for Firefox */
+	}
+
+	/*Code copy button*/
+	button.flex.gap-1.items-center.select-none.px-4.py-1 {
+		color: white;
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+
+	.icon-xs {
+		height: 1.2rem;
+		width: 1.2rem;
+	}
+
+	code,
+	pre {
+		font-family: 'Fira Code', monospace !important;
+	}
+
+
+
+	/* fading cursor */
+	@-webkit-keyframes fade {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fade {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	.result-streaming > :not(ol):not(ul):not(pre):last-child:after,
+	.result-streaming > ol:last-child li:last-child:after,
+	.result-streaming > pre:last-child code:after,
+	.result-streaming > ul:last-child li:last-child:after {
+		-webkit-animation: fade 1s ease-in-out infinite;
+		animation: fade 1s ease-in-out infinite;
+		content: "▋";
+		margin-left: .25rem;
+		vertical-align: baseline;
+	}
+
+
+
+	/* load chat animation*/
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
+	}
+
+	@keyframes fade-out {
+		0% {
+			opacity: 1;
+		}
+
+		100% {
+			opacity: 0;
+		}
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div {
+		animation: fade-in 0.25s ease-in forwards;
+		opacity: 0;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div.fade-out {
+		animation: fade-out 0.25s ease-out forwards;
+	}
+
+
+	/* scroll smoothly */
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div {
+		scroll-behavior: smooth;
+	}
+
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.absolute.bottom-0.left-0.w-full.border-t.md\:border-t-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:bg-vert-light-gradient.bg-white.dark\:bg-gray-800.md\:\!bg-transparent.dark\:md\:bg-vert-dark-gradient.pt-2.md\:pl-2.md\:w-\[calc\(100\%-\.5rem\)\] > form > div > div.flex.flex-col.w-full.py-\[10px\].flex-grow.md\:py-4.md\:pl-4.relative.border.border-black\/10.bg-white.dark\:border-gray-900\/50.dark\:text-white.dark\:bg-gray-700.rounded-xl.shadow-xs.dark\:shadow-xs {
+		backdrop-filter: blur(5px) saturate(100%);
+		-webkit-backdrop-filter: blur(1px) saturate(200%);
+		background-color: rgba(18, 18, 18, 0.2);
+		border-radius: 12px;
+		border: 1px solid rgba(67, 69, 71, .7);
+		color: rgb(255, 255, 255);
+	}
+
+	/*********************************************************************************/
+	/*Send a message Box*/
+	.dark .dark\:bg-gray-700 {
+		backdrop-filter: blur(5px) saturate(100%);
+		-webkit-backdrop-filter: blur(1px) saturate(200%);
+		background-color: rgba(18, 18, 18, 0.2);
+		border-radius: 12px;
+		border: 1px solid rgba(67, 69, 71, .7);
+		color: rgb(255, 255, 255);
+	}
+
+
+	/*********************************************************************************/
+	/* regenerate response */
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.absolute.bottom-0.left-0.w-full.border-t.md\:border-t-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:bg-vert-light-gradient.bg-white.dark\:bg-gray-800.md\:\!bg-transparent.dark\:md\:bg-vert-dark-gradient.pt-2.md\:pl-2.md\:w-\[calc\(100\%-\.5rem\)\] > form > div > div:nth-child(1) > div > button {
+		backdrop-filter: blur(5px) saturate(100%);
+		-webkit-backdrop-filter: blur(1px) saturate(200%);
+		background-color: rgba(18, 18, 18, 0.2);
+		border-radius: 122px;
+		border: 1px solid rgba(54, 55, 57, .7);
+		color: rgb(255, 255, 255);
+	}
+
+	.rounded-sm {
+		border-radius: 122px;
+	}
+
+
+	/*********************************************************************************/
+	/*Chat input */
+	.dark .dark\:bg-gray-800 {
+		--tw-bg-opacity: 1;
+		color: var(--user-input-text) !important;
+
+		background: var(--user-input-background);
+		/* fallback for old browsers */
+		background: -webkit-linear-gradient(to bottom, #434343, var(--user-input-background));
+		/* Chrome 10-25, Safari 5.1-6 */
+		background: var(--user-input)!important;
+	}
+
+	/* Ensure all image divs in user input and images remain transparent */
+	[data-message-author-role="user"] img,
+	[data-message-author-role="user"] div[class*="image"],
+	[data-message-author-role="user"] div.overflow-hidden {
+		background: transparent !important;
+	}
+
+
+	.dark .dark\:bg-gray-800:last-child {
+		background: var(--user-input-background)!important;
+	}
+
+
+	/*Chat output */
+	.dark .dark\:bg-\[\#444654\] {
+		--tw-bg-opacity: 1;
+		background: var(--user-input-background);
+	}
+
+	/*The word ChatGpt in output*/
+	.agent-turn .font-semibold.select-none {
+		color: var(--main-body-output-text-color) !important;
+	}
+
+	/*Chat Background*/
+	.dark .dark\:md\:bg-vert-dark-gradient {
+		background-image: var(--chat-background-gradient)
+	}
+
+	/*Background Base*/
+	[class*="react-scroll-to-bottom--css-"] {
+		background: var(--user-input-background) !important;
+	}
+
+	.sticky.top-0.z-\[9\].w-full {
+		background: #00000017;
+	}
+
+	/* Model icons */
+	.\[&_svg\]\:h-full.\[&_svg\]\:w-full.h-4.w-4.text-token-text-primary {
+		border: initial !important
+	}
+
+	/* Top bar when screen size is small */
+	.draggable.h-header-height.top-0.z-10.flex.items-center.justify-center.border-transparent.ps-0.md\:hidden.bg-token-bg-primary.sticky.\[box-shadow\:var\(--sharp-edge-top-shadow\)\] {
+		background: var(--sidebar-surface-primary);
+		border-bottom: 1px solid var(--line-color);
+	}
+
+	/*Gpt Output Background*/
+	.w-full.text-token-text-primary:nth-child(odd):not(svg,
+	button) {
+		background: var(--user-input-background) !important;
+	}
+
+	.w-full.text-token-text-primary:last-child:not(svg,
+	button) {
+		background: var(--user-input-background) !important;
+	}
+
+
+	/* Sidebar bar when screen size is small */
+	div#stage-sidebar-tiny-bar {
+		background: var(--sidebar-surface-primary);
+	}
+
+	/*sidebar underlying color*/
+	.screen-arch\:sticky.screen-arch\:top-\[var\(--sticky-title-offset\)\].z-20.text-token-text-primary.screen-arch\:-me-2.screen-arch\:h-10.screen-arch\:min-w-\[50cqw\].screen-arch\:-translate-x-2.screen-arch\:bg-\[var\(--sidebar-surface\)\].screen-arch\:py-1.screen-arch\:text-token-text-secondary.overflow-clip.ps-2.pt-7.text-xs.font-semibold.break-all.text-ellipsis.select-none {
+		background: var(--user-input-background) !important;
+	}
+
+	[data-discover="true"] {
+		transition: background-color 0.2s ease-in;
+		background: var(--user-input-background) !important;
+		font-size: 16px;
+		border-bottom: 0;
+	}
+
+	[data-discover="true"]:hover {
+		background: var(--selected-chat-gradient) !important;
+	}
+
+	/*Input box bottom middle to right*/
+	.bg-token-bg-primary.shadow-short.flex.w-full.cursor-text.flex-col.items-center.justify-center.overflow-clip.bg-clip-padding.contain-inline-size.dark\:bg-\[\#303030\].rounded-\[28px\] {
+		background: transparent;
+	}
+
+
+	/*Input box first question ask*/
+	._prosemirror-parent_276o5_2.text-token-text-primary.max-h-\[25dvh\].max-h-52.overflow-auto.\[scrollbar-width\:thin\].default-browser.vertical-scroll-fade-mask {
+		width: 100%;
+		border-radius: 10px;
+	}
+
+	.relative.flex.w-full.items-end.px-2\.5.py-2\.5 {
+		background: var(--user-input-background) !important;
+	}
+
+	.border-token-border-xlight.flex.w-full.cursor-text.flex-col.items-center.justify-center.rounded-\[28px\].border.bg-clip-padding.contain-inline-size.overflow-clip.shadow-sm.sm\:shadow-lg.dark\:shadow-none\!.bg-token-main-surface-primary.dark\:bg-\[\#303030\] {
+		border: 1px solid var(--line-color);
+	}
+
+	/*Add File button*/
+	.btn.relative.p-0.text-black.dark\:text-white svg {
+		transition: background-color 0.3s ease, border-color 0.3s ease;
+	}
+
+	.btn.relative.p-0.text-black.dark\:text-white svg:hover {
+		color: var(--user-input-text);
+		animation: heartbeat 2s ease-in-out infinite;
+	}
+
+
+	button.absolute.bottom-1\.5.right-2.rounded-lg.border.border-black.bg-black.p-0\.5.text-white.transition-colors.enabled\:bg-black.disabled\:text-gray-400.disabled\:opacity-10.dark\:border-white.dark\:bg-white.dark\:hover\:bg-white.md\:bottom-3.md\:right-3:hover {
+		transition: background-color 0.3s ease, border-color 0.3s ease;
+	}
+
+	button.absolute.bottom-1\.5.right-2.rounded-lg.border.border-black.bg-black.p-0\.5.text-white.transition-colors.enabled\:bg-black.disabled\:text-gray-400.disabled\:opacity-10.dark\:border-white.dark\:bg-white.dark\:hover\:bg-white.md\:bottom-3.md\:right-3:not(:disabled):hover {
+
+		animation: heartbeat 2s ease-in-out infinite;
+		background: var(--user-input-text);
+		border-color: var(--user-input-text);
+	}
+
+	/** Chat input text */
+	.dark .dark\:prose-invert {
+		--tw-prose-headings: var(--heading-output) !important;
+		--tw-prose-body: var(--main-body-output-text-color) !important;
+		--tw-prose-bold: var(--bold-output) !important;
+		--tw-prose-code: var(--code-key-words) !important;
+		--tw-prose-links: var(--links-output) !important;
+		--tw-prose-quotes: #ffc7f8;
+		--tw-prose-hr: var(--vertical-chat-lines) !important;
+	}
+
+	/** Chat input links */
+	.markdown a {
+		color: var(--links-output) !important;
+	}
+
+	/*********************************************************************************/
+	/*Recent Chat background*/
+	.dark .dark\:bg-gray-900 {
+		background-color: rgba(18, 18, 18, var(--tw-bg-opacity));
+	}
+
+	/*Recent Chat background Hover*/
+	.dark .dark\:bg-gray-900:hover {
+		background: var(--deep-space);
+	}
+
+
+	/*********************************************************************************/
+	/*Chat border seperation between AI and user*/
+	.dark .dark\:border-gray-900\/50 {
+		border-color: var(--main-chat-border-color)
+	}
+
+	#__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div > div > div.w-full.h-48.flex-shrink-0 {
+		background-color: rgba(18, 18, 18, var(--tw-bg-opacity));
+	}
+
+
+	#__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div > div > div > div > div.relative.flex.w-\[calc\(100\%-50px\)\].md\:flex-col.lg\:w-\[calc\(100\%-115px\)\] > div.flex.flex-grow.flex-col.gap-3 > div {
+		font-size: 26px
+	}
+
+	.flex-1.overflow-hidden.\@container\/thread.translate-y-\[2rem\].-mt-\[2rem\].pb-\[1\.5rem\] {
+		padding-bottom: 0;
+	}
+
+	/*********************************************************************************/
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > a:hover {
+		box-shadow: 1px 1px 10px rgba(38, 198, 218, 0.9);
+	}
+
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 {
+		width: 8px!important;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > a {
+		padding-right: 7.3rem;
+		border-color: var(--user-input-background);
+	}
+
+	/*********************************************************************************/
+	/* hide sidebar icon */
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > span {
+		background: var(--futuristic-gradient);
+		border-radius: 10px;
+		font-size: 0.9rem;
+		transition: box-shadow 0.3s;
+		text-align: center;
+	}
+
+
+
+	/*Beautify issue so damn annoying*/
+	a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-white.cursor-pointer.text-sm.rounded-md.border.dark\:border-white\/20.gizmo\:min-h-0.hover\:bg-gray-500\/10.h-11.gizmo\:h-10.gizmo\:rounded-lg.gizmo\:border-\[rgba\(0,
+	0,
+	0,
+	0\.1\)\].w-11.flex-shrink-0.items-center.justify-center.bg-white.dark\:bg-transparent {
+		border: var(--user-input-background);
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > span:hover {
+		box-shadow: 1px 1px 10px rgba(38, 198, 218, 0.9);
+	}
+
+	a.no-draggable.group.rounded-lg.active\:opacity-90.bg-\[var\(--item-background-color\)\].h-9.text-sm.screen-arch\:relative.screen-arch\:bg-transparent.screen-arch\:py-\[7px\].flex.items-center.gap-2\.5.p-2 {
+		background: var(--user-input-background) !important;
+	}
+
+
+	/*********************************************************************************/
+	/* Current Selected Chat*/
+	.bg-gray-800 {
+		background: var(--futuristic-gradient);
+
+		box-shadow: 1px 1px 0 rgba(38, 198, 218, 0);
+		transition: background 0.1s;
+	}
+
+	.hover\:bg-\[\#2A2B32\]:hover {
+		background: var(--deep-space);
+	}
+
+	.from-gray-800 {
+		--tw-gradient-from: rgba(18, 18, 18, 0) var(--tw-gradient-from-position);
+		--tw-gradient-to: rgba(52, 53, 65, 0) var(--tw-gradient-to-position);
+		--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+	}
+
+	.from-gray-900 {
+		--tw-gradient-from: rgba(32, 33, 35) var(--tw-gradient-from-position);
+		--tw-gradient-to: rgba(32, 33, 35, 0) var(--tw-gradient-to-position);
+		--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+	}
+
+	.group:hover .group-hover\:from-\[\#2A2B32\] {
+		--tw-gradient-from: #0000 var(--tw-gradient-from-position);
+		--tw-gradient-to: rgba(42, 43, 50, 0) var(--tw-gradient-to-position);
+		--tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+	}
+
+	.hover\:bg-gray-800:hover {
+		--tw-bg-opacity: 1;
+		background-color: rgba(50, 50, 52, var(--tw-bg-opacity));
+	}
+
+
+	#__next > div > div.dark.hidden.bg-gray-900.md\:fixed.md\:inset-y-0.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a.flex.py-3.px-3.items-center.gap-3.rounded-md.hover\:bg-gray-500\/10.transition-colors.duration-200.text-white.cursor-pointer.text-sm.mb-2.flex-shrink-0.border.border-white\/20:hover {
+		opacity: 90%
+	}
+
+
+	#__next > div > div.dark.hidden.bg-gray-900.md\:fixed.md\:inset-y-0.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a.flex.py-3.px-3.items-center.gap-3.rounded-md.hover\:bg-gray-500\/10.transition-colors.duration-200.text-white.cursor-pointer.text-sm.mb-2.flex-shrink-0.border.border-white\/20 span {
+		color: white;
+		font-size: 18px;
+		font-weight: 100;
+	}
+
+	#__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div > div > div > div > div > div.relative.flex.w-\[calc\(100\%-50px\)\].md\:flex-col.lg\:w-\[calc\(100\%-115px\)\] > div.flex.flex-grow.flex-col.gap-3 {
+		color: white;
+		font-size: 18px;
+		font-weight: 400;
+	}
+
+	.flex.flex-1.grow.basis-auto.flex-col.overflow-hidden {
+		background: var(--user-input-background);
+		color: var(--text-secondary)
+	}
+
+
+	body {
+		font-family: 'Open Sans', sans-serif;
+	}
+
+	::-moz-selection {
+		/* Code for Firefox */
+		background: #c2c2ce2b;
+	}
+
+	::selection {
+		background: #c2c2ce2b;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.flex-1.overflow-hidden > div > div > div {
+		padding-top: 5px;
+		margin-left: 5px;
+		font-family: 'Roboto', sans-serif;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div {
+		padding-left: 5px;
+		width: 300px !important;
+		background: transparent;
+		padding-top: 5px;
+		font-family: 'JetBrains Mono', sans-serif;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 {
+		width: 300px !important;
+	}
+
+	/*********************************************************************************/
+	/*All Chat history general  background of the chat history behind elements */
+	nav[aria-label="Chat history"] {
+		background: var(--user-input-background);
+		font-family: "Montserrat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 600;
+		font-style: normal;
+	}
+
+	/* Highlighted Current Selected Chat jun 18 25*/
+	a.__menu-item[data-active] {
+		color: var(--user-input-text);
+		border: 2px solid transparent;
+		border-image: linear-gradient(to right, var(--user-input-text), transparent) 1;
+	}
+
+	/*All Chat history*/
+	/*Chat history list*/
+	.relative.grow.overflow-hidden.whitespace-nowrap {
+		color: var(--chat-history-list);
+	}
+
+	li.relative .group.relative.rounded-lg.active\:opacity-90.hover\:bg-token-sidebar-surface-secondary:hover {
+		background: var(--deep-space);
+	}
+
+	.group.relative.rounded-lg.active\:opacity-90.bg-token-sidebar-surface-tertiary {
+		background: var(--futuristic-gradient) !important;
+	}
+
+	/*Explore gpts and Add team workspace*/
+	.text-sm {
+		color: var(--chat-history-list);
+	}
+
+
+	/*Username*/
+	.relative.-top-px.grow.-space-y-px.truncate.text-left.text-token-text-primary {
+		color: var(--chat-history-list) !important;
+		border: none !important;
+		background: transparent!important;
+	}
+
+	.flex.w-full.items-center.gap-2.rounded-lg.p-2.text-sm.hover\:bg-token-sidebar-surface-secondary.group-ui-open\:bg-token-sidebar-surface-secondary:hover {
+		background: var(--futuristic-gradient);
+	}
+
+	.flex.w-full.items-center.gap-2.rounded-lg.p-2.text-sm.hover\:bg-token-sidebar-surface-secondary.group-ui-open\:bg-token-sidebar-surface-secondary[aria-expanded="true"] {
+		background: var(--futuristic-gradient);
+	}
+
+	/*The word chat gpt top left*/
+	.grow.overflow-hidden.text-ellipsis.whitespace-nowrap.text-sm.text-token-text-primary {
+		color: var(--chat-history-list) !important;
+		border: none !important;
+	}
+
+	/*Chat History Buttons fix */
+	button.text-token-text-primary {
+		color: var(--chat-history-list);
+		border: none !important;
+		background: transparent !important;
+	}
+
+	button.text-token-text-primary[aria-haspopup="menu"] {
+		background: transparent !important;
+	}
+
+	/*username bottom left*/
+	.relative.-top-px.grow.-space-y-px.overflow-hidden.text-ellipsis.whitespace-nowrap.text-left.text-token-text-primary {
+		background: var(--text-token-tertiary) !important;
+	}
+
+	/*chat gpt text in button top left*/
+	.grow.overflow-hidden.text-ellipsis.whitespace-nowrap.text-sm.text-token-text-primary {
+		background: transparent !important;
+	}
+
+	/*chat gpt button top left (New Chat)*/
+	.bg-token-sidebar-surface-primary {
+		background: var(--user-input-background) !important;
+	}
+
+	.juice\:sticky.juice\:top-0.juice\:z-20.juice\:bg-token-sidebar-surface-primary {
+		position: -webkit-sticky;
+		/* For Safari */
+		background-color: var(--user-input-background);
+	}
+
+	/*Hover over chat gpt text in button top left (New Chat)*/
+	.group.flex.h-10.items-center.gap-2.rounded-lg.bg-token-sidebar-surface-primary.px-2.font-medium:hover {
+		background: var(--futuristic-gradient) !important;
+	}
+
+
+	/*Recent Chat background Hover For Day/Times Updated*/
+	span.flex.h-9.items-center {
+		background: var(--user-input-background) !important;
+	}
+
+	a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary {
+		background-color: var(--user-input-background) !important;
+	}
+
+	/*GPTS Button top left in chat history*/
+	a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary:hover {
+		background: var(--futuristic-gradient) !important;
+	}
+
+	/*********************************************************************************/
+	#__next > div > div.flex.h-full.flex-1.flex-col.md\:pl-\[260px\] > main > div.flex-1.overflow-hidden > div {
+		background: var(--user-input-background);
+	}
+
+	\/75 {
+		background-color: rgb(185 185 185 / 25%);
+	}
+
+	#headlessui-dialog-panel-\:r8\: {
+		backdrop-filter: blur(5px) saturate(100%);
+		-webkit-backdrop-filter: blur(1px) saturate(100%);
+		background-color: rgba(18, 18, 18, 0.2);
+		border-radius: 12px;
+		border: 1px solid rgba(67, 69, 71, .7);
+		color: rgb(255, 255, 255);
+	}
+
+	/*********************************************************************************/
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(4) > span > span.rounded-md.bg-yellow-200.py-0\.5.px-1\.5.text-xs.font-medium.uppercase.text-gray-800 {
+		display: none;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(3) {
+		font-size: 0;
+		width: 60px;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(4) {
+		font-size: 0;
+		width: 60px;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(5) {
+		font-size: 0;
+		width: 60px;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(6) {
+		font-size: 0;
+		width: 60px;
+	}
+
+	/* .result-streaming {display: none;} */
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex > div.dark.hidden.bg-gray-900.md\:flex.md\:w-\[260px\].md\:flex-col > div > div > nav > a:nth-child(7) {
+		font-size: 0;
+		width: 60px;
+	}
+
+	.h-4.w-4 {
+		display: none;
+	}
+
+	/*hide disclaimer and version */
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.relative.flex.h-full.max-w-full.flex-1.overflow-hidden > div > main > div.absolute.bottom-0.left-0.w-full.border-t.md\:border-t-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:bg-vert-light-gradient.bg-white.dark\:bg-gray-800.md\:\!bg-transparent.dark\:md\:bg-vert-dark-gradient.pt-2.md\:-left-2 > div > span {
+		display: none;
+	}
+
+	/* Double click on chat to rename chat */
+	.absolute.bottom-0.left-\[7px\].right-2.top-0.flex.items-center.bg-token-sidebar-surface-secondary {
+		background: var(--user-input-background)
+	}
+
+	/* chatgpt title */
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex > div.flex.h-full.max-w-full.flex-1.flex-col > main > div.flex-1.overflow-hidden > div > div > div > div.text-gray-800.w-full.md\:max-w-2xl.lg\:max-w-3xl.md\:h-full.md\:flex.md\:flex-col.px-6.dark\:text-gray-100 > h1 {
+		font-size: 0px;
+	}
+
+	#__next > div.overflow-hidden.w-full.h-full.relative.flex > div.flex.h-full.max-w-full.flex-1.flex-col > main > div.flex-1.overflow-hidden > div > div > div > div.text-gray-800.w-full.md\:max-w-2xl.lg\:max-w-3xl.md\:h-full.md\:flex.md\:flex-col.px-6.dark\:text-gray-100 > div {
+		display: none;
+	}
+
+	/* Chat history backgroud plus remove gradient*/
+	.bg-gradient-to-l {
+		display: none;
+	}
+
+	.bg-gray-900 {
+		background-color: transparent;
+	}
+
+	/* What can I help you with*/
+	.grid.min-h-\[74px\].grid-cols-1.items-center.justify-end {
+		color: var(--user-input-text)
+	}
+
+
+	/*********************************************************************************/
+	/*2023 Novemeber update in progress*/
+	/*Stick top*/
+	.sticky.top-0.flex.items-center.justify-between.z-10.h-14 {
+		background: linear-gradient(to right, black, rgba(0, 0, 0, 0) 50%, black);
+	}
+
+	/*Text Area to enter chat*/
+	.bg-token-bg-primary.shadow-short.cursor-text.overflow-clip.bg-clip-padding.p-2\.5.contain-inline-size.dark\:bg-\[\#303030\].grid.grid-cols-\[auto_1fr_auto\].\[grid-template-areas\:\'header_header_header\'_\'leading_primary_trailing\'_\'\._footer_\.\'\].group-data-expanded\/composer\:\[grid-template-areas\:\'header_header_header\'_\'primary_primary_primary\'_\'leading_footer_trailing\'\]{
+ background: var(--user-input-background);
+	max-height: @textInputBarMaxHeight !important;
+	border-radius: 30px !important;
+	border: var(--line-color) 1px solid;
+	padding: 15px !important;
+}
+
+.w-full.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:w-\[calc\(100\%-\.5rem\)\].juice\:w-full {
+	background: var(--user-input-background);
+	padding-bottom: 10px
+}
+
+/* Black background underneath the inpujt box */
+.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.w-full {
+	background: var(--user-input-background);
+}
+
+div#radix {
+	background: #00000085 !important;
+}
+
+/*Gpt input*/
+.text-token-text-primary:not(svg,
+button,
+a,
+.flex,
+h3,
+.default-browser,
+.text-start) {
+	background: var(--selected-chat-gradient) !important;
+}
+
+article:not(:last-child) {
+	border-bottom: solid rgba(@lineColor, .2) 1px;
+}
+
+
+/*Gpt input background*/
+div#composer-background {
+	background: var(--user-input-background) !important;
+	border: 1px solid rgba(@lineColor, 0.3);
+}
+
+.flex.flex-col.text-sm.md\:pb-9 {
+	background: var(--user-input-background);
+}
+
+.flex.flex-col.gap-2.pb-2.text-token-text-primary.text-sm.juice\:mt-5 {
+	border-top: none !important;
+}
+
+.flex.flex-col.gap-3.sm\:flex-row-reverse.mt-5.sm\:mt-4 {
+	background: transparent !important;
+	margin-top: 25px;
+}
+
+.font-semibold.text-token-text-primary {
+	border-top: none !important;
+}
+
+.text-token-text-primary {
+	color: var(--user-input-text) !important;
+	/*input Color?*/
+}
+
+/*Gpt main screen input Welcome Screen */
+.flex.h-full.flex-col.items-center.justify-center.text-token-text-primary {
+	background: var(--user-input-background) !important;
+}
+
+.flex.h-full.flex-col.overflow-y-auto {
+	background: var(--user-input-background) !important;
+}
+
+.p-2 {
+	padding-right: 2rem
+}
+
+.py-2\.5:not(:last-child) {
+	color: white;
+}
+
+
+/*Icon in more text*/
+.icon-md {
+	stroke: white;
+	stroke-width: 0px;
+}
+
+/*Disclamer text*/
+.relative.px-2.py-2.text-center.text-xs.text-gray-600.dark\:text-gray-300.md\:px-\[60px\] {
+	color: var(--user-input-background);
+}
+
+.gizmo .markdown > :not(pre),
+.gizmo .markdown > :not(pre) > :not(a) {
+	color: var(--main-body-output-text-color);
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h4,
+.markdown h4 {
+	color: var(--heading-output) !important;
+}
+
+.prose :where(strong):not(:where([class~=not-prose] *)) {
+	color: var(--bold-output) !important;
+}
+
+/*********************************************************************************/
+/* Current Chat edit or "remove" current chat buttons*/
+button.p-1.hover\:text-white svg {
+	stroke: #cacaca;
+}
+
+button.p-1.hover\:text-white svg:hover {
+	stroke: white;
+}
+
+.p-1 {
+	padding: 0.01rem
+}
+
+button.flex.items-center.justify-center.text-token-text-primary.transition.hover\:text-token-text-secondary.radix-state-open\:text-token-text-secondary:has(svg.icon-md) {
+	background: transparent !important
+}
+
+.radix-state-open\:bg-\[\#f5f5f5\][data-state=open] {
+	background-color: rgb(107 107 107 / 54%);
+}
+
+/*********************************************************************************/
+/*Alerts*/
+div[role="alert"] {
+	background: var(--alerts);
+	border: transparent;
+}
+
+.border-white\/20 {
+	border-color: transparent
+}
+
+/*********************************************************************************/
+/*Select GPT version menu*/
+.popover[role="menu"] {
+	background: #0e0e0ea1 !important;
+	backdrop-filter: blur(4px);
+}
+
+.draggable.no-draggable-children {
+	background: var(--user-input-background) !important;
+}
+
+
+.group.flex.cursor-pointer.items-center.gap-1.rounded-xl.py-2.px-3.text-lg.font-medium:hover {
+	background: var(--futuristic-gradient);
+}
+
+.group.flex.cursor-pointer.items-center.gap-1.rounded-xl.py-2.px-3.text-lg.font-medium[data-state="open"] {
+	background: var(--futuristic-gradient);
+}
+
+[role="menuitem"]:hover {
+	background: var(--deep-space);
+}
+
+[role="menuitem"]:hover:last-child {
+	background: var(--futuristic-gradient);
+}
+
+
+/*GPT Settings*/
+[role="tablist"] {
+	padding: 0 !important;
+	margin: 1vh;
+}
+
+.m-2.md\:m-0.md\:px-4.md\:pl-6.md\:pt-4.flex.flex-shrink-0.flex-wrap.md\:ml-\[-8px\].md\:min-w-\[180px\].max-w-\[200px\].flex-col.gap-2 {
+	padding-left: 0.5rem;
+	height: 100%;
+	overflow: auto;
+}
+
+h2[as="h3"].text-token-text-primary {
+	color: white !important;
+	border-top: 0;
+}
+
+div[role="dialog"] {
+	background: #31313180;
+	backdrop-filter: blur(3px);
+}
+
+div[role="dialog"] button:hover {
+	background: #c6c6c6b3;
+}
+
+
+div[role="dialog"] [type="button"][role="tab"][aria-selected="true"] {
+	background: #c6c6c647 !important;
+}
+
+div[role="dialog"] [type="button"][role="tab"][aria-selected="false"]:hover {
+	background: #c6c6c699 !important;
+}
+
+div[role="dialog"] .text-token-text-primary {
+	color: #cacaca !important;
+	border: none !important;
+	background: transparent !important;
+}
+
+div[role="dialog"] .focus-none.flex.h-full.flex-col.items-center.justify-start.outline-none {
+	background: #ea000000;
+}
+
+div[role="dialog"] .focus-none.flex.h-full.flex-col.items-center.justify-start.outline-none .relative:not(button) {
+	background: initial;
+}
+
+
+
+
+
+/*********************************************************************************/
+/*GPTs*/
+.sticky.top-14.z-10.-ml-4.mb-12.w-screen.bg-token-main-surface-primary.py-2.text-sm.md\:ml-0.md\:w-full.md\:pb-0 {
+	background: rgba(0, 0, 0, .77);
+}
+
+input.z-10.w-full.rounded-xl.border.border-token-border-light.bg-token-main-surface-primary.py-2.pr-3.font-normal.outline-0.delay-100.md\:h-14.h-12.text-base.pl-12 {
+	background: rgba(0, 0, 0, .77);
+	outline: 1px #ffffff42 solid;
+}
+
+div#headlessui-popover-panel-\:rk\: {
+	background: black;
+	outline: 1px #ffffff42 solid;
+}
+
+.relative.flex.flex-grow.flex-col.gap-4.overflow-y-auto.px-6.pb-20.pt-16 {
+	background: black;
+}
+
+/*Home before chat*/
+.text-base.my-auto.mx-auto.px-3.md\:px-4.w-full.md\:px-5.lg\:px-4.xl\:px-5.h-full {
+	background: var(--user-input-background);
+}
+
+._prosemirror-parent_11fu7_1.text-token-text-primary.max-h-\[25dvh\].max-h-52.overflow-auto.\[scrollbar-width\:thin\].default-browser {
+	background: transparent !important;
+}
+
+/*********************************************************************************/
+/*Before login*/
+.relative.hidden.flex-1.flex-col.justify-center.px-5.pt-8.md\:flex.md\:px-6.md\:py-[22px].lg\:px-8 {
+	background: radial-gradient(@gptOutputBackgroundColor , #0000) !important;
+	color: rgb(0 255 246) !important;
+}
+
+[data-testid="login-button"],
+button.relative.flex.h-12.items-center.justify-center.rounded-md.text-center.text-base.font-medium.bg-\[\#3C46FF\].text-\[\#fff\].hover\:bg-\[\#0000FF\],
+.continue-btn,
+._button-login-id {
+	border: none;
+	background: radial-gradient(#810af8, #3300c7c4);
+	transition: background 0.3s ease, transform 0.3s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn {
+	border: none;
+	color: white;
+	background: linear-gradient(to right, #112d33, #3b0059)
+}
+
+[data-testid="login-button"]:hover,
+button.relative.flex.h-12.items-center.justify-center.rounded-md.text-center.text-base.font-medium.bg-\[\#3C46FF\].text-\[\#fff\].hover\:bg-\[\#0000FF\]:hover,
+.continue-btn:hover,
+.social-btn:hover,
+[data-provider="windowslive"]:hover,
+[data-provider="google"]:hover,
+[data-provider="apple"]:hover,
+._button-login-id:hover {
+	border: none;
+	background: linear-gradient(45deg, #3cceff, #b300ff);
+	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+	animation: heartbeat 4s infinite;
+}
+
+main.main-container,
+.oai-header,
+.oai-footer,
+.login-container {
+	background: var(--user-input-background);
+	color: white;
+}
+
+.oai-header img {
+	filter: invert(1);
+}
+
+h1.title {
+	color: white;
+}
+
+label.email-label {
+	filter: invert(1);
+}
+
+input.email-input {
+	filter: invert(1);
+}
+
+._prompt-box-outer {
+	filter: invert(1);
+}
+
+/* Icons in dropdown gpt type */
+.bg-token-main-surface-secondary {
+	background-color: transparent !important
+}
+
+
+
+.dark .dark\:bg-token-main-surface-secondary {
+	background-color: transparent !important
+}
+
+/*Side bar glitch of background of white smear when trying to select a chat or hover over */
+.absolute.bottom-0.top-0.to-transparent.ltr\:right-0.ltr\:bg-gradient-to-l.rtl\:left-0.rtl\:bg-gradient-to-r.from-token-sidebar-surface-secondary.w-20.from-60\%.juice\:w-10 {
+	background: transparent;
+}
+
+.ltr\:bg-gradient-to-l:where([dir=ltr],
+[dir=ltr] *) {
+	background: transparent;
+}
+
+/*Projects background on sidebar bug*/
+.z-20.screen-arch\:sticky.screen-arch\:top-\[var\(--sticky-title-offset\)\].select-none.overflow-clip.text-ellipsis.break-all.pl-2.pt-7.text-xs.font-semibold.text-token-text-primary.screen-arch\:-mr-2.screen-arch\:h-10.screen-arch\:min-w-\[50cqw\].screen-arch\:-translate-x-2.screen-arch\:bg-\[var\(--sidebar-surface\)\].screen-arch\:py-1.screen-arch\:text-token-text-secondary {
+	background: transparent !important;
+}
+
+[title="Sora"] {
+	background: transparent !important;
+}
+
+.max-w-md.text-center.text-sm.font-normal.text-token-text-primary {
+	background: transparent !important;
+}
+
+/*********************************************************************************/
+/*Scroll Bars*/
+/* Hide the entire scrollbar by default */
+::-webkit-scrollbar {
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+
+/* The width for vertical and height for horizontal scrollbars */
+::-webkit-scrollbar:vertical {
+	width: 10px;
+}
+
+::-webkit-scrollbar:horizontal {
+	height: 10px;
+}
+
+/* Show the entire scrollbar on hover over the body or any scrollable container */
+body:hover::-webkit-scrollbar,
+.scrollable-container:hover::-webkit-scrollbar {
+	opacity: 1;
+}
+
+/* The draggable scrolling handle */
+::-webkit-scrollbar-thumb {
+	background: var(--futuristic-gradient);
+	border-radius: 5px;
+}
+
+* {
+	--sidebar-mask: transparent !important;
+	scrollbar-color: var(--futuristic-gradient) !important;
+}
+
+/* The empty space “below” the scrollbar bar */
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+/*Image issues for shopping*/
+.mix-blend-darken {
+	mix-blend-mode: normal;
+}
+
+/*********************************************************************************/
+/*Highlighing text*/
+*:not(.cm-content.cm-lineWrapping)::selection {
+	background-color: white !important;
+	color: blue !important;
+}
+
+*:not(.cm-content.cm-lineWrapping)::-moz-selection {
+	background-color: white !important;
+	color: blue !important;
+}
+
+*:not(.cm-content.cm-lineWrapping)-webkit-selection {
+	background-color: white !important;
+	color: blue !important;
+}
+
+/*********************************************************************************/
+/* Applicable only for keepchatgpt userscript  */
+div#kcg {
+	background: var(--user-input-background) !important;
+}
+
+/*********************************************************************************/
+/* Applicable only for Grepper save to grepper in code boxs */
+.open_grepper_editor.gpt_grepper_add_answer_trigger {
+	top: 2px !important;
+	right: 230px !important;
+	color: #d5d5d5 !important;
+	font-size: 18px !important;
+	font-weight: bold;
+	background: var(--code-topbar);
+	letter-spacing: 1px;
+}
+
+/*********************************************************************************/
+/* Applicable only for ChatGPT Chat Organizer - Folders Extension https://chrome.google.com/webstore/detail/chatgpt-chat-organizer-fo/eaoimfbcncfnjkojlfjinakmflglmegk?hl=en-GB  */
+.popup-container.fixed.top-0.left-0.w-screen.h-screen.flex.items-center.justify-center.z-50 {
+	background-color: rgba(69, 69, 69, .69) !important;
+}
+
+.groups-div-extension {
+	color: var(--chat-history-list);
+}
+
+.p-4.bg-gray-900.rounded-md.shadow-md {
+	background: var(--user-input-background);
+	margin-bottom: 3%;
+	text-align: center;
+	line-height: 1.5;
+}
+
+.pb-2.border-b.border-gray-300.cursor-pointer.px-1 {
+	transition: border-radius .5s ease, color 0.5s ease, background 0.5s ease;
+	padding: 8px;
+}
+
+.pb-2.border-b.border-gray-300.cursor-pointer.px-1:hover {
+	color: white;
+	background: var(--futuristic-gradient);
+	border-radius: 55px;
+}
+
+
+a.flex.py-1.px-3.items-center.gap-1.relative.rounded-md.break-all.mb-2 {
+	display: none;
+}
+
+/********************* Tables *************************/
+.tableContainer.horzScrollShadows {
+	background: transparent;
+	border: 0;
+}
+
+article table {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: 'Segoe UI', sans-serif;
+	color: white;
+}
+
+article thead {
+	background: var(--table-header);
+}
+
+article thead th {
+	text-align: left;
+	padding: 12px 16px;
+	border: 1px solid var(--line-color);
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+
+article tbody td {
+	padding: 12px 16px;
+	border: 1px solid var(--line-color);
+}
+
+article tbody tr:nth-child(even) {
+	background: var(--user-input);
+}
+
+article tbody tr:hover {
+	background: var(--table-hover);
+	transition: background-color 0.3s ease;
+}
+
+/*********************************************************************************/
+/*New Chat Input Text Color ?? */
+.empty\:hidden {
+	color: var(--user-input-text) !important;
+}
+
+/*********************************************************************************/
+/*Send Button*/
+svg.icon-sm.m-1.md\:m-0 {
+	margin: .5rem;
+}
+
+/*********************************************************************************/
+/************************************GPT Canvas************************************/
+/*********************************************************************************/
+.flex.w-full.min-w-0.items-center.justify-between.gap-2.self-start.border-token-border-light.px-4.transition-colors.duration-700.border-token-border-light.py-3.text-sm.font-medium.text-token-text-secondary {
+	background: var(--user-input-background) !important;
+}
+
+header.\@container.flex.h-14.flex-none.items-center.justify-between.gap-1.px-3 {
+	background: var(--user-input-background);
+}
+
+span.text-sm.text-token-text-primary.truncate {
+	border-top: none;
+	background: transparent !important;
+}
+
+header.flex.items-center.justify-between.p-3.h-14 {
+	height: 50px;
+	background: var(--canvas-top-bar-gradient) !important
+}
+
+.flex.justify-start.pt-2.h-full {
+	padding: 0;
+}
+
+.cm-content.cm-lineWrapping {
+	font-family: 'Fira Code', monospace !important;
+	background: var(--code-background);
+}
+
+svg.icon-sm.mr-0\.5.text-token-text-tertiary {
+	background: #2F2F2F !important;
+	margin: 0;
+	border: none;
+}
+
+textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-text-primary.outline-0.placeholder\:text-token-text-secondary.focus\:ring-0.focus-visible\:ring-0 {
+	background: #3E3E3E !important;
+	border: none;
+}
+
+.cm-gutters {
+	background: black !important;
+}
+
+.absolute.bottom-0.z-20.h-24.w-full.transition-colors {
+	background: linear-gradient(rgb(0 0 0 / 0%), rgb(0 0 0)) !important;
+}
+
+/*Safety text bottom*/
+.relative.mt-auto.flex.min-h-8.w-full.items-center.justify-center.p-2.text-center.text-xs.text-token-text-secondary.md\:px-\[60px\] {
+	background: var(--user-input-background);
+	color: var(--user-input-background);
+}
+
+.composer-parent {
+	background: var(--user-input-background);
+}
+
+/*********************************************************************************/
+/************************************WIDE MODE************************************/
+/*********************************************************************************/
+& when (@wideMode =1) {
+	.md\:max-w-3xl,
+	/* Common medium breakpoint limit */
+	.lg\:max-w-3xl,
+	/* Common large breakpoint limit */
+	.\!max-w-3xl,
+	/* Another variation seen */
+	.xl\:max-w-\[48rem\],
+	/* Common extra-large breakpoint limit (48rem = 768px) */
+	.gizmo .xl\:max-w-\[48rem\],
+	/* Sometimes nested */
+	/* Target the direct parent containers of message groups */
+	div[class*="react-scroll-to-bottom"] > div > div > .mx-auto,
+	/* Target the main content area wrapper if others fail */
+	main .w-full .mx-auto {
+		max-width: 95% !important;
+	}
+
+	.prose {
+		max-width: none !important;
+		/* Allow prose to fill its widened container */
+	}
+}
+
+/************************************Hide Add Teams Advertisment************************************/
+& when (@hideJunk =1) {
+	a.group.flex.gap-2.p-2\.5.text-sm.cursor-pointer.focus\:ring-0.radix-disabled\:pointer-events-none.radix-disabled\:opacity-50.hover\:bg-token-sidebar-surface-secondary.m-0.rounded-lg.px-2 {
+		display: none;
+		height: 0px;
+	}
+
+	.bg-token-bg-elevated-secondary.sticky.bottom-0.z-30.py-1\.5.group-data-scrolled-from-end\/scrollport\:shadow-\(--sharp-edge-bottom-shadow\).empty\:hidden {
+		display: none;
+		height: 0px;
+	}
+
+	/*Warning text*/
+	.relative.px-2.py-2.text-center.text-xs.text-token-text-secondary.md\:px-\[60px\] {
+		color: transparent;
+		display: none;
+	}
+
+	.w-full.translate-y-4.px-2.py-2.text-center.text-xs.text-token-text-secondary.empty\:hidden.xs\:translate-y-8.md\:px-\[60px\].\@lg\/thread\:absolute.\@lg\/thread\:bottom-0.\@lg\/thread\:left-0 {
+		color: transparent;
+		display: none;
+	}
+
+	.bg-token-bg-elevated-secondary.sticky.bottom-0.z-30.px-\[3px\].py-1\.5.group-data-scrolled-from-end\/scrollport\:shadow-\(--sharp-edge-bottom-shadow\).empty\:hidden {
+		display: none;
+	}
+}
+
+/******************************* Display No Text Wrap ********************************/
+& when (@noTextWrap =1) {
+	.whitespace-nowrap {
+		white-space: break-spaces;
+	}
+
+	.truncate {
+		text-overflow: initial;
+		white-space: break-spaces;
+	}
+
+	a.p-2 {
+		padding-right: 0;
+	}
+
+	.p-2 {
+		padding: 0;
+	}
+
+	li.relative {
+		margin-bottom: 7px;
+	}
+
+	.no-draggable.group.rounded-lg.active\:opacity-90.bg-\[var\(--item-background-color\)\].h-9.text-sm.relative {
+		--item-background-color: #000 !important;
+	}
+
+	.mt-5 {
+		padding-top: 0rem;
+		margin-top: 0;
+		box-sizing: border-box;
+	}
+}
+
+/******************************* Codex ********************************/
+.bg-token-bg-primary.sticky.top-0.z-50.flex.flex-col.items-center {
+	background: transparent;
+}
+
 }
