@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.945
+@version        2.2.96
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -20,9 +20,9 @@
 @var color lineColor "Line work/borders color" rgba(255, 255, 255, .2)
 
 @var checkbox   wideMode  "GPT Wide Mode" 1
-@var checkbox   hideJunk "Hide Junk" 1
+@var checkbox   hideExtras "Hide User Profile" 0
 @var checkbox   noTextWrap "Show Full Chat Descriptions (No Text Wrap)" 0
-@var number     textInputBarMaxHeight "Adjust the max height of text input (px)"     ['px', 350, 1, null, 1]
+@var number     textInputBarMaxHeight "Adjust the max height of text input (px)"     ['px', 1000, 1, null, 1]
 
 ==/UserStyle== */
 /*
@@ -69,6 +69,8 @@ regexp("https://chatgpt.com(/.*)?") {
 		--table-hover: #ffffff30;
 
 		--selected-chat-gradient: linear-gradient(to right, @gptOutputBackgroundColor , #0D0D0D 100%);
+		--chat-history-hover-gradient: linear-gradient(90deg, #3d3d3d, @userInputBackgroundColor);
+		/* space grey → black */
 		--canvas-top-bar-gradient: linear-gradient(to right, #0D0D0D, @gptOutputBackgroundColor);
 		--chat-history-list: #C0C0C0;
 		--sidebar-surface-secondary: #676767a6;
@@ -98,6 +100,21 @@ regexp("https://chatgpt.com(/.*)?") {
 		filter: invert(1);
 	}
 
+	a .group.__menu-item.hoverable:hover {
+		background: linear-gradient(90deg, #f00, #000000);
+	}
+
+	/* Gpt main screen input Welcome Screen */
+	h1.text-page-header.inline-flex {
+		background: linear-gradient( 90deg,
+		var(--main-body-output-text-color),
+		var(--user-input-text));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		color: transparent;
+	}
+
 	.content-fade:after {
 		background: var(--user-input-background);
 	}
@@ -113,6 +130,7 @@ regexp("https://chatgpt.com(/.*)?") {
 		background: var(--futuristic-gradient)!important;
 		border-radius: 10px;
 	}
+
 
 	/* Keyframes for red to white background transition */
 	@keyframes redPulseBG {
@@ -469,16 +487,17 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	/*********************************************************************************/
-	/*Send a message Box*/
-	.dark .dark\:bg-gray-700 {
-		backdrop-filter: blur(5px) saturate(100%);
-		-webkit-backdrop-filter: blur(1px) saturate(200%);
-		background-color: rgba(18, 18, 18, 0.2);
-		border-radius: 12px;
-		border: 1px solid rgba(67, 69, 71, .7);
-		color: rgb(255, 255, 255);
-	}
+	/*Send a message input Box*/
+	.bg-token-bg-primary.dark\:bg-token-bg-elevated-primary.dark-oled\:bg-token-bg-primary.corner-superellipse\/1\.1.cursor-text.overflow-clip.bg-clip-padding.p-2\.5.contain-inline-size.motion-safe\:transition-colors.motion-safe\:duration-200.motion-safe\:ease-in-out.grid.grid-cols-\[auto_1fr_auto\].\[grid-template-areas\:\'header_header_header\'_\'leading_primary_trailing\'_\'\._footer_\.\'\].group-data-expanded\/composer\:\[grid-template-areas\:\'header_header_header\'_\'primary_primary_primary\'_\'leading_footer_trailing\'\].shadow-short-composer {
+		background:linear-gradient(to left,var(--user-input-text-less-transparent) 1% ,transparent);
+		border: 1px solid rgba(67, 69, 71, .7); 
+	} 
 
+	/* text inside message input Box*/
+	.wcDTda_prosemirror-parent p
+	{
+		color:var(--main-body-output-text-color);
+	}
 
 	/*********************************************************************************/
 	/* regenerate response */
@@ -494,7 +513,6 @@ regexp("https://chatgpt.com(/.*)?") {
 	.rounded-sm {
 		border-radius: 122px;
 	}
-
 
 	/*********************************************************************************/
 	/*Chat input */
@@ -581,14 +599,16 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	[data-discover="true"] {
-		transition: background-color 0.2s ease-in;
+		transition: background 0.2s ease-in;
 		background: var(--user-input-background) !important;
 		font-size: 16px;
 		border-bottom: 0;
 	}
 
-	[data-discover="true"]:hover {
-		background: var(--selected-chat-gradient) !important;
+	[data-discover="true"]:hover:not([data-active]):not([aria-label="Home"]) {
+		transition: background-color 0.2s ease-in;
+		border-radius: 0px;
+		background: var(--chat-history-hover-gradient) !important;
 	}
 
 	/*Input box bottom middle to right*/
@@ -975,7 +995,7 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	.h-4.w-4 {
-		display: none;
+		background: var(--user-input-text);
 	}
 
 	/*hide disclaimer and version */
@@ -1084,11 +1104,6 @@ div#composer-background {
 .text-token-text-primary {
 	color: var(--user-input-text) !important;
 	/*input Color?*/
-}
-
-/*Gpt main screen input Welcome Screen */
-.flex.h-full.flex-col.items-center.justify-center.text-token-text-primary {
-	background: var(--user-input-background) !important;
 }
 
 .flex.h-full.flex-col.overflow-y-auto {
@@ -1623,10 +1638,14 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 		max-width: none !important;
 		/* Allow prose to fill its widened container */
 	}
+
+	.\@w-sm\/main\:\[scrollbar-gutter\:stable_both-edges\].touch\:\[scrollbar-width\:none\].relative.flex.min-h-0.min-w-0.flex-1.flex-col.\[scrollbar-gutter\:stable\].not-print\:overflow-x-clip.not-print\:overflow-y-auto {
+		width: 100% !important;
+	}
 }
 
 /************************************Hide Add Teams Advertisment************************************/
-& when (@hideJunk =1) {
+& when (@hideExtras =1) {
 	a.group.flex.gap-2.p-2\.5.text-sm.cursor-pointer.focus\:ring-0.radix-disabled\:pointer-events-none.radix-disabled\:opacity-50.hover\:bg-token-sidebar-surface-secondary.m-0.rounded-lg.px-2 {
 		display: none;
 		height: 0px;
@@ -1692,4 +1711,40 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 	background: transparent;
 }
 
+
+
+
+}
+
+/* ChatGPT Images pages ONLY (forces non-wide layout even if @wideMode = 1) */
+@-moz-document regexp("https://chatgpt.com/images(/.*)?") {
+
+	& when (@wideMode =1) {
+
+		.md\:max-w-3xl,
+		.lg\:max-w-3xl,
+		.\!max-w-3xl,
+		.xl\:max-w-\[48rem\],
+		.gizmo .xl\:max-w-\[48rem\],
+		div[class*="react-scroll-to-bottom"] > div > div > .mx-auto,
+		main .w-full .mx-auto {
+			max-width: 48rem !important;
+		}
+
+		.prose {
+			max-width: 48rem !important;
+		}
+
+		.\@w-sm\/main\:\[scrollbar-gutter\:stable_both-edges\].touch\:\[scrollbar-width\:none\].relative.flex.min-h-0.min-w-0.flex-1.flex-col.\[scrollbar-gutter\:stable\].not-print\:overflow-x-clip.not-print\:overflow-y-auto {
+			width: auto !important;
+		}
+	}
+
+	h2.text-token-text-primary.text-heading-3.ms-4.font-medium {
+		background: transparent !important;
+	}
+
+	h1.text-token-text-primary {
+		background: transparent !important;
+	}
 }
