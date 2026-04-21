@@ -1,13 +1,14 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.96
+@version        2.2.97
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
 @preprocessor   less
 
 @var color userInputTextColor "User Input Text Color" rgb(105,187,197)
+@var color chatBoxColor "Chat Box Input Color" rgba(105,187,197,0.25)
 @var color userInputBackgroundColor "User Input Background" #000000
 @var color userInputBubbleColor "User Input Background Bubble" rgba(0,0,0,0)
 @var color gptOutputBackgroundColor "GPT Output Background" #2b404c61
@@ -187,18 +188,24 @@ regexp("https://chatgpt.com(/.*)?") {
 	button[data-testid="send-button"]:not(:disabled) {
 		transition: background 2s ease-in-out;
 	}
-
+	
+	/* Send to GPT button */
+	button[data-testid="send-button"] {
+		background: transparent;
+	}
+	
+	/* Thinking mode */
+	button.__composer-pill{
+		top:5px;
+		color: var(--user-input-text);
+	}
+	
 	/* Send to GPT button on hover */
 	button[data-testid="send-button"]:not(:disabled):hover {
 		transition: background 0.5s ease-in-out;
 		background: var(--user-input-text);
 		animation: heartbeat 4s ease-in-out infinite;
 		filter: saturate(1.5) contrast(1.5);
-	}
-
-	/* Talk with GPT */
-	button[data-testid="composer-speech-button"] {
-		background: var(--user-input-text);
 	}
 
 	[data-testid="share-chat-button"] {
@@ -489,7 +496,7 @@ regexp("https://chatgpt.com(/.*)?") {
 	/*********************************************************************************/
 	/*Send a message input Box*/
 	.bg-token-bg-primary.dark\:bg-token-bg-elevated-primary.dark-oled\:bg-token-bg-primary.corner-superellipse\/1\.1.cursor-text.overflow-clip.bg-clip-padding.p-2\.5.contain-inline-size.motion-safe\:transition-colors.motion-safe\:duration-200.motion-safe\:ease-in-out.grid.grid-cols-\[auto_1fr_auto\].\[grid-template-areas\:\'header_header_header\'_\'leading_primary_trailing\'_\'\._footer_\.\'\].group-data-expanded\/composer\:\[grid-template-areas\:\'header_header_header\'_\'primary_primary_primary\'_\'leading_footer_trailing\'\].shadow-short-composer {
-		background:linear-gradient(to left,var(--user-input-text-less-transparent) 1% ,transparent);
+		background:linear-gradient(to left,@chatBoxColor 1% ,transparent);
 		border: 1px solid rgba(67, 69, 71, .7); 
 	} 
 
