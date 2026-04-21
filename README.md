@@ -16,41 +16,43 @@ Note:
 
 ## 🎨 Features:
 
-- 2.0 update!! : 
-Im trying to do LOTS of color customization in stylus settings (see how to access below) so you can make GPT look as you want
-Also:
-- Fixing many color issues
-- using better calibrated screen for better colors showing on devices
-- themed settings
-- better hover effects
-- themed menus
-- bug fixes in theme
+**🎨 Extensive Color Customization (via Stylus settings):**
+- User Input Text Color
+- Chat Box Input Color
+- User Input Background & Bubble Color
+- GPT Output Background
+- GPT Main Body Output Text Color
+- GPT Code Keywords Color
+- GPT Headings Color
+- GPT Bold Words Color
+- GPT Links Color
+- Paragraph Line Split Color
+- Line Work/Borders Color
 
+**🖥️ Layout & Functional Customization:**
+- **GPT WIDE MODE**: Allows chats to utilize the full width of the screen, great for programmers and reading large code blocks.
+- **Show Full Chat Descriptions (No Text Wrap)**: View entire chat history titles clearly in the sidebar without text wrapping truncation.
+- **Hide User Profile**: Toggle the visibility of the user profile for a cleaner interface.
+- **Adjustable Text Input Max Height**: Modify the maximum height of the chat input box to make composing and reviewing long messages much easier.
 
-- NEW customizable feature for **adjusting the maximum height** of the User Text Input Bar directly from the Stylus settings, enhancing your reading experience for composing and reviewing larger questions.
-- NEW **Remove Team subscription Advertising** in Chat History Option from stylus settings (On By default)
-- NEW: **GPT WIDE MODE!** allow chats to be wide great for programmers that like bigger code blocks (details below)
-
----
-
-- Added the ability **select your own input and output text colors** (details below)
+**✨ Additional Enhancements:**
 - A deep and consistent dark color scheme inspired by material design.
-- Better Selection Highlighting with HighContrast
-- User input and GPT output now are different colors for easier on the eyes reading and also faster distinguishing between input and output 
-- Better Code Syntax Highlight within text to function like Slack's embedded orange code ( when code written out of code-box)
-- Strong white headings on silver easy on the eyes main text for GPT output
-- Border + Color separation in chat between GPT and user to allow for easier to see differentiation of question and answer
-- Better Code Box! 
+- Better Selection Highlighting with HighContrast.
+- User input and GPT output are distinct colors for easier reading and faster distinguishing between prompts and responses.
+- Better Code Syntax Highlight within text, functioning like Slack's embedded orange code for inline code snippets.
+- Strong white headings on sleek, easy-on-the-eyes silver main text for GPT output.
+- Clear border and color separation between GPT and user messages.
+- **Better Code Box!** 
     - VS Code Dark+ Code Background
-    - FIRA CODE Font 
-    - Better letter spacing
+    - FIRA CODE Font for better readability
+    - Improved letter spacing
     - Top Code Bar language highlight
-    - Font smoothed/Antialiased (for low resolution displays)
+    - Font smoothed/Antialiased for low resolution displays
     - Better horizontal scroll bar visibility
-- Clearer thicker scroll Bars for better navigation horizontally and vertically
-- Better Alert Colors
-- Enhanced code sections with improved background and text contrast.
-- Integration with popular Google Fonts for enhanced readability.
+- Clearer, thicker scroll bars for better vertical and horizontal navigation.
+- Better Alert Colors.
+- Themed settings and menus with polished hover effects.
+- Integration with popular Google Fonts for enhanced overall text readability.
 ## 📦 Installation & Setup
 
 Enhance your ChatGPT experience with these initial steps:
