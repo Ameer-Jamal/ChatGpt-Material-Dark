@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.97
+@version        2.2.971
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -198,6 +198,11 @@ regexp("https://chatgpt.com(/.*)?") {
 	button.__composer-pill{
 		top:5px;
 		color: var(--user-input-text);
+	}
+	
+	/* Voice mode */
+	button[aria-label="Start Voice"]{
+		background: transparent;
 	}
 	
 	/* Send to GPT button on hover */
@@ -506,9 +511,7 @@ regexp("https://chatgpt.com(/.*)?") {
 		color:var(--main-body-output-text-color);
 	}
 	
-	button.composer-submit-button-color.text-submit-btn-text.flex.h-9.w-9.items-center.justify-center.rounded-full.transition-colors.hover\:opacity-70.focus-visible\:outline-black.focus-visible\:outline-none.disabled\:text-\[\#f4f4f4\].disabled\:opacity-30.dark\:focus-visible\:outline-white{
-		background: transparent;
-	}
+
 
 	/*********************************************************************************/
 	/* regenerate response */
@@ -1624,6 +1627,7 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 	background: var(--user-input-background);
 }
 
+
 /*********************************************************************************/
 /************************************WIDE MODE************************************/
 /*********************************************************************************/
@@ -1758,4 +1762,16 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 	h1.text-token-text-primary {
 		background: transparent !important;
 	}
+}
+
+/* Deep research Iframe */
+@-moz-document url-prefix("https://connector_openai_deep_research") {
+
+	html.dark{
+		background: var(--user-input-background);
+	}
+	main.text-token-text-primary.flex.min-h-0.w-full.flex-col.sm\:px-0.px-4.max-w-full.h-auto.cursor-default{
+		background: transparent;
+	}
+
 }
