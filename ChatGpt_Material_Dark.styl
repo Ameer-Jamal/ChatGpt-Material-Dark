@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.971
+@version        2.2.972
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -1774,4 +1774,266 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 		background: transparent;
 	}
 
+}
+
+@-moz-document url("https://auth.openai.com/log-in-or-create-account"),
+               regexp("^https://auth\\.openai\\.com/log-in-or-create-account(\\?.*)?$") {
+
+	/* ====================== LOGIN THEME TOKENS ====================== */
+
+	:root {
+		--login-bg: var(--user-input-background);
+		--login-card-bg: rgba(10, 12, 20, 0.95);
+
+		--login-text: var(--heading-output);
+		--login-muted-text: var(--main-body-output-text-color);
+		--login-subtitle-text: var(--user-input-text);
+		--login-link: var(--links-output);
+
+		--login-accent: var(--user-input-text);
+		--login-accent-soft: var(--user-input-text-less-transparent);
+		--login-accent-bright: var(--vertical-chat-lines);
+		--login-accent-blue: var(--links-output);
+
+		--login-border: color-mix(in srgb, var(--login-accent-bright) 15%, transparent);
+		--login-border-strong: color-mix(in srgb, var(--login-accent-bright) 30%, transparent);
+ --login-input-bg: transparent;
+--login-input-bg-focus: transparent;
+		
+		--login-secondary-bg: rgba(255, 255, 255, 0.06);
+		--login-secondary-bg-hover: color-mix(in srgb, var(--login-accent-bright) 12%, transparent);
+
+		--login-button-text: var(--user-input-background);
+		--login-button-gradient: linear-gradient(90deg, var(--login-accent-bright), var(--login-accent-blue));
+
+		--login-divider: linear-gradient(to right, transparent, var(--login-accent-soft), transparent);
+
+		--login-radius-card: 20px;
+		--login-radius-pill: 50px;
+
+		--login-card-shadow: 0 0 60px color-mix(in srgb, var(--login-accent-bright) 15%, transparent);
+		--login-button-shadow: 0 0 30px color-mix(in srgb, var(--login-accent-bright) 70%, transparent);
+		--login-button-shadow-hover: 0 0 50px color-mix(in srgb, var(--login-accent-bright) 90%, transparent);
+		--login-secondary-shadow-hover: 0 0 25px color-mix(in srgb, var(--login-accent-bright) 50%, transparent);
+	}
+
+	/* ====================== LOGIN PAGE ====================== */
+
+	html,
+	body {
+		background: var(--login-bg) !important;
+		color: var(--login-text) !important;
+	}
+
+	[data-discover="true"]:hover:not([data-active]):not([aria-label="Home"]) {
+		background: var(--login-bg) !important;
+	}
+
+	/* ====================== MAIN CONTAINER ====================== */
+
+	[class*="_root_"][class*="_l85du_"] {
+		background: var(--login-card-bg) !important;
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid var(--login-border) !important;
+		border-radius: var(--login-radius-card) !important;
+		padding: 40px 32px !important;
+		box-shadow: var(--login-card-shadow) !important;
+	}
+
+	/* ====================== TITLE & SUBTITLE ====================== */
+
+	[class*="_heading_"][class*="_l85du_"] {
+		color: var(--login-text) !important;
+		font-size: 28px !important;
+		font-weight: 700 !important;
+		letter-spacing: -0.5px !important;
+		margin-bottom: 8px !important;
+	}
+
+	[class*="_subTitle_"][class*="_l85du_"] {
+		color: var(--login-subtitle-text) !important;
+		font-size: 15px !important;
+		line-height: 1.5 !important;
+	}
+/* ====================== EMAIL INPUT FINAL OVERRIDE ====================== */
+
+/* Remove all wrapper pills/backgrounds/borders around the email input */
+[class*="_root_"][class*="_l85du_"] [class*="_18qcl_"],
+[class*="_root_"][class*="_l85du_"] [class*="_18qcl_"] *,
+[class*="_root_"][class*="_l85du_"] [class*="_18qcl_"]::before,
+[class*="_root_"][class*="_l85du_"] [class*="_18qcl_"]::after,
+[class*="_root_"][class*="_l85du_"] div:has(input[class*="_input_"]),
+[class*="_root_"][class*="_l85du_"] div:has(input[class*="_input_"])::before,
+[class*="_root_"][class*="_l85du_"] div:has(input[class*="_input_"])::after {
+	background: transparent !important;
+	background-color: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	outline: none !important;
+}
+
+[class*="_root_"][class*="_l85du_"] input[class*="_input_"],
+[class*="_input_"][class*="_1kwl2_"] {
+	width: 100% !important;
+	box-sizing: border-box !important;
+	background: transparent !important;
+	background-color: transparent !important;
+	border: 2px solid var(--login-border-strong) !important;
+	border-radius: 50px !important;
+	box-shadow: none !important;
+	outline: none !important;
+	color: var(--login-text) !important;
+	caret-color: var(--login-accent-bright) !important;
+	padding: 16px 32px !important;
+	font-size: 16px !important;
+	transition: all 0.3s ease !important;
+}
+
+[class*="_root_"][class*="_l85du_"] input[class*="_input_"]:focus,
+[class*="_input_"][class*="_1kwl2_"]:focus {
+	background: transparent !important;
+	background-color: transparent !important;
+	border-color: var(--login-accent-bright) !important;
+	box-shadow: 0 0 0 4px color-mix(in srgb, var(--login-accent-bright) 15%, transparent) !important;
+	outline: none !important;
+}
+
+/* Keep label visible without adding a wrapper background */
+[class*="_root_"][class*="_l85du_"] [class*="_typeableLabelText_"],
+[class*="_typeableLabelText_"][class*="_18qcl_"] {
+	background: transparent !important;
+	background-color: transparent !important;
+	color: var(--login-accent-bright) !important;
+	font-size: 16px;
+	padding:30px;
+}
+	/* ====================== PRIMARY CONTINUE BUTTON ====================== */
+
+	button[class*="_primary_"][class*="_2sicu_"],
+	button[type="submit"][class*="_primary_"] {
+		width: 100% !important;
+		padding: 16px 24px !important;
+		font-size: 17px !important;
+		font-weight: 700 !important;
+		color: var(--login-button-text) !important;
+		background: var(--login-button-gradient) !important;
+		border: none !important;
+		border-radius: var(--login-radius-pill) !important;
+		cursor: pointer !important;
+		position: relative !important;
+		overflow: hidden !important;
+		box-shadow: var(--login-button-shadow) !important;
+		transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) !important;
+		text-transform: uppercase !important;
+		letter-spacing: 1px !important;
+	}
+
+	button[class*="_primary_"][class*="_2sicu_"]:hover,
+	button[type="submit"][class*="_primary_"]:hover {
+		transform: translateY(-3px) !important;
+		box-shadow: var(--login-button-shadow-hover) !important;
+	}
+
+	button[class*="_primary_"][class*="_2sicu_"]::before,
+	button[type="submit"][class*="_primary_"]::before {
+		content: "";
+		position: absolute;
+		top: -50%;
+		left: -100%;
+		width: 40%;
+		height: 300%;
+		background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+		transition: 0.7s;
+		pointer-events: none;
+	}
+
+	button[class*="_primary_"][class*="_2sicu_"]:hover::before,
+	button[type="submit"][class*="_primary_"]:hover::before {
+		left: 120%;
+	}
+
+	/* ====================== SOCIAL BUTTONS ====================== */
+
+	button[class*="buttonStyleFix"] {
+		width: 100% !important;
+		padding: 14px 20px !important;
+		font-size: 15px !important;
+		font-weight: 600 !important;
+		color: var(--login-muted-text) !important;
+		background: var(--login-secondary-bg) !important;
+		border: 2px solid color-mix(in srgb, var(--login-accent-bright) 25%, transparent) !important;
+		border-radius: var(--login-radius-pill) !important;
+		cursor: pointer !important;
+		display: flex !important;
+		align-items: center !important;
+		gap: 14px !important;
+		transition: all 0.4s ease !important;
+		position: relative !important;
+		overflow: hidden !important;
+	}
+
+	button[class*="buttonStyleFix"]:hover {
+		background: var(--login-secondary-bg-hover) !important;
+		border-color: var(--login-accent-bright) !important;
+		color: var(--login-text) !important;
+		transform: translateY(-2px) !important;
+		box-shadow: var(--login-secondary-shadow-hover) !important;
+	}
+
+	button[class*="buttonStyleFix"]::before {
+		content: "";
+		position: absolute;
+		top: -100%;
+		left: -150%;
+		width: 50%;
+		height: 300%;
+		background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+		transition: 0.8s;
+		pointer-events: none;
+	}
+
+	button[class*="buttonStyleFix"]:hover::before {
+		left: 120%;
+	}
+
+	/* ====================== "OR" DIVIDER ====================== */
+
+	[class*="_root_"][class*="_9b5jb_"] {
+		margin: 20px 0 !important;
+		background: transparent !important;
+		box-shadow: none !important;
+		border: none !important;
+		padding: 0 !important;
+	}
+
+	[class*="_line_"][class*="_9b5jb_"] {
+		background: var(--login-divider) !important;
+		height: 1px !important;
+	}
+
+	[class*="_name_"][class*="_9b5jb_"] {
+		color: var(--login-accent-bright) !important;
+		font-size: 13px !important;
+		font-weight: 500 !important;
+		letter-spacing: 2px !important;
+		background: var(--login-card-bg) !important;
+		padding: 0 16px !important;
+	}
+
+	/* ====================== FOOTER ====================== */
+
+	[class*="_footer_"][class*="_l85du_"] {
+		color: var(--login-muted-text) !important;
+	}
+
+	[class*="_footer_"][class*="_l85du_"] a {
+		color: var(--login-link) !important;
+		text-decoration: none !important;
+	}
+
+	[class*="_footer_"][class*="_l85du_"] a:hover {
+		color: var(--login-accent-bright) !important;
+		text-decoration: underline !important;
+	}
 }
