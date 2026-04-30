@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.972
+@version        2.2.973
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -1393,7 +1393,7 @@ input.email-input {
 }
 
 /*Projects background on sidebar bug*/
-.z-20.screen-arch\:sticky.screen-arch\:top-\[var\(--sticky-title-offset\)\].select-none.overflow-clip.text-ellipsis.break-all.pl-2.pt-7.text-xs.font-semibold.text-token-text-primary.screen-arch\:-mr-2.screen-arch\:h-10.screen-arch\:min-w-\[50cqw\].screen-arch\:-translate-x-2.screen-arch\:bg-\[var\(--sidebar-surface\)\].screen-arch\:py-1.screen-arch\:text-token-text-secondary {
+.pt-\(--sidebar-section-first-margin-top\).last\:mb-5.bg-token-main-surface-primary.tall\:sticky.tall\:top-header-height.tall\:z-20.not-tall\:relative.\[--sticky-spacer\:6px\] {
 	background: transparent !important;
 }
 
@@ -1661,6 +1661,11 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 
 /************************************Hide Add Teams Advertisment************************************/
 & when (@hideExtras =1) {
+	
+	.bg-\(--sidebar-surface-primary\).relative.z-30.w-\(--sidebar-width\).shrink-0.pt-2.pb-1\.5.empty\:hidden{
+		display: none;
+	}
+	
 	a.group.flex.gap-2.p-2\.5.text-sm.cursor-pointer.focus\:ring-0.radix-disabled\:pointer-events-none.radix-disabled\:opacity-50.hover\:bg-token-sidebar-surface-secondary.m-0.rounded-lg.px-2 {
 		display: none;
 		height: 0px;
@@ -1727,7 +1732,13 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 }
 
 
-
+.sticky.top-0.z-30.bg-\(--sidebar-surface-primary\) {
+	background: transparent;
+}
+.bg-\(--sidebar-surface-primary\).relative.z-30.w-\(--sidebar-width\).shrink-0.pt-2.pb-1\.5.empty\:hidden{
+		background: var(--user-input-background);
+		border-top: 1px solid var(--line-color);
+}
 
 }
 
