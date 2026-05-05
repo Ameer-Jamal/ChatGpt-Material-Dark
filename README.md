@@ -1,13 +1,10 @@
 # 🌙 ChatGPT Material Dark
 <div>
-    <img width="1735" height="969" alt="image" src="https://github.com/user-attachments/assets/c0da5ba8-c9dc-49e4-9069-28ff40de33a4" />
+    <img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/8e5a16ac-422a-49af-94c7-5055cce01f8e" />
 </div>
 
 ### Download and Install here:
 #### https://userstyles.world/style/11408/chatgpt-material-dark
-<div>
-    <img width="1735" height="969" alt="image" src="https://github.com/user-attachments/assets/adc1071d-ec15-4288-98e2-4ea88e3325ea" />
-</div>
 
 If you like it please review lets get this everywhere! 
 For feedback please contact me with information about your problem at www.linkedin.com/in/ameer-jamal or raise a github issue here : https://github.com/Ameer-Jamal/ChatGpt-Material-Dark
