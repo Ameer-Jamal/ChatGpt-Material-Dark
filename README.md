@@ -1,84 +1,139 @@
 # 🌙 ChatGPT Material Dark
-<div>
-    <img width="1672" height="941" alt="image" src="https://github.com/user-attachments/assets/8e5a16ac-422a-49af-94c7-5055cce01f8e" />
+
+Transform ChatGPT into a polished Material-inspired dark workspace with cleaner contrast, customizable colors, gradient backgrounds, and reduced visual clutter.
+
+<div align="center">
+  <img width="1672" height="941" alt="ChatGPT Material Dark Preview" src="https://github.com/user-attachments/assets/8e5a16ac-422a-49af-94c7-5055cce01f8e" />
 </div>
 
-### Download and Install here:
-#### https://userstyles.world/style/11408/chatgpt-material-dark
+---
 
-If you like it please review lets get this everywhere! 
-For feedback please contact me with information about your problem at www.linkedin.com/in/ameer-jamal or raise a github issue here : https://github.com/Ameer-Jamal/ChatGpt-Material-Dark
+## Install Options
 
-and ill be happy to fix any arising issues.
-Note:
-- **Make sure chatGPT General Theme settings is set to dark for best results**
-- I prioritize High Customizability with this theme, check the theme settings (how to access below) to change colors to your liking
-## 🔍 About this Theme:
-### Transform your ChatGPT experience with a sleek material dark theme. This theme provides a visually pleasing dark mode with improved readability, ensuring a more comfortable and immersive user experience during extended chat sessions.
+### Chrome Extension
 
+<div align="center">
+  <a href="https://chromewebstore.google.com/detail/chatgpt-material-dark/kgnejlblhnimbflbcgfmoeckdbhllfcn?hl=en">
+    <img src="https://img.shields.io/badge/Install%20from-Chrome%20Web%20Store-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white"
+         alt="Install from Chrome Web Store"
+         height="48">
+  </a>
 
-## 🎨 Features:
+  <br>
 
-**🎨 Extensive Color Customization (via Stylus settings):**
-- User Input Text Color
-- Chat Box Input Color
-- User Input Background & Bubble Color
-- GPT Output Background
-- GPT Main Body Output Text Color
-- GPT Code Keywords Color
-- GPT Headings Color
-- GPT Bold Words Color
-- GPT Links Color
-- Paragraph Line Split Color
-- Line Work/Borders Color
+  <img src="https://img.shields.io/chrome-web-store/v/kgnejlblhnimbflbcgfmoeckdbhllfcn?style=for-the-badge&label=Version" alt="Chrome Web Store Version">
+  <img src="https://img.shields.io/chrome-web-store/users/kgnejlblhnimbflbcgfmoeckdbhllfcn?style=for-the-badge&label=Users" alt="Chrome Web Store Users">
+  <img src="https://img.shields.io/chrome-web-store/rating/kgnejlblhnimbflbcgfmoeckdbhllfcn?style=for-the-badge&label=Rating" alt="Chrome Web Store Rating">
+</div>
 
-**🖥️ Layout & Functional Customization:**
-- **GPT WIDE MODE**: Allows chats to utilize the full width of the screen, great for programmers and reading large code blocks.
-- **Show Full Chat Descriptions (No Text Wrap)**: View entire chat history titles clearly in the sidebar without text wrapping truncation.
-- **Hide User Profile**: Toggle the visibility of the user profile for a cleaner interface.
-- **Adjustable Text Input Max Height**: Modify the maximum height of the chat input box to make composing and reviewing long messages much easier.
+### Stylus Userstyle
 
-**✨ Additional Enhancements:**
-- A deep and consistent dark color scheme inspired by material design.
-- Better Selection Highlighting with HighContrast.
-- User input and GPT output are distinct colors for easier reading and faster distinguishing between prompts and responses.
-- Better Code Syntax Highlight within text, functioning like Slack's embedded orange code for inline code snippets.
-- Strong white headings on sleek, easy-on-the-eyes silver main text for GPT output.
-- Clear border and color separation between GPT and user messages.
-- **Better Code Box!** 
-    - VS Code Dark+ Code Background
-    - FIRA CODE Font for better readability
-    - Improved letter spacing
-    - Top Code Bar language highlight
-    - Font smoothed/Antialiased for low resolution displays
-    - Better horizontal scroll bar visibility
-- Clearer, thicker scroll bars for better vertical and horizontal navigation.
-- Better Alert Colors.
-- Themed settings and menus with polished hover effects.
-- Integration with popular Google Fonts for enhanced overall text readability.
-## 📦 Installation & Setup
+<div align="center">
+  <a href="https://userstyles.world/style/11408/chatgpt-material-dark">
+    <img src="https://img.shields.io/badge/Install%20with-Stylus-8A2BE2?style=for-the-badge"
+         alt="Install with Stylus"
+         height="48">
+  </a>
 
-Enhance your ChatGPT experience with these initial steps:
+  <br>
 
-1. **Add UserStyle**: Install the "ChatGpt Material Dark With Wide Mode Option" UserStyle using Stylus or a similar supported browser extension. Make sure to navigate to ChatGPT post-installation.
-2. **Enable Dark Mode**: Switch to GPT Dark mode to prevent any style conflicts by:
-   - On https://chat.openai.com/ after logging in
-   - Click your username at the bottom left corner.
-   - Navigate to Settings > General.
-   - Click on the Theme and select Dark.
+  <a href="https://userstyles.world/style/11408/chatgpt-material-dark">
+    <img src="https://img.shields.io/badge/Userstyles.world-ChatGPT%20Material%20Dark-2E3440?style=for-the-badge"
+         alt="ChatGPT Material Dark on Userstyles.world">
+  </a>
+</div>
 
-## 🔧 Customizing ChatGPT and enabling options with Stylus
+---
 
-Tailor your ChatGPT interface effortlessly:
+## About
 
-1. **Open Stylus Plugin**: Click the Stylus extension icon on your browser's toolbar.
-2. **Find the Theme**: Search for "ChatGPT Material Dark" in your UserStyles list.
-3. **Customize Colors 🌈  & Activate Wide Mode 🖥️**: Utilize the gear icon next to the theme for customization. Here, you can alter the text colors and toggle the GPT WIDE MODE for an expanded chat interface, ideal for larger code blocks or extensive text.
+ChatGPT Material Dark gives ChatGPT a cleaner, darker, more customizable interface designed for extended use.
 
-#### 💡 Note: Compatibility
+It improves readability, reduces visual clutter, separates user and assistant messages more clearly, and gives you control over the colors and layout of the ChatGPT interface.
 
-This setup is compatible with various extensions and features, enhancing your ChatGPT experience:
+For best results, set ChatGPT’s built-in theme to **Dark** under:
 
-- [ChatGPT Chat Organizer](https://chrome.google.com/webstore/detail/chatgpt-chat-organizer-fo/eaoimfbcncfnjkojlfjinakmflglmegk?hl=en-GB)
-- [Dark Reader](https://darkreader.org/)
-- Suitable for ChatGPT Plus Subscription users.
+`Settings > General > Theme > Dark`
+
+---
+
+## Features
+
+### Theme Customization
+
+- User message text color
+- Chat input color
+- User message bubble color
+- Assistant output background
+- Assistant output text color
+- Link color
+- Heading color
+- Bold text color
+- Border and divider colors
+- Chat background colors
+- Gradient background support
+
+### Layout Options
+
+- Wide Mode for a roomier chat layout
+- Full sidebar title display with no text wrapping
+- Hide side clutter for a cleaner workspace
+- Adjustable chat input height
+
+### Visual Improvements
+
+- Material-inspired dark color palette
+- Clearer separation between user and assistant messages
+- Improved contrast for long reading sessions
+- Better selection highlighting
+- Cleaner scrollbars
+- Improved alert colors
+- Themed menus and settings
+- Google Fonts integration
+
+### Code Display Enhancements
+
+- Darker code block background
+- Improved code readability
+- Better letter spacing
+- Clearer horizontal scrolling
+- Language bar styling
+- Font smoothing for lower-resolution displays
+
+---
+
+## Chrome Extension Features
+
+The Chrome extension version includes:
+
+- Popup-based theme controls
+- Live color updates
+- Built-in presets
+- Custom named presets
+- Chrome storage sync
+- No separate userstyle manager required
+
+---
+
+## Privacy
+
+ChatGPT Material Dark is privacy-focused.
+
+- No analytics
+- No tracking
+- No ads
+- No data selling
+- No collection of chats, prompts, or personal content
+
+The extension only changes the appearance of supported ChatGPT pages.
+
+---
+
+## Feedback and Issues
+
+If you like the theme, please consider leaving a review on the Chrome Web Store or Userstyles.world.
+
+For bugs, requests, or feedback:
+
+- LinkedIn: https://www.linkedin.com/in/ameer-jamal
+- GitHub Issues: https://github.com/Ameer-Jamal/ChatGpt-Material-Dark/issues
