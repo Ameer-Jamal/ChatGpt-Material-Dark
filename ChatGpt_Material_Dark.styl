@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGpt Material Dark With Wide Mode and Customization
 @namespace      ameer-jamal.github.io/
-@version        2.2.973
+@version        2.3.21
 @description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -9,16 +9,17 @@
 
 @var color userInputTextColor "User Input Text Color" rgb(105,187,197)
 @var color chatBoxColor "Chat Box Input Color" rgba(105,187,197,0.25)
-@var color userInputBackgroundColor "User Input Background" #000000
-@var color userInputBubbleColor "User Input Background Bubble" rgba(0,0,0,0)
-@var color gptOutputBackgroundColor "GPT Output Background" #2b404c61
+@var color userInputBackgroundColor "User Input Background" #121212
+@var color userInputBubbleColor "User Input Background Bubble" rgba(105,187,197,0.1)
+@var color userInputBubbleBorderColor "User Input Bubble Border" rgba(105,187,197,0.42)
+@var color gptOutputBackgroundColor "GPT Output Background" rgba(0,0,0,0)
 @var color gptMainBodyOutputTextColor "GPT Main Body Output Text Color" #C0C0C0
 @var color codeKeyWordsOutput "GPT Code Keywords Color" #E8922E
 @var color headingOutput "GPT Headings" #fff
 @var color boldOutput "GPT Bold words" #e5fdff
 @var color linksOutput "GPT links" #53b7ff
 @var color verticalChatLines "Paragraph line split color" #2fffd2
-@var color lineColor "Line work/borders color" rgba(255, 255, 255, .2)
+@var color lineColor "Line work/borders color" rgba(255,255,255,0.12)
 
 @var checkbox   wideMode  "GPT Wide Mode" 1
 @var checkbox   hideExtras "Hide User Profile" 0
@@ -45,18 +46,13 @@
 regexp("https://auth.openai.com(/.*)?"),
 regexp("https://auth0.openai.com(/.*)?"),
 regexp("https://chatgpt.com(/.*)?") {
-
-	@import (css) url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-	@import (css) url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
-	@import (css) url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
-	@import (css) url('href="https://fonts.googleapis.com/css2?family=Montserrat: taal,wght@0,100..900;1,100..900&display=swap');
-
 	:root {
 		--futuristic-gradient: linear-gradient(to right, #0f2027c4, #203a43b0, #2c5364cf);
 		--darker-futristic-gradient: linear-gradient(to right, #245062c4, #203a43b0, #000000cf);
-		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-		--chat-background-gradient: linear-gradient(180deg, rgb(32 33 35 / 0%), rgb(32 33 35) 58.85%);
+ 		--chat-background-gradient: linear-gradient(180deg, rgb(32 33 35 / 0%), rgb(32 33 35) 58.85%);
+		--chat-box-color: @chatBoxColor;
 		--user-input-background: @userInputBackgroundColor;
+		--user-input-background-solid: @userInputBackgroundColor;
 		--main-chat-border-color: rgba(137, 126, 109, 0.35);
 		--deep-space: linear-gradient(to left, #000, #434343cc);
 		--deep-space-to-top-transparent: linear-gradient(to top, #4343434f, #0D0D0D);
@@ -81,6 +77,11 @@ regexp("https://chatgpt.com(/.*)?") {
 		--user-input-text: @userInputTextColor;
 		--text-secondary: @userInputTextColor;
 		--message-surface: @userInputBubbleColor;
+		--message-border-color: @userInputBubbleBorderColor;
+		--assistant-message-surface: @gptOutputBackgroundColor;
+		--assistant-response-border: 0;
+		--assistant-response-radius: 0;
+		--assistant-response-padding: 0;
 		--user-input-text-less-transparent: rgba(@userInputTextColor, 0.4);
 
 		--main-body-output-text-color: @gptMainBodyOutputTextColor;
@@ -89,9 +90,9 @@ regexp("https://chatgpt.com(/.*)?") {
 		--bold-output: @boldOutput;
 		--links-output: @linksOutput;
 		--line-color: @lineColor;
+		--lineColorAlpha20: fade(@lineColor, 20%);
+		--lineColorAlpha30: fade(@lineColor, 30%);
 		--vertical-chat-lines: @verticalChatLines;
-		--sidebar-surface-primary: @userInputBackgroundColor;
-		--bg-elevated-secondary: @userInputBackgroundColor
 	}
 
 	/*********************************************************************************/
@@ -101,12 +102,19 @@ regexp("https://chatgpt.com(/.*)?") {
 		filter: invert(1);
 	}
 
-	a .group.__menu-item.hoverable:hover {
-		background: linear-gradient(90deg, #f00, #000000);
+	.group.__menu-item.hoverable:hover,
+	.__menu-item.hoverable:hover,
+	[data-sidebar-item="true"]:hover,
+	[data-sidebar-item="true"][data-state="open"] {
+		background: color-mix(in srgb, var(--user-input-text) 12%, transparent) !important;
+		color: var(--user-input-text) !important;
 	}
 
 	/* Gpt main screen input Welcome Screen */
-	h1.text-page-header.inline-flex {
+	h1.text-page-header.inline-flex,
+	[data-splash-headline-option] h1.inline-flex,
+	[data-splash-headline-option] h1.inline-flex .text-pretty,
+	[data-splash-headline-option] h1.inline-flex .px-1 {
 		background: linear-gradient( 90deg,
 		var(--main-body-output-text-color),
 		var(--user-input-text));
@@ -117,7 +125,7 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	.content-fade:after {
-		background: var(--user-input-background);
+		background: transparent !important;
 	}
 
 	/*user input updated*/
@@ -126,9 +134,79 @@ regexp("https://chatgpt.com(/.*)?") {
 		background: var(--message-surface);
 	}
 
+	[data-message-author-role="user"] .user-message-bubble-color {
+		color: var(--user-input-text) !important;
+		background: var(--message-surface) !important;
+		border: 1px solid var(--message-border-color) !important;
+	}
+
+	[data-message-author-role="user"] [data-testid="collapsible-user-message-root"],
+	[data-message-author-role="user"] [data-testid="collapsible-user-message-content"],
+	[data-message-author-role="user"] [data-testid="collapsible-user-message-content"] *,
+	[data-message-author-role="user"] [data-custom-highlighting-behavior="boundary"] {
+		color: var(--user-input-text) !important;
+		background: transparent !important;
+	}
+
+	[data-message-author-role="user"] [data-testid="collapsible-user-message-toggle"] {
+		color: var(--user-input-text) !important;
+		background: transparent !important;
+		border: none !important;
+	}
+
+	[data-message-author-role="user"] .user-message-bubble-color *,
+	[data-message-author-role="user"] .text-token-text-primary {
+		color: var(--user-input-text) !important;
+	}
+
+	[data-message-author-role="assistant"] .markdown,
+	[data-message-author-role="assistant"] .prose,
+	[data-message-author-role="assistant"] .text-token-text-primary,
+	section[data-turn="assistant"] .agent-turn,
+	section[data-turn="assistant"] .agent-turn .text-token-text-primary {
+		color: var(--main-body-output-text-color) !important;
+	}
+
+	[data-message-author-role="assistant"] .markdown :where(p, li, span, div):not(pre *):not(code *),
+	section[data-turn="assistant"] .markdown :where(p, li, span, div):not(pre *):not(code *) {
+		color: var(--main-body-output-text-color) !important;
+	}
+
+	section[data-turn="assistant"] .agent-turn > .flex.max-w-full.flex-col.gap-4.grow {
+		background: transparent !important;
+		border: 0;
+		padding: 0;
+	}
+
+	section[data-turn="assistant"] .agent-turn {
+		background: var(--assistant-message-surface) !important;
+		border: var(--assistant-response-border);
+		border-radius: var(--assistant-response-radius);
+		padding: var(--assistant-response-padding);
+	}
+
+	section[data-turn="assistant"] .agent-turn > .flex.max-w-full.flex-col.gap-4.grow {
+		border: 0;
+		padding: 0;
+	}
+
+	[data-message-author-role="assistant"] .markdown,
+	[data-message-author-role="assistant"] .prose {
+		background: var(--assistant-message-surface) !important;
+		border: var(--assistant-response-border);
+		border-radius: var(--assistant-response-radius);
+		padding: var(--assistant-response-padding);
+	}
+
+	[data-message-author-role="assistant"] .markdown :where(p, ul, ol, li, blockquote, div):not(pre):not(pre *):not(code):not(code *),
+	[data-message-author-role="assistant"] .prose :where(p, ul, ol, li, blockquote, div):not(pre):not(pre *):not(code):not(code *),
+	section[data-turn="assistant"] .markdown :where(p, ul, ol, li, blockquote, div):not(pre):not(pre *):not(code):not(code *) {
+		background-color: transparent !important;
+	}
+
 	/*Auto prompts on home screen*/
 	button.btn.relative.btn-neutral.group.w-full.whitespace-nowrap.rounded-xl.px-4.py-3.text-left.text-token-text-primary.md\:whitespace-normal:hover {
-		background: var(--futuristic-gradient)!important;
+		background: rgba(255, 255, 255, 0.05) !important;
 		border-radius: 10px;
 	}
 
@@ -196,8 +274,7 @@ regexp("https://chatgpt.com(/.*)?") {
 	
 	/* Thinking mode */
 	button.__composer-pill{
-		top:5px;
-		color: var(--user-input-text);
+		color: var(--user-input-text) !important;
 	}
 	
 	/* Voice mode */
@@ -232,7 +309,13 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	div#thread-bottom {
-		background: var(--user-input-background);
+		background: transparent !important;
+	}
+
+	#thread-bottom-container,
+	#thread-bottom-container > div,
+	#thread-bottom-container [id="thread-bottom"] {
+		background: transparent !important;
 	}
 
 	/*Speach Button*/
@@ -242,7 +325,7 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	button.relative.flex.h-9.items-center.justify-center.rounded-full.bg-black.text-white.transition-colors.focus-visible\:outline-none.focus-visible\:outline-black.disabled\:text-gray-50.disabled\:opacity-30.can-hover\:hover\:opacity-70.dark\:bg-white.dark\:text-black.w-9:hover {
-		filter: saturate(1.5), brightness(4)contrast(4);
+		filter: saturate(1.5) brightness(4) contrast(4);
 	}
 
 	/* Attachments button on hover */
@@ -367,6 +450,98 @@ regexp("https://chatgpt.com(/.*)?") {
 		background: #1c1d1f;
 	}
 
+	/* Current code block shell */
+	.markdown pre > div > .relative .border.border-token-border-light.border-radius-3xl.rounded-3xl,
+	.markdown pre .border.border-token-border-light.border-radius-3xl.rounded-3xl {
+		border: 1px solid var(--line-color) !important;
+		border-radius: 24px !important;
+		background: var(--code-background) !important;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+		overflow: hidden;
+	}
+
+	.markdown pre .h-full.w-full.border-radius-3xl.bg-token-bg-elevated-secondary.corner-superellipse\/1\.1.overflow-clip.rounded-3xl,
+	.markdown pre .bg-token-bg-elevated-secondary.corner-superellipse\/1\.1.overflow-clip.rounded-3xl {
+		background: var(--code-background) !important;
+	}
+
+	.markdown pre .sticky.top-\(--sticky-padding-top\).z-2.select-none,
+	.markdown pre .flex.w-full.items-center.justify-between.py-1\.5.ps-4.pe-1\.5.font-sans.md\:ps-5.bg-token-bg-elevated-secondary {
+		background: var(--code-topbar) !important;
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+	}
+
+	.markdown pre .flex.max-w-\[75\%\].min-w-0.cursor-default.items-center.text-sm.font-medium.justify-self-start.text-token-text-primary {
+		color: #f1f4fa !important;
+		font-family: 'Fira Code', monospace !important;
+		font-size: 0.9rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.markdown pre button[aria-label="Copy"] {
+		color: var(--user-input-text) !important;
+		background: rgba(255, 255, 255, 0.04) !important;
+		border: 1px solid color-mix(in srgb, var(--user-input-text) 30%, transparent);
+		width: 2.6rem;
+		height: 2.6rem;
+		padding: 0 !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+	}
+
+	.markdown pre button[aria-label="Copy"]:hover {
+		background: color-mix(in srgb, var(--user-input-text) 14%, transparent) !important;
+		border-color: color-mix(in srgb, var(--user-input-text) 55%, transparent);
+		color: var(--user-input-text) !important;
+	}
+
+	.markdown pre .pointer-events-none.absolute.inset-x-4.top-12.bottom-4 .sticky.bg-token-border-light {
+		background: linear-gradient(to right, transparent, var(--line-color), transparent) !important;
+		height: 1px;
+		opacity: 0.8;
+	}
+
+	/* Canvas / Writing Block Fixes */
+	[data-writing-block-fullscreen-shell-surface="true"],
+	[data-writing-block-fullscreen-header-surface="true"],
+	[data-writing-block="true"] [data-testid="writing-block-header-magic-edit-composer"] {
+		background-color: var(--writer-block-bg) !important;
+	}
+
+	[data-testid="writing-block-header-magic-edit-button"] {
+		background:
+			linear-gradient(90deg, color-mix(in srgb, var(--user-input-text) 14%, transparent), transparent 78%),
+			color-mix(in srgb, var(--user-input-background-solid) 82%, black) !important;
+		border-color: color-mix(in srgb, var(--user-input-text) 38%, transparent) !important;
+		color: var(--user-input-text) !important;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	}
+
+	[data-testid="writing-block-header-magic-edit-button"]:enabled:hover {
+		background:
+			linear-gradient(90deg, color-mix(in srgb, var(--user-input-text) 24%, transparent), transparent 82%),
+			color-mix(in srgb, var(--user-input-background-solid) 72%, black) !important;
+		border-color: color-mix(in srgb, var(--user-input-text) 58%, transparent) !important;
+	}
+
+	[data-testid="writing-block-header-magic-edit-button"] [data-testid="writing-block-header-magic-edit-collapsed-label"] {
+		color: var(--user-input-text) !important;
+	}
+
+	.writing-block-editor,
+	[data-writing-block-fullscreen-editor-region="true"] {
+		background-color: transparent !important;
+	}
+
+	[data-writing-block-fullscreen-shell-border="true"] {
+		box-shadow: inset 0px 0px 0px 1px var(--line-color) !important;
+	}
+
 	/*********************************************************************************/
 	/* Code top bar */
 	.flex.items-center.text-token-text-secondary.px-4.py-2.text-xs.font-sans.justify-between.rounded-t-\[5px\].h-9.bg-token-sidebar-surface-primary.dark\:bg-token-main-surface-secondary.select-none {
@@ -383,6 +558,50 @@ regexp("https://chatgpt.com(/.*)?") {
 	/*Code background*/
 	.p-4.overflow-y-auto {
 		background: var(--code-background);
+	}
+
+	.markdown pre #code-block-viewer.cm-editor,
+	.markdown pre .cm-editor {
+		background: var(--code-background) !important;
+		color: var(--main-body-output-text-color) !important;
+		font-family: 'Fira Code', monospace !important;
+		font-size: 0.95rem;
+		line-height: 1.7;
+	}
+
+	.markdown pre .cm-scroller,
+	.markdown pre .cm-content.q9tKkq_readonly,
+	.markdown pre .cm-content,
+	.markdown pre .cm-content code {
+		background: transparent !important;
+		color: inherit !important;
+		font-family: 'Fira Code', monospace !important;
+	}
+
+	.markdown pre .cm-scroller {
+		padding: 1rem 1.25rem 1.25rem;
+		overflow-x: auto;
+	}
+
+	.markdown pre .cm-content {
+		caret-color: var(--user-input-text);
+	}
+
+	.markdown pre .cm-focused {
+		outline: none !important;
+	}
+
+	.markdown pre .ͼv {
+		color: var(--code-key-words) !important;
+		font-weight: 700;
+	}
+
+	.markdown pre .ͼ11 {
+		color: #84d6ff !important;
+	}
+
+	.markdown pre .ͼy {
+		color: #ffd479 !important;
 	}
 
 	/* Code snippet font and settings*/
@@ -501,9 +720,23 @@ regexp("https://chatgpt.com(/.*)?") {
 	/*********************************************************************************/
 	/*Send a message input Box*/
 	.bg-token-bg-primary.dark\:bg-token-bg-elevated-primary.dark-oled\:bg-token-bg-primary.corner-superellipse\/1\.1.cursor-text.overflow-clip.bg-clip-padding.p-2\.5.contain-inline-size.motion-safe\:transition-colors.motion-safe\:duration-200.motion-safe\:ease-in-out.grid.grid-cols-\[auto_1fr_auto\].\[grid-template-areas\:\'header_header_header\'_\'leading_primary_trailing\'_\'\._footer_\.\'\].group-data-expanded\/composer\:\[grid-template-areas\:\'header_header_header\'_\'primary_primary_primary\'_\'leading_footer_trailing\'\].shadow-short-composer {
-		background:linear-gradient(to left,@chatBoxColor 1% ,transparent);
-		border: 1px solid rgba(67, 69, 71, .7); 
+		background: linear-gradient(to left, var(--chat-box-color), transparent), var(--user-input-background-solid) !important;
+		background-clip: padding-box !important;
+		border: 1px solid transparent !important; 
 	} 
+
+	[data-composer-surface="true"] {
+		background: linear-gradient(to left, var(--chat-box-color), transparent), var(--user-input-background-solid) !important;
+		background-clip: padding-box !important;
+		border: 1px solid transparent !important;
+		box-shadow: none !important;
+	}
+
+	[data-composer-surface="true"] .ProseMirror,
+	[data-composer-surface="true"] .default-browser,
+	[data-composer-surface="true"] .wcDTda_prosemirror-parent {
+		background: transparent !important;
+	}
 
 	/* text inside message input Box*/
 	.wcDTda_prosemirror-parent p
@@ -534,30 +767,26 @@ regexp("https://chatgpt.com(/.*)?") {
 		--tw-bg-opacity: 1;
 		color: var(--user-input-text) !important;
 
-		background: var(--user-input-background);
-		/* fallback for old browsers */
-		background: -webkit-linear-gradient(to bottom, #434343, var(--user-input-background));
-		/* Chrome 10-25, Safari 5.1-6 */
-		background: var(--user-input)!important;
+		background: transparent !important;
 	}
 
 	/* Ensure all image divs in user input and images remain transparent */
 	[data-message-author-role="user"] img,
 	[data-message-author-role="user"] div[class*="image"],
-	[data-message-author-role="user"] div.overflow-hidden {
+	[data-message-author-role="user"] div.overflow-hidden:not(.user-message-bubble-color) {
 		background: transparent !important;
 	}
 
 
 	.dark .dark\:bg-gray-800:last-child {
-		background: var(--user-input-background)!important;
+		background: transparent !important;
 	}
 
 
 	/*Chat output */
 	.dark .dark\:bg-\[\#444654\] {
 		--tw-bg-opacity: 1;
-		background: var(--user-input-background);
+		background: transparent;
 	}
 
 	/*The word ChatGpt in output*/
@@ -580,7 +809,7 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	/* Model icons */
-	.\[&_svg\]\:h-full.\[&_svg\]\:w-full.h-4.w-4.text-token-text-primary {
+	[class~="[&_svg]:h-full"][class~="[&_svg]:w-full"].h-4.w-4.text-token-text-primary {
 		border: initial !important
 	}
 
@@ -593,12 +822,12 @@ regexp("https://chatgpt.com(/.*)?") {
 	/*Gpt Output Background*/
 	.w-full.text-token-text-primary:nth-child(odd):not(svg,
 	button) {
-		background: var(--user-input-background) !important;
+		background: transparent !important;
 	}
 
 	.w-full.text-token-text-primary:last-child:not(svg,
 	button) {
-		background: var(--user-input-background) !important;
+		background: transparent !important;
 	}
 
 
@@ -607,14 +836,34 @@ regexp("https://chatgpt.com(/.*)?") {
 		background: var(--sidebar-surface-primary);
 	}
 
+	/* Sticky sidebar chrome must be opaque so scrolled chat titles do not bleed through it. */
+	[class*="sidebar-section-first-margin-top"][class*="sticky"],
+	.pt-\(--sidebar-section-first-margin-top\).last\:mb-5.bg-token-main-surface-primary.tall\:sticky.tall\:top-header-height.tall\:z-20.not-tall\:relative.\[--sticky-spacer\:6px\] {
+		background: linear-gradient(180deg, color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) 0%, var(--user-input-background-solid) 100%) !important;
+		box-shadow: none !important;
+		z-index: 40 !important;
+	}
+
+	.sticky.top-0.z-30:has(#sidebar-header),
+	.sticky.top-0.z-30.bg-\(--sidebar-surface-primary\) {
+		background: color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) !important;
+		box-shadow: none !important;
+		z-index: 40 !important;
+	}
+
+	[class*="sidebar-section-first-margin-top"][class*="sticky"] > [aria-hidden="true"],
+	.pt-\(--sidebar-section-first-margin-top\).last\:mb-5.bg-token-main-surface-primary.tall\:sticky.tall\:top-header-height.tall\:z-20.not-tall\:relative.\[--sticky-spacer\:6px\] > [aria-hidden="true"] {
+		opacity: 0 !important;
+	}
+
 	/*sidebar underlying color*/
 	.screen-arch\:sticky.screen-arch\:top-\[var\(--sticky-title-offset\)\].z-20.text-token-text-primary.screen-arch\:-me-2.screen-arch\:h-10.screen-arch\:min-w-\[50cqw\].screen-arch\:-translate-x-2.screen-arch\:bg-\[var\(--sidebar-surface\)\].screen-arch\:py-1.screen-arch\:text-token-text-secondary.overflow-clip.ps-2.pt-7.text-xs.font-semibold.break-all.text-ellipsis.select-none {
-		background: var(--user-input-background) !important;
+		background: transparent !important;
 	}
 
 	[data-discover="true"] {
 		transition: background 0.2s ease-in;
-		background: var(--user-input-background) !important;
+		background: transparent !important;
 		font-size: 16px;
 		border-bottom: 0;
 	}
@@ -638,7 +887,7 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	.relative.flex.w-full.items-end.px-2\.5.py-2\.5 {
-		background: var(--user-input-background) !important;
+		background: transparent !important;
 	}
 
 	.border-token-border-xlight.flex.w-full.cursor-text.flex-col.items-center.justify-center.rounded-\[28px\].border.bg-clip-padding.contain-inline-size.overflow-clip.shadow-sm.sm\:shadow-lg.dark\:shadow-none\!.bg-token-main-surface-primary.dark\:bg-\[\#303030\] {
@@ -710,7 +959,7 @@ regexp("https://chatgpt.com(/.*)?") {
 		font-size: 26px
 	}
 
-	.flex-1.overflow-hidden.\@container\/thread.translate-y-\[2rem\].-mt-\[2rem\].pb-\[1\.5rem\] {
+	.flex-1.overflow-hidden[class~="@container/thread"][class~="translate-y-[2rem]"][class~="-mt-[2rem]"][class~="pb-[1.5rem]"] {
 		padding-bottom: 0;
 	}
 
@@ -732,7 +981,7 @@ regexp("https://chatgpt.com(/.*)?") {
 	/*********************************************************************************/
 	/* hide sidebar icon */
 	#__next > div.overflow-hidden.w-full.h-full.relative.flex.z-0 > div.dark.flex-shrink-0.overflow-x-hidden.bg-gray-900 > div > div > div > nav > div.mb-1.flex.flex-row.gap-2 > span {
-		background: var(--futuristic-gradient);
+		background: rgba(255, 255, 255, 0.1);
 		border-radius: 10px;
 		font-size: 0.9rem;
 		transition: box-shadow 0.3s;
@@ -742,10 +991,7 @@ regexp("https://chatgpt.com(/.*)?") {
 
 
 	/*Beautify issue so damn annoying*/
-	a.flex.px-3.min-h-\[44px\].py-1.gap-3.transition-colors.duration-200.dark\:text-white.cursor-pointer.text-sm.rounded-md.border.dark\:border-white\/20.gizmo\:min-h-0.hover\:bg-gray-500\/10.h-11.gizmo\:h-10.gizmo\:rounded-lg.gizmo\:border-\[rgba\(0,
-	0,
-	0,
-	0\.1\)\].w-11.flex-shrink-0.items-center.justify-center.bg-white.dark\:bg-transparent {
+	a.flex[class~="min-h-[44px]"].py-1.gap-3.transition-colors.duration-200[class~="dark:text-white"].cursor-pointer.text-sm.rounded-md.border[class~="dark:border-white/20"][class~="gizmo:min-h-0"][class~="hover:bg-gray-500/10"].h-11[class~="gizmo:h-10"][class~="gizmo:rounded-lg"][class~="gizmo:border-[rgba(0,0,0,0.1)]"].w-11.flex-shrink-0.items-center.justify-center.bg-white[class~="dark:bg-transparent"] {
 		border: var(--user-input-background);
 	}
 
@@ -754,14 +1000,14 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	a.no-draggable.group.rounded-lg.active\:opacity-90.bg-\[var\(--item-background-color\)\].h-9.text-sm.screen-arch\:relative.screen-arch\:bg-transparent.screen-arch\:py-\[7px\].flex.items-center.gap-2\.5.p-2 {
-		background: var(--user-input-background) !important;
+		background: transparent !important;
 	}
 
 
 	/*********************************************************************************/
 	/* Current Selected Chat*/
 	.bg-gray-800 {
-		background: var(--futuristic-gradient);
+		background: rgba(255, 255, 255, 0.1);
 
 		box-shadow: 1px 1px 0 rgba(38, 198, 218, 0);
 		transition: background 0.1s;
@@ -866,6 +1112,65 @@ regexp("https://chatgpt.com(/.*)?") {
 		border-image: linear-gradient(to right, var(--user-input-text), transparent) 1;
 	}
 
+	[data-testid="accounts-profile-button"] {
+		color: var(--chat-history-list) !important;
+		background: transparent !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		box-shadow: none !important;
+		min-height: 58px;
+		padding: 0.55rem 0.65rem !important;
+		margin-inline: 0 !important;
+		width: 100% !important;
+	}
+
+	[data-testid="accounts-profile-button"]:hover,
+	[data-testid="accounts-profile-button"][data-state="open"] {
+		color: var(--user-input-text) !important;
+		background: color-mix(in srgb, var(--user-input-text) 12%, transparent) !important;
+	}
+
+	[data-testid="accounts-profile-button"] .truncate {
+		color: color-mix(in srgb, var(--chat-history-list) 88%, white) !important;
+		font-weight: 600;
+	}
+
+	[data-testid="accounts-profile-button"] .text-token-text-tertiary,
+	[data-testid="accounts-profile-button"] .trailing {
+		color: color-mix(in srgb, var(--user-input-text) 70%, white) !important;
+	}
+
+	[data-testid="accounts-profile-button"] .rounded-full,
+	[data-testid="accounts-profile-button"] img {
+		background: linear-gradient(135deg, var(--user-input-text), var(--links-output)) !important;
+		border: 1px solid color-mix(in srgb, var(--user-input-text) 55%, transparent);
+	}
+
+	[data-testid="accounts-profile-button"] [data-trailing-button] {
+		color: color-mix(in srgb, var(--user-input-text) 82%, white) !important;
+		background: color-mix(in srgb, var(--user-input-text) 10%, transparent) !important;
+		border-radius: 10px !important;
+	}
+
+	[data-testid="accounts-profile-button"] [data-trailing-button]:hover {
+		background: color-mix(in srgb, var(--user-input-text) 20%, transparent) !important;
+	}
+
+	[data-sidebar-item="true"],
+	.__menu-item.hoverable {
+		transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+	}
+
+	[data-sidebar-item="true"]:hover,
+	[data-sidebar-item="true"][data-state="open"],
+	[data-sidebar-item="true"][data-active],
+	.__menu-item.hoverable:hover,
+	.__menu-item.hoverable[data-state="open"],
+	.__menu-item.hoverable[data-active] {
+		background: color-mix(in srgb, var(--user-input-text) 12%, transparent) !important;
+		color: var(--user-input-text) !important;
+	}
+
 	/*All Chat history*/
 	/*Chat history list*/
 	.relative.grow.overflow-hidden.whitespace-nowrap {
@@ -873,11 +1178,11 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	li.relative .group.relative.rounded-lg.active\:opacity-90.hover\:bg-token-sidebar-surface-secondary:hover {
-		background: var(--deep-space);
+		background: rgba(255, 255, 255, 0.05) !important;
 	}
 
 	.group.relative.rounded-lg.active\:opacity-90.bg-token-sidebar-surface-tertiary {
-		background: var(--futuristic-gradient) !important;
+		background: rgba(255, 255, 255, 0.1) !important;
 	}
 
 	/*Explore gpts and Add team workspace*/
@@ -894,11 +1199,11 @@ regexp("https://chatgpt.com(/.*)?") {
 	}
 
 	.flex.w-full.items-center.gap-2.rounded-lg.p-2.text-sm.hover\:bg-token-sidebar-surface-secondary.group-ui-open\:bg-token-sidebar-surface-secondary:hover {
-		background: var(--futuristic-gradient);
+		background: rgba(255, 255, 255, 0.05) !important;
 	}
 
 	.flex.w-full.items-center.gap-2.rounded-lg.p-2.text-sm.hover\:bg-token-sidebar-surface-secondary.group-ui-open\:bg-token-sidebar-surface-secondary[aria-expanded="true"] {
-		background: var(--futuristic-gradient);
+		background: rgba(255, 255, 255, 0.1) !important;
 	}
 
 	/*The word chat gpt top left*/
@@ -920,7 +1225,7 @@ regexp("https://chatgpt.com(/.*)?") {
 
 	/*username bottom left*/
 	.relative.-top-px.grow.-space-y-px.overflow-hidden.text-ellipsis.whitespace-nowrap.text-left.text-token-text-primary {
-		background: var(--text-token-tertiary) !important;
+		background: transparent !important;
 	}
 
 	/*chat gpt text in button top left*/
@@ -933,30 +1238,33 @@ regexp("https://chatgpt.com(/.*)?") {
 		background: var(--user-input-background) !important;
 	}
 
+	.group.flex.h-10.items-center.gap-2.rounded-lg.bg-token-sidebar-surface-primary.px-2.font-medium {
+		background: transparent !important;
+	}
+
 	.juice\:sticky.juice\:top-0.juice\:z-20.juice\:bg-token-sidebar-surface-primary {
 		position: -webkit-sticky;
 		/* For Safari */
-		background-color: var(--user-input-background);
+		background-color: transparent !important;
 	}
 
 	/*Hover over chat gpt text in button top left (New Chat)*/
 	.group.flex.h-10.items-center.gap-2.rounded-lg.bg-token-sidebar-surface-primary.px-2.font-medium:hover {
-		background: var(--futuristic-gradient) !important;
+		background: rgba(255, 255, 255, 0.05) !important;
 	}
-
 
 	/*Recent Chat background Hover For Day/Times Updated*/
 	span.flex.h-9.items-center {
-		background: var(--user-input-background) !important;
+		background: transparent !important;
 	}
 
 	a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary {
-		background-color: var(--user-input-background) !important;
+		background-color: transparent !important;
 	}
 
 	/*GPTS Button top left in chat history*/
 	a.flex.h-10.w-full.items-center.gap-2.rounded-lg.px-2.font-medium.text-token-text-primary.hover\:bg-token-sidebar-surface-secondary:hover {
-		background: var(--futuristic-gradient) !important;
+		background: rgba(255, 255, 255, 0.05) !important;
 	}
 
 	/*********************************************************************************/
@@ -1019,7 +1327,7 @@ regexp("https://chatgpt.com(/.*)?") {
 
 	/* Double click on chat to rename chat */
 	.absolute.bottom-0.left-\[7px\].right-2.top-0.flex.items-center.bg-token-sidebar-surface-secondary {
-		background: var(--user-input-background)
+		background: transparent !important;
 	}
 
 	/* chatgpt title */
@@ -1055,7 +1363,7 @@ regexp("https://chatgpt.com(/.*)?") {
 
 	/*Text Area to enter chat*/
 	.bg-token-bg-primary.shadow-short.cursor-text.overflow-clip.bg-clip-padding.p-2\.5.contain-inline-size.dark\:bg-\[\#303030\].grid.grid-cols-\[auto_1fr_auto\].\[grid-template-areas\:\'header_header_header\'_\'leading_primary_trailing\'_\'\._footer_\.\'\].group-data-expanded\/composer\:\[grid-template-areas\:\'header_header_header\'_\'primary_primary_primary\'_\'leading_footer_trailing\'\]{
- background: var(--user-input-background);
+	background: var(--chat-box-color) !important;
 	max-height: @textInputBarMaxHeight !important;
 	border-radius: 30px !important;
 	border: var(--line-color) 1px solid;
@@ -1063,13 +1371,13 @@ regexp("https://chatgpt.com(/.*)?") {
 }
 
 .w-full.md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.md\:w-\[calc\(100\%-\.5rem\)\].juice\:w-full {
-	background: var(--user-input-background);
+	background: transparent;
 	padding-bottom: 10px
 }
 
 /* Black background underneath the inpujt box */
 .md\:pt-0.dark\:border-white\/20.md\:border-transparent.md\:dark\:border-transparent.w-full {
-	background: var(--user-input-background);
+	background: transparent;
 }
 
 div#radix {
@@ -1088,18 +1396,18 @@ h3,
 }
 
 article:not(:last-child) {
-	border-bottom: solid rgba(@lineColor, .2) 1px;
+	border-bottom: 1px solid var(--lineColorAlpha20);
 }
 
 
 /*Gpt input background*/
 div#composer-background {
-	background: var(--user-input-background) !important;
-	border: 1px solid rgba(@lineColor, 0.3);
+	background: transparent !important;
+	border: 1px solid var(--lineColorAlpha30);
 }
 
 .flex.flex-col.text-sm.md\:pb-9 {
-	background: var(--user-input-background);
+	background: transparent;
 }
 
 .flex.flex-col.gap-2.pb-2.text-token-text-primary.text-sm.juice\:mt-5 {
@@ -1121,7 +1429,7 @@ div#composer-background {
 }
 
 .flex.h-full.flex-col.overflow-y-auto {
-	background: var(--user-input-background) !important;
+	background: transparent !important;
 }
 
 .p-2 {
@@ -1208,19 +1516,19 @@ div[role="alert"] {
 
 
 .group.flex.cursor-pointer.items-center.gap-1.rounded-xl.py-2.px-3.text-lg.font-medium:hover {
-	background: var(--futuristic-gradient);
+	background: rgba(255, 255, 255, 0.05) !important;
 }
 
 .group.flex.cursor-pointer.items-center.gap-1.rounded-xl.py-2.px-3.text-lg.font-medium[data-state="open"] {
-	background: var(--futuristic-gradient);
+	background: rgba(255, 255, 255, 0.1) !important;
 }
 
 [role="menuitem"]:hover {
-	background: var(--deep-space);
+	background: rgba(255, 255, 255, 0.05) !important;
 }
 
 [role="menuitem"]:hover:last-child {
-	background: var(--futuristic-gradient);
+	background: rgba(255, 255, 255, 0.05) !important;
 }
 
 
@@ -1308,8 +1616,8 @@ div#headlessui-popover-panel-\:rk\: {
 
 /*********************************************************************************/
 /*Before login*/
-.relative.hidden.flex-1.flex-col.justify-center.px-5.pt-8.md\:flex.md\:px-6.md\:py-[22px].lg\:px-8 {
-	background: radial-gradient(@gptOutputBackgroundColor , #0000) !important;
+.relative.hidden.flex-1.flex-col.justify-center.px-5.pt-8[class~="md:flex"][class~="md:px-6"][class~="md:py-[22px]"][class~="lg:px-8"] {
+	background: radial-gradient(var(--assistant-message-surface), #0000) !important;
 	color: rgb(0 255 246) !important;
 }
 
@@ -1382,6 +1690,10 @@ input.email-input {
 	background-color: transparent !important
 }
 
+nav#stage-sidebar-tiny-bar{
+	background: var(--sidebar-surface-primary);
+}
+
 /*Side bar glitch of background of white smear when trying to select a chat or hover over */
 .absolute.bottom-0.top-0.to-transparent.ltr\:right-0.ltr\:bg-gradient-to-l.rtl\:left-0.rtl\:bg-gradient-to-r.from-token-sidebar-surface-secondary.w-20.from-60\%.juice\:w-10 {
 	background: transparent;
@@ -1394,7 +1706,18 @@ input.email-input {
 
 /*Projects background on sidebar bug*/
 .pt-\(--sidebar-section-first-margin-top\).last\:mb-5.bg-token-main-surface-primary.tall\:sticky.tall\:top-header-height.tall\:z-20.not-tall\:relative.\[--sticky-spacer\:6px\] {
-	background: transparent !important;
+	background: linear-gradient(180deg, color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) 0%, var(--user-input-background-solid) 100%) !important;
+	box-shadow: none !important;
+	z-index: 40 !important;
+}
+
+[class*="bg-token-main-surface-primary"][class*="tall:sticky"][class*="tall:top-header-height"],
+[class*="bg-token-bg-elevated-secondary"][class*="sticky"][class*="bottom-0"] {
+	background: linear-gradient(180deg, color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) 0%, var(--user-input-background-solid) 100%) !important;
+}
+
+.sticky.top-0.z-30:has(#sidebar-header) {
+	background: color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) !important;
 }
 
 [title="Sora"] {
@@ -1508,13 +1831,18 @@ div#kcg {
 
 .pb-2.border-b.border-gray-300.cursor-pointer.px-1:hover {
 	color: white;
-	background: var(--futuristic-gradient);
+	background: rgba(255, 255, 255, 0.1);
 	border-radius: 55px;
 }
 
 
 a.flex.py-1.px-3.items-center.gap-1.relative.rounded-md.break-all.mb-2 {
 	display: none;
+}
+		
+h2.__menu-label.text-token-text-primary.font-semibold{
+	background: transparent !important;
+	color: var(--user-input-text) !important;
 }
 
 /********************* Tables *************************/
@@ -1575,7 +1903,7 @@ svg.icon-sm.m-1.md\:m-0 {
 	background: var(--user-input-background) !important;
 }
 
-header.\@container.flex.h-14.flex-none.items-center.justify-between.gap-1.px-3 {
+header[class~="@container"].flex.h-14.flex-none.items-center.justify-between.gap-1.px-3 {
 	background: var(--user-input-background);
 }
 
@@ -1654,13 +1982,17 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 		/* Allow prose to fill its widened container */
 	}
 
-	.\@w-sm\/main\:\[scrollbar-gutter\:stable_both-edges\].touch\:\[scrollbar-width\:none\].relative.flex.min-h-0.min-w-0.flex-1.flex-col.\[scrollbar-gutter\:stable\].not-print\:overflow-x-clip.not-print\:overflow-y-auto {
-		width: 100% !important;
-	}
+		[class~="@w-sm/main:[scrollbar-gutter:stable_both-edges]"][class~="touch:[scrollbar-width:none]"].relative.flex.min-h-0.min-w-0.flex-1.flex-col[class~="[scrollbar-gutter:stable]"].not-print\:overflow-x-clip.not-print\:overflow-y-auto {
+			width: 100% !important;
+		}
 }
 
 /************************************Hide Add Teams Advertisment************************************/
 & when (@hideExtras =1) {
+
+	[data-testid="accounts-profile-button"] {
+		display: flex !important;
+	}
 	
 	.bg-\(--sidebar-surface-primary\).relative.z-30.w-\(--sidebar-width\).shrink-0.pt-2.pb-1\.5.empty\:hidden{
 		display: none;
@@ -1682,10 +2014,16 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 		display: none;
 	}
 
-	.w-full.translate-y-4.px-2.py-2.text-center.text-xs.text-token-text-secondary.empty\:hidden.xs\:translate-y-8.md\:px-\[60px\].\@lg\/thread\:absolute.\@lg\/thread\:bottom-0.\@lg\/thread\:left-0 {
-		color: transparent;
-		display: none;
+	[style*="--vt-disclaimer"],
+	#thread-bottom-container .text-token-text-secondary:has(> div > div > div > div),
+	#thread-bottom-container .select-none.active\:select-auto.data-has-range-start\:select-auto.flex.min-h-8.w-full.items-center.justify-center.p-2.text-xs {
+		display: none !important;
 	}
+
+		.w-full.translate-y-4.px-2.py-2.text-center.text-xs.text-token-text-secondary.empty\:hidden.xs\:translate-y-8.md\:px-\[60px\][class~="@lg/thread:absolute"][class~="@lg/thread:bottom-0"][class~="@lg/thread:left-0"] {
+			color: transparent;
+			display: none;
+		}
 
 	.bg-token-bg-elevated-secondary.sticky.bottom-0.z-30.px-\[3px\].py-1\.5.group-data-scrolled-from-end\/scrollport\:shadow-\(--sharp-edge-bottom-shadow\).empty\:hidden {
 		display: none;
@@ -1732,12 +2070,24 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 }
 
 
-.sticky.top-0.z-30.bg-\(--sidebar-surface-primary\) {
-	background: transparent;
-}
 .bg-\(--sidebar-surface-primary\).relative.z-30.w-\(--sidebar-width\).shrink-0.pt-2.pb-1\.5.empty\:hidden{
-		background: var(--user-input-background);
-		border-top: 1px solid var(--line-color);
+		background:
+			linear-gradient(90deg, color-mix(in srgb, var(--user-input-text) 12%, transparent), transparent 72%),
+			color-mix(in srgb, var(--user-input-background-solid) 82%, black) !important;
+		border-top: 0 !important;
+		border-radius: 0 !important;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+		padding-inline: 0 !important;
+		padding-bottom: 0.35rem;
+}
+
+.bg-\(--sidebar-surface-primary\).relative.z-30.w-\(--sidebar-width\).shrink-0.pt-2.pb-1\.5.empty\:hidden > div[aria-hidden="true"] {
+	opacity: 0 !important;
+}
+
+.bg-\(--sidebar-surface-primary\).relative.z-30.w-\(--sidebar-width\).shrink-0.pt-2.pb-1\.5.empty\:hidden > .relative {
+	border-radius: 0 !important;
+	overflow: hidden;
 }
 
 }
@@ -1761,9 +2111,9 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 			max-width: 48rem !important;
 		}
 
-		.\@w-sm\/main\:\[scrollbar-gutter\:stable_both-edges\].touch\:\[scrollbar-width\:none\].relative.flex.min-h-0.min-w-0.flex-1.flex-col.\[scrollbar-gutter\:stable\].not-print\:overflow-x-clip.not-print\:overflow-y-auto {
-			width: auto !important;
-		}
+			[class~="@w-sm/main:[scrollbar-gutter:stable_both-edges]"][class~="touch:[scrollbar-width:none]"].relative.flex.min-h-0.min-w-0.flex-1.flex-col[class~="[scrollbar-gutter:stable]"].not-print\:overflow-x-clip.not-print\:overflow-y-auto {
+				width: auto !important;
+			}
 	}
 
 	h2.text-token-text-primary.text-heading-3.ms-4.font-medium {
