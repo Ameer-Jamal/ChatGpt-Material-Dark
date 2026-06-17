@@ -1,16 +1,16 @@
 /* ==UserStyle==
-@name           ChatGpt Material Dark With Wide Mode and Customization
+@name           ChatGPT Material Dark Customizer
 @namespace      ameer-jamal.github.io/
-@version        2.3.21
-@description    Experience ChatGPT with a sleek Material Dark theme. Enjoy a distraction-free, immersive AI interaction on chat.openai.com.
+@version        2.3.3
+@description    Customize ChatGPT with Material Dark themes, gradients, presets, and live color controls.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
 @preprocessor   less
 
 @var color userInputTextColor "User Input Text Color" rgb(105,187,197)
 @var color chatBoxColor "Chat Box Input Color" rgba(105,187,197,0.25)
-@var color userInputBackgroundColor "User Input Background" #121212
-@var color userInputBubbleColor "User Input Background Bubble" rgba(105,187,197,0.1)
+@var color userInputBackgroundColor "Main Background" #121212
+@var color userInputBubbleColor "User Bubble Background" rgba(105,187,197,0.1)
 @var color userInputBubbleBorderColor "User Input Bubble Border" rgba(105,187,197,0.42)
 @var color gptOutputBackgroundColor "GPT Output Background" rgba(0,0,0,0)
 @var color gptMainBodyOutputTextColor "GPT Main Body Output Text Color" #C0C0C0
@@ -22,6 +22,7 @@
 @var color lineColor "Line work/borders color" rgba(255,255,255,0.12)
 
 @var checkbox   wideMode  "GPT Wide Mode" 1
+@var checkbox   sidebarBackdropFilters "Sidebar Backdrop Filters" 1
 @var checkbox   hideExtras "Hide User Profile" 0
 @var checkbox   noTextWrap "Show Full Chat Descriptions (No Text Wrap)" 0
 @var number     textInputBarMaxHeight "Adjust the max height of text input (px)"     ['px', 1000, 1, null, 1]
@@ -29,10 +30,10 @@
 ==/UserStyle== */
 /*
  * License: Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
- * 
+ *
  * You are free to:
  * - Share — copy and redistribute the material in any medium or format.
- * 
+ *
  * Under the following terms:
  * - Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
  *   You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
@@ -40,14 +41,14 @@
  * - No Commercial Use — You may not use t
  * For the full license text, visit https://creativecommons.org/licenses/by-nd/4.0/
  * For any questions or concerns, please reach out to the original author.
- 
+
 */
 @-moz-document regexp("https://chat.openai.com(/.*)?"),
 regexp("https://auth.openai.com(/.*)?"),
 regexp("https://auth0.openai.com(/.*)?"),
 regexp("https://chatgpt.com(/.*)?") {
 	:root {
-		--futuristic-gradient: linear-gradient(to right, #0f2027c4, #203a43b0, #2c5364cf);
+		--futuristic-gradient: linear-gradient(to bottom, color-mix(in srgb, var(--user-input-text) 55%, var(--user-input-background-solid)), var(--user-input-background-solid));
 		--darker-futristic-gradient: linear-gradient(to right, #245062c4, #203a43b0, #000000cf);
  		--chat-background-gradient: linear-gradient(180deg, rgb(32 33 35 / 0%), rgb(32 33 35) 58.85%);
 		--chat-box-color: @chatBoxColor;
@@ -59,8 +60,8 @@ regexp("https://chatgpt.com(/.*)?") {
 
 		--alerts: linear-gradient(to right, #ff512ff0, #f09819f0);
 
-		--code-background: #1E1E1E;
-		--code-topbar: radial-gradient(circle at -5.9%, #2c5364 0%, #00283a 15.9%, #1E1E1E 24.5%, #1E1E1E 100%);
+		--code-background: color-mix(in srgb, var(--user-input-background-solid) 86%, black);
+		--code-topbar: radial-gradient(circle at -5.9%, color-mix(in srgb, var(--user-input-text) 34%, var(--user-input-background-solid)) 0%, color-mix(in srgb, var(--user-input-text) 16%, var(--user-input-background-solid)) 15.9%, var(--code-background) 24.5%, var(--code-background) 100%);
 
 		--table-header: linear-gradient(to right, @gptOutputBackgroundColor 0%, @gptOutputBackgroundColor 20%, transparent 50%, @gptOutputBackgroundColor 80%, @gptOutputBackgroundColor 100%);
 		--table-hover: #ffffff30;
@@ -71,11 +72,16 @@ regexp("https://chatgpt.com(/.*)?") {
 		--canvas-top-bar-gradient: linear-gradient(to right, #0D0D0D, @gptOutputBackgroundColor);
 		--chat-history-list: #C0C0C0;
 		--sidebar-surface-secondary: #676767a6;
+		--sidebar-chrome-tint: color-mix(in srgb, var(--user-input-text) 30%, transparent);
+		--sidebar-header-bg: linear-gradient(0deg, transparent, var(--sidebar-chrome-tint)), color-mix(in srgb, color-mix(in srgb, var(--user-input-background-solid) 18%, black) 34%, transparent);
+		--sidebar-sticky-bg: transparent;
+		--sidebar-backdrop-filter: brightness(0.5) blur(1px);
 
 		/*Highlight selected chat not used in favor of --sidebar-surface-tertiary*/
 		/* Alternative user input text color: #B0C4DE */
 		--user-input-text: @userInputTextColor;
 		--text-secondary: @userInputTextColor;
+		--cmd-user-bubble-surface: @userInputBubbleColor;
 		--message-surface: @userInputBubbleColor;
 		--message-border-color: @userInputBubbleBorderColor;
 		--assistant-message-surface: @gptOutputBackgroundColor;
@@ -131,17 +137,27 @@ regexp("https://chatgpt.com(/.*)?") {
 	/*user input updated*/
 	.user-message-bubble-color {
 		color: var(--user-input-text);
-		background: var(--message-surface);
+		background: var(--cmd-user-bubble-surface);
 	}
 
 	[data-message-author-role="user"] .user-message-bubble-color {
 		color: var(--user-input-text) !important;
-		background: var(--message-surface) !important;
+		background: var(--cmd-user-bubble-surface) !important;
+		background-color: var(--cmd-user-bubble-surface) !important;
+		background-image: none !important;
 		border: 1px solid var(--message-border-color) !important;
 	}
 
-	[data-message-author-role="user"] [data-testid="collapsible-user-message-root"],
-	[data-message-author-role="user"] [data-testid="collapsible-user-message-content"],
+	[data-message-author-role="user"] [data-testid="collapsible-user-message-root"] {
+		color: var(--user-input-text) !important;
+		background: transparent !important;
+	}
+
+	[data-message-author-role="user"] [data-testid="collapsible-user-message-content"] {
+		color: var(--user-input-text) !important;
+		background: transparent !important;
+	}
+
 	[data-message-author-role="user"] [data-testid="collapsible-user-message-content"] *,
 	[data-message-author-role="user"] [data-custom-highlighting-behavior="boundary"] {
 		color: var(--user-input-text) !important;
@@ -266,22 +282,22 @@ regexp("https://chatgpt.com(/.*)?") {
 	button[data-testid="send-button"]:not(:disabled) {
 		transition: background 2s ease-in-out;
 	}
-	
+
 	/* Send to GPT button */
 	button[data-testid="send-button"] {
 		background: transparent;
 	}
-	
+
 	/* Thinking mode */
 	button.__composer-pill{
 		color: var(--user-input-text) !important;
 	}
-	
+
 	/* Voice mode */
 	button[aria-label="Start Voice"]{
 		background: transparent;
 	}
-	
+
 	/* Send to GPT button on hover */
 	button[data-testid="send-button"]:not(:disabled):hover {
 		transition: background 0.5s ease-in-out;
@@ -472,6 +488,11 @@ regexp("https://chatgpt.com(/.*)?") {
 		-webkit-backdrop-filter: blur(10px);
 	}
 
+	.markdown pre .sticky.top-\(--sticky-padding-top\).z-2.select-none {
+		top: 0 !important;
+		margin-top: 0 !important;
+	}
+
 	.markdown pre .flex.max-w-\[75\%\].min-w-0.cursor-default.items-center.text-sm.font-medium.justify-self-start.text-token-text-primary {
 		color: #f1f4fa !important;
 		font-family: 'Fira Code', monospace !important;
@@ -553,6 +574,7 @@ regexp("https://chatgpt.com(/.*)?") {
 		border-bottom: 0.1px solid #fff9;
 		letter-spacing: 4px;
 		font-variant: small-caps;
+		margin-top: 0 !important;
 	}
 
 	/*Code background*/
@@ -722,8 +744,8 @@ regexp("https://chatgpt.com(/.*)?") {
 	.bg-token-bg-primary.dark\:bg-token-bg-elevated-primary.dark-oled\:bg-token-bg-primary.corner-superellipse\/1\.1.cursor-text.overflow-clip.bg-clip-padding.p-2\.5.contain-inline-size.motion-safe\:transition-colors.motion-safe\:duration-200.motion-safe\:ease-in-out.grid.grid-cols-\[auto_1fr_auto\].\[grid-template-areas\:\'header_header_header\'_\'leading_primary_trailing\'_\'\._footer_\.\'\].group-data-expanded\/composer\:\[grid-template-areas\:\'header_header_header\'_\'primary_primary_primary\'_\'leading_footer_trailing\'\].shadow-short-composer {
 		background: linear-gradient(to left, var(--chat-box-color), transparent), var(--user-input-background-solid) !important;
 		background-clip: padding-box !important;
-		border: 1px solid transparent !important; 
-	} 
+		border: 1px solid transparent !important;
+	}
 
 	[data-composer-surface="true"] {
 		background: linear-gradient(to left, var(--chat-box-color), transparent), var(--user-input-background-solid) !important;
@@ -743,7 +765,7 @@ regexp("https://chatgpt.com(/.*)?") {
 	{
 		color:var(--main-body-output-text-color);
 	}
-	
+
 
 
 	/*********************************************************************************/
@@ -839,14 +861,18 @@ regexp("https://chatgpt.com(/.*)?") {
 	/* Sticky sidebar chrome must be opaque so scrolled chat titles do not bleed through it. */
 	[class*="sidebar-section-first-margin-top"][class*="sticky"],
 	.pt-\(--sidebar-section-first-margin-top\).last\:mb-5.bg-token-main-surface-primary.tall\:sticky.tall\:top-header-height.tall\:z-20.not-tall\:relative.\[--sticky-spacer\:6px\] {
-		background: linear-gradient(180deg, color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) 0%, var(--user-input-background-solid) 100%) !important;
+		background: var(--sidebar-sticky-bg) !important;
+		backdrop-filter: var(--sidebar-backdrop-filter);
+		-webkit-backdrop-filter: var(--sidebar-backdrop-filter);
 		box-shadow: none !important;
 		z-index: 40 !important;
 	}
 
 	.sticky.top-0.z-30:has(#sidebar-header),
 	.sticky.top-0.z-30.bg-\(--sidebar-surface-primary\) {
-		background: color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) !important;
+		background: var(--sidebar-header-bg) !important;
+		backdrop-filter: var(--sidebar-backdrop-filter);
+		-webkit-backdrop-filter: var(--sidebar-backdrop-filter);
 		box-shadow: none !important;
 		z-index: 40 !important;
 	}
@@ -1706,18 +1732,22 @@ nav#stage-sidebar-tiny-bar{
 
 /*Projects background on sidebar bug*/
 .pt-\(--sidebar-section-first-margin-top\).last\:mb-5.bg-token-main-surface-primary.tall\:sticky.tall\:top-header-height.tall\:z-20.not-tall\:relative.\[--sticky-spacer\:6px\] {
-	background: linear-gradient(180deg, color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) 0%, var(--user-input-background-solid) 100%) !important;
+	background: var(--sidebar-sticky-bg) !important;
 	box-shadow: none !important;
 	z-index: 40 !important;
 }
 
 [class*="bg-token-main-surface-primary"][class*="tall:sticky"][class*="tall:top-header-height"],
 [class*="bg-token-bg-elevated-secondary"][class*="sticky"][class*="bottom-0"] {
-	background: linear-gradient(180deg, color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) 0%, var(--user-input-background-solid) 100%) !important;
+	background: var(--sidebar-sticky-bg) !important;
+	backdrop-filter: var(--sidebar-backdrop-filter);
+	-webkit-backdrop-filter: var(--sidebar-backdrop-filter);
 }
 
 .sticky.top-0.z-30:has(#sidebar-header) {
-	background: color-mix(in srgb, var(--user-input-text) 8%, var(--user-input-background-solid)) !important;
+	background: var(--sidebar-header-bg) !important;
+	backdrop-filter: var(--sidebar-backdrop-filter);
+	-webkit-backdrop-filter: var(--sidebar-backdrop-filter);
 }
 
 [title="Sora"] {
@@ -1759,12 +1789,12 @@ body:hover::-webkit-scrollbar,
 
 * {
 	--sidebar-mask: transparent !important;
-	scrollbar-color: var(--futuristic-gradient) !important;
+	scrollbar-color: var(--futuristic-gradient) var(--user-input-background) !important;
 }
 
 /* The empty space “below” the scrollbar bar */
 ::-webkit-scrollbar-track {
-	background-color: transparent;
+	background: var(--user-input-background) !important;
 }
 
 /*Image issues for shopping*/
@@ -1839,7 +1869,7 @@ div#kcg {
 a.flex.py-1.px-3.items-center.gap-1.relative.rounded-md.break-all.mb-2 {
 	display: none;
 }
-		
+
 h2.__menu-label.text-token-text-primary.font-semibold{
 	background: transparent !important;
 	color: var(--user-input-text) !important;
@@ -1993,11 +2023,11 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 	[data-testid="accounts-profile-button"] {
 		display: flex !important;
 	}
-	
+
 	.bg-\(--sidebar-surface-primary\).relative.z-30.w-\(--sidebar-width\).shrink-0.pt-2.pb-1\.5.empty\:hidden{
 		display: none;
 	}
-	
+
 	a.group.flex.gap-2.p-2\.5.text-sm.cursor-pointer.focus\:ring-0.radix-disabled\:pointer-events-none.radix-disabled\:opacity-50.hover\:bg-token-sidebar-surface-secondary.m-0.rounded-lg.px-2 {
 		display: none;
 		height: 0px;
@@ -2073,7 +2103,7 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 .bg-\(--sidebar-surface-primary\).relative.z-30.w-\(--sidebar-width\).shrink-0.pt-2.pb-1\.5.empty\:hidden{
 		background:
 			linear-gradient(90deg, color-mix(in srgb, var(--user-input-text) 12%, transparent), transparent 72%),
-			color-mix(in srgb, var(--user-input-background-solid) 82%, black) !important;
+			var(--user-input-background) !important;
 		border-top: 0 !important;
 		border-radius: 0 !important;
 		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
