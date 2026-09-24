@@ -1,4 +1,5 @@
 # 🌙 ChatGPT Material Dark
+Please note as this overlays on top of ChatGPT that I'm constantly working on updates to keep up with their constant UI changes, if things break let me know and since I use this daily I'm always trying to keep up with updating it. 
 
 Transform ChatGPT into a polished Material-inspired dark workspace with cleaner contrast, customizable colors, gradient backgrounds, and reduced visual clutter.
 
