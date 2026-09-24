@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           ChatGPT Material Dark Customizer
 @namespace      ameer-jamal.github.io/
-@version        2.3.4
+@version        2.3.5
 @description    Customize ChatGPT with Material Dark themes, gradients, presets, and live color controls.
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
@@ -2469,6 +2469,27 @@ div[role="alert"] {
 .popover[role="menu"] {
 	background: #0e0e0ea1 !important;
 	backdrop-filter: blur(4px);
+}
+
+/* ChatGPT's current Radix menus, including the profile and submenu portals. */
+[role="menu"][data-radix-menu-content] {
+	background: var(--user-input-background-solid) !important;
+	color: var(--main-body-output-text-color) !important;
+	border: 1px solid var(--line-color) !important;
+	box-shadow: 0 12px 32px rgb(0 0 0 / 35%) !important;
+}
+
+[role="menu"][data-radix-menu-content] :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]) {
+	color: inherit !important;
+}
+
+[role="menu"][data-radix-menu-content] :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]):is(:hover, :focus, [data-highlighted], [data-state="open"]):not([data-disabled]) {
+	background: color-mix(in srgb, var(--user-input-text) 14%, transparent) !important;
+	color: var(--user-input-text) !important;
+}
+
+[role="menu"][data-radix-menu-content] :is(.bg-border, [role="separator"]) {
+	background: var(--line-color) !important;
 }
 
 .draggable.no-draggable-children {
