@@ -2920,7 +2920,7 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 }
 
 .absolute.bottom-0.z-20.h-24.w-full.transition-colors {
-	background: linear-gradient(rgb(0 0 0 / 0%), rgb(0 0 0)) !important;
+	background: linear-gradient(transparent, var(--user-input-background-solid)) !important;
 }
 
 /*Safety text bottom*/
@@ -2967,49 +2967,20 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 
 /************************************Hide Add Teams Advertisment************************************/
 & when (@hideExtras =1) {
-
-	[data-testid="accounts-profile-button"] {
-		display: flex !important;
-	}
-	
-	.bg-\(--sidebar-surface-primary\).relative.z-30.w-\(--sidebar-width\).shrink-0.pt-2.pb-1\.5.empty\:hidden{
-		display: none;
-	}
-	
-	a.group.flex.gap-2.p-2\.5.text-sm.cursor-pointer.focus\:ring-0.radix-disabled\:pointer-events-none.radix-disabled\:opacity-50.hover\:bg-token-sidebar-surface-secondary.m-0.rounded-lg.px-2 {
-		display: none;
-		height: 0px;
-	}
-
-	.bg-token-bg-elevated-secondary.sticky.bottom-0.z-30.py-1\.5.group-data-scrolled-from-end\/scrollport\:shadow-\(--sharp-edge-bottom-shadow\).empty\:hidden {
-		display: none;
-		height: 0px;
-	}
-
-	/*Warning text*/
-	.relative.px-2.py-2.text-center.text-xs.text-token-text-secondary.md\:px-\[60px\] {
-		color: transparent;
-		display: none;
-	}
-
-	[style*="--vt-disclaimer"],
-	#thread-bottom-container .text-token-text-secondary:has(> div > div > div > div),
-	#thread-bottom-container .select-none.active\:select-auto.data-has-range-start\:select-auto.flex.min-h-8.w-full.items-center.justify-center.p-2.text-xs {
+	[data-app-navigation-rail] button[aria-label="Help menu"],
+	[data-app-navigation-rail] button:not([data-sidebar-destination]):not([aria-label]),
+	[data-app-shell-page-sidebar] [data-testid*="upsell"],
+	[data-app-shell-page-sidebar] [data-testid*="promo"],
+	[data-app-shell-page-sidebar] a[href*="/pricing"],
+	[data-app-shell-page-sidebar] a[href*="/upgrade"] {
 		display: none !important;
-	}
-
-		.w-full.translate-y-4.px-2.py-2.text-center.text-xs.text-token-text-secondary.empty\:hidden.xs\:translate-y-8.md\:px-\[60px\][class~="@lg/thread:absolute"][class~="@lg/thread:bottom-0"][class~="@lg/thread:left-0"] {
-			color: transparent;
-			display: none;
-		}
-
-	.bg-token-bg-elevated-secondary.sticky.bottom-0.z-30.px-\[3px\].py-1\.5.group-data-scrolled-from-end\/scrollport\:shadow-\(--sharp-edge-bottom-shadow\).empty\:hidden {
-		display: none;
 	}
 }
 
 /******************************* Hide Mistakes Disclaimer *******************************/
 & when (@hideDisclaimer =1) {
+	[data-markdown-copy="exclude"].text-codex-description,
+	[data-testid="thread-disclaimer"],
 	.select-none.active\:select-auto.data-has-range-start\:select-auto.m-auto.flex.max-w-fit.items-center.justify-center.text-balance.text-xs.pointer-events-auto.rounded-full {
 		display: none !important;
 	}
@@ -3017,35 +2988,32 @@ textarea.w-full.resize-none.border-0.bg-transparent.px-1.py-0.pr-2.text-token-te
 
 /******************************* Display No Text Wrap ********************************/
 & when (@noTextWrap =1) {
-	.whitespace-nowrap {
-		white-space: break-spaces;
+	[data-app-shell-page-sidebar] .truncate,
+	[data-app-shell-page-sidebar] .text-ellipsis,
+	[data-app-shell-page-sidebar] [class*="line-clamp-"],
+	[data-app-shell-page-sidebar] [data-thread-title],
+	[data-app-shell-page-sidebar] [data-thread-title] span {
+		white-space: normal !important;
+		text-overflow: clip !important;
+		overflow: visible !important;
+		-webkit-line-clamp: unset !important;
+		animation: none !important;
+		transform: none !important;
 	}
 
-	.truncate {
-		text-overflow: initial;
-		white-space: break-spaces;
+	[data-app-shell-page-sidebar] [data-thread-title] > span,
+	[data-app-shell-page-sidebar] [data-thread-title] > span > span,
+	[data-app-shell-page-sidebar] [data-marquee-content] {
+		width: 100% !important;
+		max-width: 100% !important;
 	}
 
-	a.p-2 {
-		padding-right: 0;
-	}
-
-	.p-2 {
-		padding: 0;
-	}
-
-	li.relative {
-		margin-bottom: 7px;
-	}
-
-	.no-draggable.group.rounded-lg.active\:opacity-90.bg-\[var\(--item-background-color\)\].h-9.text-sm.relative {
-		--item-background-color: #000 !important;
-	}
-
-	.mt-5 {
-		padding-top: 0rem;
-		margin-top: 0;
-		box-sizing: border-box;
+	[data-app-shell-page-sidebar] .sidebar-item:has([data-thread-title]),
+	[data-app-shell-page-sidebar] [data-thread-title-trigger],
+	[data-app-shell-page-sidebar] [data-thread-title-trigger] [class~="h-full"],
+	[data-app-shell-page-sidebar] [data-thread-title] {
+		height: auto !important;
+		min-height: var(--height-token-row, 36px);
 	}
 }
 
@@ -3182,11 +3150,21 @@ body:has(#root) [data-oai-writing-block-surface] {
 body:has(#root) [data-composer-dark][data-composer-layout] {
 	background: linear-gradient(to left, var(--chat-box-color), transparent), var(--user-input-background-solid) !important;
 	border: 1px solid var(--line-color) !important;
+	border-radius: 1.5rem !important;
 	color: var(--main-body-output-text-color) !important;
+}
+
+body:has(#root) main[data-app-shell-main-surface] {
+	--color-surface: var(--user-input-background-solid);
+}
+
+body:has(#root) [class~="bg-gradient-to-t"][class~="from-surface"][class~="via-surface"] {
+	background: linear-gradient(to top, var(--user-input-background-solid), color-mix(in srgb, var(--user-input-background-solid) 70%, transparent), transparent) !important;
 }
 
 body:has(#root) [data-composer-body] {
 	background: linear-gradient(to left, var(--chat-box-color), transparent), var(--user-input-background-solid) !important;
+	border-radius: inherit !important;
 	box-shadow: none !important;
 	border: 0 !important;
 }
