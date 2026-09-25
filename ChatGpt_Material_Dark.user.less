@@ -6,6 +6,7 @@
 @author         Ameer Jamal
 @license        CC BY-ND 4.0
 @preprocessor   less
+@var select themePreset "Theme preset (Custom colors uses the controls below)" {"custom:Custom colors*":"custom","default:Material Dark":"default","oled:OLED Black":"oled","ocean:Deep Ocean":"ocean","forest:Deep Forest":"forest","nebula:Nebula Violet":"nebula","ember:Ember Noir":"ember","graphite:Graphite Slate":"graphite","nord:Nord Frost":"nord","rose:Rose Noir":"rose","cyber:Cyber Magenta":"cyber","aurum:Aurum Gold":"aurum","dracula:Dracula Violet":"dracula","github:GitHub Dimmed":"github","matrix:Matrix Rain":"matrix","dos:DOS Amber":"dos","solarized:Solarized Dusk":"solarized","crimson:Crimson Eclipse":"crimson","tokyo:Tokyo Afterglow":"tokyo","vaporwave:Vaporwave Drive":"vaporwave","monokai:Monokai Pop":"monokai","vscode:VS Code Dark Modern":"vscode","vscodePlus:VS Code Dark+":"vscodePlus","cursor:Cursor Dark":"cursor","cursorMidnight:Cursor Midnight":"cursorMidnight","onedark:One Dark Pro":"onedark","catppuccin:Catppuccin Mocha":"catppuccin","abyss:Abyss":"abyss","kimbie:Kimbie Dark":"kimbie","tomorrowNightBlue:Tomorrow Night Blue":"tomorrowNightBlue"}
 
 @var color userInputTextColor "User Input Text Color" rgb(105,187,197)
 @var color chatBoxColor "Chat Box Input Color" rgba(105,187,197,0.25)
@@ -64,11 +65,11 @@ regexp("https://chatgpt.com(/.*)?") {
 		--code-background: color-mix(in srgb, var(--user-input-background-solid) 86%, black);
 		--code-topbar: radial-gradient(circle at -5.9%, color-mix(in srgb, var(--user-input-text) 34%, var(--user-input-background-solid)) 0%, color-mix(in srgb, var(--user-input-text) 16%, var(--user-input-background-solid)) 15.9%, var(--code-background) 24.5%, var(--code-background) 100%);
 
-		--table-header: linear-gradient(to right, @gptOutputBackgroundColor 0%, @gptOutputBackgroundColor 20%, transparent 50%, @gptOutputBackgroundColor 80%, @gptOutputBackgroundColor 100%);
+		--table-header: linear-gradient(to right, var(--assistant-message-surface) 0%, var(--assistant-message-surface) 20%, transparent 50%, var(--assistant-message-surface) 80%, var(--assistant-message-surface) 100%);
 		--table-hover: #ffffff30;
 
 		/* space grey → black */
-		--canvas-top-bar-gradient: linear-gradient(to right, #0D0D0D, @gptOutputBackgroundColor);
+		--canvas-top-bar-gradient: linear-gradient(to right, #0D0D0D, var(--assistant-message-surface));
 		--chat-history-list: #C0C0C0;
 		--sidebar-surface-secondary: #676767a6;
 		--sidebar-chrome-tint: color-mix(in srgb, var(--user-input-text) 30%, transparent);
@@ -99,6 +100,907 @@ regexp("https://chatgpt.com(/.*)?") {
 		--lineColorAlpha30: fade(@lineColor, 30%);
 		--vertical-chat-lines: @verticalChatLines;
 	}
+
+	/* BEGIN GENERATED THEME PRESETS */
+	& when (@themePreset = default), (@themePreset = "default") {
+		:root {
+			--user-input-background: #121212;
+			--sidebar-surface: #121212;
+			--sidebar-surface-primary: #121212;
+			--sidebar-surface-tertiary: #121212;
+			--bg-elevated-secondary: #121212;
+			--user-input-text: #69bbc5;
+			--text-secondary: #69bbc5;
+			--chat-box-color: rgba(105,187,197,0.25);
+			--user-input-background-solid: #121212;
+			--cmd-user-bubble-surface: rgba(105,187,197,0.1);
+			--message-surface: rgba(105,187,197,0.1);
+			--message-border-color: rgba(105,187,197,0.42);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #C0C0C0;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #53b7ff;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(255,255,255,0.12);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = oled), (@themePreset = "oled") {
+		:root {
+			--user-input-background: #000000;
+			--sidebar-surface: #000000;
+			--sidebar-surface-primary: #000000;
+			--sidebar-surface-tertiary: #000000;
+			--bg-elevated-secondary: #000000;
+			--user-input-text: #69bbc5;
+			--text-secondary: #69bbc5;
+			--chat-box-color: rgba(105,187,197,0.25);
+			--user-input-background-solid: #000000;
+			--cmd-user-bubble-surface: rgba(0,0,0,0.35);
+			--message-surface: rgba(0,0,0,0.35);
+			--message-border-color: rgba(105,187,197,0.45);
+			--assistant-message-surface: #050505;
+			--main-body-output-text-color: #C0C0C0;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #53b7ff;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(255,255,255,0.16);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = ocean), (@themePreset = "ocean") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #05090d 0%, #071821 48%, #092a35 100%);
+			--sidebar-surface: linear-gradient(145deg, #05090d 0%, #071821 48%, #092a35 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #05090d 0%, #071821 48%, #092a35 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #05090d 0%, #071821 48%, #092a35 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #05090d 0%, #071821 48%, #092a35 100%);
+			--user-input-text: #7bd6e0;
+			--text-secondary: #7bd6e0;
+			--chat-box-color: rgba(123,214,224,0.22);
+			--user-input-background-solid: #061117;
+			--cmd-user-bubble-surface: rgba(123,214,224,0.18);
+			--message-surface: rgba(123,214,224,0.18);
+			--message-border-color: rgba(123,214,224,0.5);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #C0C0C0;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #5ecbff;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(123,214,224,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = forest), (@themePreset = "forest") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #050807 0%, #0b1a10 50%, #123321 100%);
+			--sidebar-surface: linear-gradient(145deg, #050807 0%, #0b1a10 50%, #123321 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #050807 0%, #0b1a10 50%, #123321 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #050807 0%, #0b1a10 50%, #123321 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #050807 0%, #0b1a10 50%, #123321 100%);
+			--user-input-text: #9bd69a;
+			--text-secondary: #9bd69a;
+			--chat-box-color: rgba(155,214,154,0.2);
+			--user-input-background-solid: #07120c;
+			--cmd-user-bubble-surface: rgba(155,214,154,0.18);
+			--message-surface: rgba(155,214,154,0.18);
+			--message-border-color: rgba(155,214,154,0.5);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #C0C0C0;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #88d9ff;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(155,214,154,0.3);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = nebula), (@themePreset = "nebula") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #070611 0%, #12091f 42%, #25103f 100%);
+			--sidebar-surface: linear-gradient(145deg, #070611 0%, #12091f 42%, #25103f 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #070611 0%, #12091f 42%, #25103f 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #070611 0%, #12091f 42%, #25103f 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #070611 0%, #12091f 42%, #25103f 100%);
+			--user-input-text: #d7b7ff;
+			--text-secondary: #d7b7ff;
+			--chat-box-color: rgba(183,133,255,0.2);
+			--user-input-background-solid: #090712;
+			--cmd-user-bubble-surface: rgba(183,133,255,0.18);
+			--message-surface: rgba(183,133,255,0.18);
+			--message-border-color: rgba(215,183,255,0.48);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #d8d2e6;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #b78cff;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(183,133,255,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = ember), (@themePreset = "ember") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #090403 0%, #1a0906 48%, #35110a 100%);
+			--sidebar-surface: linear-gradient(145deg, #090403 0%, #1a0906 48%, #35110a 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #090403 0%, #1a0906 48%, #35110a 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #090403 0%, #1a0906 48%, #35110a 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #090403 0%, #1a0906 48%, #35110a 100%);
+			--user-input-text: #ffb36b;
+			--text-secondary: #ffb36b;
+			--chat-box-color: rgba(255,128,64,0.2);
+			--user-input-background-solid: #120806;
+			--cmd-user-bubble-surface: rgba(255,128,64,0.16);
+			--message-surface: rgba(255,128,64,0.16);
+			--message-border-color: rgba(255,179,107,0.46);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #e4d0c4;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #ff8f5a;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(255,128,64,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = graphite), (@themePreset = "graphite") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #070a0f 0%, #111827 48%, #1f2937 100%);
+			--sidebar-surface: linear-gradient(145deg, #070a0f 0%, #111827 48%, #1f2937 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #070a0f 0%, #111827 48%, #1f2937 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #070a0f 0%, #111827 48%, #1f2937 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #070a0f 0%, #111827 48%, #1f2937 100%);
+			--user-input-text: #cbd5e1;
+			--text-secondary: #cbd5e1;
+			--chat-box-color: rgba(148,163,184,0.2);
+			--user-input-background-solid: #0b1018;
+			--cmd-user-bubble-surface: rgba(148,163,184,0.16);
+			--message-surface: rgba(148,163,184,0.16);
+			--message-border-color: rgba(203,213,225,0.42);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #d7dde8;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #93c5fd;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(148,163,184,0.26);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = nord), (@themePreset = "nord") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #070c14 0%, #101927 48%, #243244 100%);
+			--sidebar-surface: linear-gradient(145deg, #070c14 0%, #101927 48%, #243244 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #070c14 0%, #101927 48%, #243244 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #070c14 0%, #101927 48%, #243244 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #070c14 0%, #101927 48%, #243244 100%);
+			--user-input-text: #88c0d0;
+			--text-secondary: #88c0d0;
+			--chat-box-color: rgba(136,192,208,0.2);
+			--user-input-background-solid: #0b111b;
+			--cmd-user-bubble-surface: rgba(136,192,208,0.16);
+			--message-surface: rgba(136,192,208,0.16);
+			--message-border-color: rgba(136,192,208,0.48);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #d8dee9;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #81a1c1;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(136,192,208,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = rose), (@themePreset = "rose") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #09040a 0%, #1b0a19 46%, #35112f 100%);
+			--sidebar-surface: linear-gradient(145deg, #09040a 0%, #1b0a19 46%, #35112f 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #09040a 0%, #1b0a19 46%, #35112f 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #09040a 0%, #1b0a19 46%, #35112f 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #09040a 0%, #1b0a19 46%, #35112f 100%);
+			--user-input-text: #f0a6ca;
+			--text-secondary: #f0a6ca;
+			--chat-box-color: rgba(240,166,202,0.2);
+			--user-input-background-solid: #120711;
+			--cmd-user-bubble-surface: rgba(240,166,202,0.16);
+			--message-surface: rgba(240,166,202,0.16);
+			--message-border-color: rgba(240,166,202,0.46);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #ead7e2;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #ff8ec7;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(240,166,202,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = cyber), (@themePreset = "cyber") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #05040d 0%, #10071f 46%, #271047 100%);
+			--sidebar-surface: linear-gradient(145deg, #05040d 0%, #10071f 46%, #271047 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #05040d 0%, #10071f 46%, #271047 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #05040d 0%, #10071f 46%, #271047 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #05040d 0%, #10071f 46%, #271047 100%);
+			--user-input-text: #ff4fd8;
+			--text-secondary: #ff4fd8;
+			--chat-box-color: rgba(255,79,216,0.2);
+			--user-input-background-solid: #080713;
+			--cmd-user-bubble-surface: rgba(255,79,216,0.15);
+			--message-surface: rgba(255,79,216,0.15);
+			--message-border-color: rgba(255,79,216,0.46);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #eadcf2;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #38d5ff;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(255,79,216,0.27);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = aurum), (@themePreset = "aurum") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #070501 0%, #1a1104 48%, #352408 100%);
+			--sidebar-surface: linear-gradient(145deg, #070501 0%, #1a1104 48%, #352408 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #070501 0%, #1a1104 48%, #352408 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #070501 0%, #1a1104 48%, #352408 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #070501 0%, #1a1104 48%, #352408 100%);
+			--user-input-text: #f6d365;
+			--text-secondary: #f6d365;
+			--chat-box-color: rgba(246,211,101,0.2);
+			--user-input-background-solid: #100b03;
+			--cmd-user-bubble-surface: rgba(246,211,101,0.15);
+			--message-surface: rgba(246,211,101,0.15);
+			--message-border-color: rgba(246,211,101,0.44);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #e8dcc2;
+			--code-key-words: #E8922E;
+			--heading-output: #ffffff;
+			--bold-output: #e5fdff;
+			--links-output: #ffcf5f;
+			--vertical-chat-lines: #2fffd2;
+			--line-color: rgba(246,211,101,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = dracula), (@themePreset = "dracula") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #14111c 0%, #211a2f 48%, #332846 100%);
+			--sidebar-surface: linear-gradient(145deg, #14111c 0%, #211a2f 48%, #332846 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #14111c 0%, #211a2f 48%, #332846 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #14111c 0%, #211a2f 48%, #332846 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #14111c 0%, #211a2f 48%, #332846 100%);
+			--user-input-text: #ff79c6;
+			--text-secondary: #ff79c6;
+			--chat-box-color: rgba(255,121,198,0.2);
+			--user-input-background-solid: #191622;
+			--cmd-user-bubble-surface: rgba(255,121,198,0.16);
+			--message-surface: rgba(255,121,198,0.16);
+			--message-border-color: rgba(189,147,249,0.48);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #f8f8f2;
+			--code-key-words: #ffb86c;
+			--heading-output: #bd93f9;
+			--bold-output: #f1fa8c;
+			--links-output: #8be9fd;
+			--vertical-chat-lines: #50fa7b;
+			--line-color: rgba(189,147,249,0.3);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = github), (@themePreset = "github") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #090c10 0%, #0d1117 48%, #161b22 100%);
+			--sidebar-surface: linear-gradient(145deg, #090c10 0%, #0d1117 48%, #161b22 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #090c10 0%, #0d1117 48%, #161b22 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #090c10 0%, #0d1117 48%, #161b22 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #090c10 0%, #0d1117 48%, #161b22 100%);
+			--user-input-text: #58a6ff;
+			--text-secondary: #58a6ff;
+			--chat-box-color: rgba(88,166,255,0.18);
+			--user-input-background-solid: #0d1117;
+			--cmd-user-bubble-surface: rgba(88,166,255,0.14);
+			--message-surface: rgba(88,166,255,0.14);
+			--message-border-color: rgba(88,166,255,0.42);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #c9d1d9;
+			--code-key-words: #ff7b72;
+			--heading-output: #d2a8ff;
+			--bold-output: #f0f6fc;
+			--links-output: #58a6ff;
+			--vertical-chat-lines: #3fb950;
+			--line-color: rgba(139,148,158,0.26);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = matrix), (@themePreset = "matrix") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #000300 0%, #031006 48%, #06240d 100%);
+			--sidebar-surface: linear-gradient(145deg, #000300 0%, #031006 48%, #06240d 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #000300 0%, #031006 48%, #06240d 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #000300 0%, #031006 48%, #06240d 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #000300 0%, #031006 48%, #06240d 100%);
+			--user-input-text: #00ff41;
+			--text-secondary: #00ff41;
+			--chat-box-color: rgba(0,255,65,0.18);
+			--user-input-background-solid: #020802;
+			--cmd-user-bubble-surface: rgba(0,255,65,0.13);
+			--message-surface: rgba(0,255,65,0.13);
+			--message-border-color: rgba(0,255,65,0.5);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #c8ffd6;
+			--code-key-words: #00ff41;
+			--heading-output: #7cff9b;
+			--bold-output: #eaffee;
+			--links-output: #20ff8a;
+			--vertical-chat-lines: #00b82f;
+			--line-color: rgba(0,255,65,0.3);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = dos), (@themePreset = "dos") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #030200 0%, #120c02 48%, #2a1a03 100%);
+			--sidebar-surface: linear-gradient(145deg, #030200 0%, #120c02 48%, #2a1a03 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #030200 0%, #120c02 48%, #2a1a03 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #030200 0%, #120c02 48%, #2a1a03 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #030200 0%, #120c02 48%, #2a1a03 100%);
+			--user-input-text: #ffbf3f;
+			--text-secondary: #ffbf3f;
+			--chat-box-color: rgba(255,191,63,0.18);
+			--user-input-background-solid: #090601;
+			--cmd-user-bubble-surface: rgba(255,191,63,0.14);
+			--message-surface: rgba(255,191,63,0.14);
+			--message-border-color: rgba(255,191,63,0.48);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #ffe2a3;
+			--code-key-words: #ffcf6b;
+			--heading-output: #ffd37a;
+			--bold-output: #fff1cf;
+			--links-output: #ffb000;
+			--vertical-chat-lines: #c98500;
+			--line-color: rgba(255,191,63,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = solarized), (@themePreset = "solarized") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #001217 0%, #002b36 48%, #073642 100%);
+			--sidebar-surface: linear-gradient(145deg, #001217 0%, #002b36 48%, #073642 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #001217 0%, #002b36 48%, #073642 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #001217 0%, #002b36 48%, #073642 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #001217 0%, #002b36 48%, #073642 100%);
+			--user-input-text: #2aa198;
+			--text-secondary: #2aa198;
+			--chat-box-color: rgba(42,161,152,0.2);
+			--user-input-background-solid: #001b23;
+			--cmd-user-bubble-surface: rgba(42,161,152,0.15);
+			--message-surface: rgba(42,161,152,0.15);
+			--message-border-color: rgba(42,161,152,0.46);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #eee8d5;
+			--code-key-words: #b58900;
+			--heading-output: #268bd2;
+			--bold-output: #fdf6e3;
+			--links-output: #268bd2;
+			--vertical-chat-lines: #859900;
+			--line-color: rgba(42,161,152,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = crimson), (@themePreset = "crimson") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #080203 0%, #1d070c 48%, #3b0b16 100%);
+			--sidebar-surface: linear-gradient(145deg, #080203 0%, #1d070c 48%, #3b0b16 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #080203 0%, #1d070c 48%, #3b0b16 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #080203 0%, #1d070c 48%, #3b0b16 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #080203 0%, #1d070c 48%, #3b0b16 100%);
+			--user-input-text: #ff647c;
+			--text-secondary: #ff647c;
+			--chat-box-color: rgba(255,100,124,0.2);
+			--user-input-background-solid: #140609;
+			--cmd-user-bubble-surface: rgba(255,100,124,0.16);
+			--message-surface: rgba(255,100,124,0.16);
+			--message-border-color: rgba(255,100,124,0.5);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #f2d9de;
+			--code-key-words: #ff9f43;
+			--heading-output: #ff6b81;
+			--bold-output: #fff0f3;
+			--links-output: #ff7a90;
+			--vertical-chat-lines: #d93654;
+			--line-color: rgba(255,100,124,0.3);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = tokyo), (@themePreset = "tokyo") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #050611 0%, #101327 48%, #242044 100%);
+			--sidebar-surface: linear-gradient(145deg, #050611 0%, #101327 48%, #242044 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #050611 0%, #101327 48%, #242044 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #050611 0%, #101327 48%, #242044 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #050611 0%, #101327 48%, #242044 100%);
+			--user-input-text: #7aa2f7;
+			--text-secondary: #7aa2f7;
+			--chat-box-color: rgba(122,162,247,0.2);
+			--user-input-background-solid: #090b18;
+			--cmd-user-bubble-surface: rgba(122,162,247,0.16);
+			--message-surface: rgba(122,162,247,0.16);
+			--message-border-color: rgba(187,154,247,0.48);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #c0caf5;
+			--code-key-words: #bb9af7;
+			--heading-output: #7dcfff;
+			--bold-output: #e0e6ff;
+			--links-output: #7aa2f7;
+			--vertical-chat-lines: #9ece6a;
+			--line-color: rgba(122,162,247,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = vaporwave), (@themePreset = "vaporwave") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #040311 0%, #11102d 46%, #351052 100%);
+			--sidebar-surface: linear-gradient(145deg, #040311 0%, #11102d 46%, #351052 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #040311 0%, #11102d 46%, #351052 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #040311 0%, #11102d 46%, #351052 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #040311 0%, #11102d 46%, #351052 100%);
+			--user-input-text: #5ef2ff;
+			--text-secondary: #5ef2ff;
+			--chat-box-color: rgba(94,242,255,0.2);
+			--user-input-background-solid: #09061a;
+			--cmd-user-bubble-surface: rgba(255,91,214,0.16);
+			--message-surface: rgba(255,91,214,0.16);
+			--message-border-color: rgba(94,242,255,0.5);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #eee6ff;
+			--code-key-words: #ffe66d;
+			--heading-output: #ff5bd6;
+			--bold-output: #ffffff;
+			--links-output: #ff72dc;
+			--vertical-chat-lines: #5ef2ff;
+			--line-color: rgba(151,101,255,0.32);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = monokai), (@themePreset = "monokai") {
+		:root {
+			--user-input-background: linear-gradient(145deg, #0b0b08 0%, #171711 48%, #27251a 100%);
+			--sidebar-surface: linear-gradient(145deg, #0b0b08 0%, #171711 48%, #27251a 100%);
+			--sidebar-surface-primary: linear-gradient(145deg, #0b0b08 0%, #171711 48%, #27251a 100%);
+			--sidebar-surface-tertiary: linear-gradient(145deg, #0b0b08 0%, #171711 48%, #27251a 100%);
+			--bg-elevated-secondary: linear-gradient(145deg, #0b0b08 0%, #171711 48%, #27251a 100%);
+			--user-input-text: #a6e22e;
+			--text-secondary: #a6e22e;
+			--chat-box-color: rgba(166,226,46,0.18);
+			--user-input-background-solid: #12120e;
+			--cmd-user-bubble-surface: rgba(166,226,46,0.14);
+			--message-surface: rgba(166,226,46,0.14);
+			--message-border-color: rgba(249,38,114,0.44);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #f8f8f2;
+			--code-key-words: #f92672;
+			--heading-output: #fd971f;
+			--bold-output: #f8f8f2;
+			--links-output: #66d9ef;
+			--vertical-chat-lines: #ae81ff;
+			--line-color: rgba(166,226,46,0.26);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = vscode), (@themePreset = "vscode") {
+		:root {
+			--user-input-background: #1f1f1f;
+			--sidebar-surface: #1f1f1f;
+			--sidebar-surface-primary: #1f1f1f;
+			--sidebar-surface-tertiary: #1f1f1f;
+			--bg-elevated-secondary: #1f1f1f;
+			--user-input-text: #4daafc;
+			--text-secondary: #4daafc;
+			--chat-box-color: rgba(77,170,252,0.18);
+			--user-input-background-solid: #1f1f1f;
+			--cmd-user-bubble-surface: rgba(0,120,212,0.16);
+			--message-surface: rgba(0,120,212,0.16);
+			--message-border-color: rgba(77,170,252,0.42);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #cccccc;
+			--code-key-words: #c586c0;
+			--heading-output: #4ec9b0;
+			--bold-output: #ffffff;
+			--links-output: #4daafc;
+			--vertical-chat-lines: #0078d4;
+			--line-color: rgba(255,255,255,0.09);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = vscodePlus), (@themePreset = "vscodePlus") {
+		:root {
+			--user-input-background: #1e1e1e;
+			--sidebar-surface: #1e1e1e;
+			--sidebar-surface-primary: #1e1e1e;
+			--sidebar-surface-tertiary: #1e1e1e;
+			--bg-elevated-secondary: #1e1e1e;
+			--user-input-text: #569cd6;
+			--text-secondary: #569cd6;
+			--chat-box-color: rgba(86,156,214,0.18);
+			--user-input-background-solid: #1e1e1e;
+			--cmd-user-bubble-surface: rgba(86,156,214,0.14);
+			--message-surface: rgba(86,156,214,0.14);
+			--message-border-color: rgba(86,156,214,0.42);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #d4d4d4;
+			--code-key-words: #c586c0;
+			--heading-output: #4ec9b0;
+			--bold-output: #dcdcaa;
+			--links-output: #3794ff;
+			--vertical-chat-lines: #6a9955;
+			--line-color: rgba(255,255,255,0.12);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = cursor), (@themePreset = "cursor") {
+		:root {
+			--user-input-background: #181818;
+			--sidebar-surface: #181818;
+			--sidebar-surface-primary: #181818;
+			--sidebar-surface-tertiary: #181818;
+			--bg-elevated-secondary: #181818;
+			--user-input-text: #81a1c1;
+			--text-secondary: #81a1c1;
+			--chat-box-color: rgba(129,161,193,0.18);
+			--user-input-background-solid: #181818;
+			--cmd-user-bubble-surface: rgba(240,240,240,0.08);
+			--message-surface: rgba(240,240,240,0.08);
+			--message-border-color: rgba(129,161,193,0.4);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #f0f0f0;
+			--code-key-words: #82d2ce;
+			--heading-output: #efb080;
+			--bold-output: #aaa0fa;
+			--links-output: #81a1c1;
+			--vertical-chat-lines: #a8cc7c;
+			--line-color: rgba(240,240,240,0.12);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = cursorMidnight), (@themePreset = "cursorMidnight") {
+		:root {
+			--user-input-background: #1e2127;
+			--sidebar-surface: #1e2127;
+			--sidebar-surface-primary: #1e2127;
+			--sidebar-surface-tertiary: #1e2127;
+			--bg-elevated-secondary: #1e2127;
+			--user-input-text: #88c0d0;
+			--text-secondary: #88c0d0;
+			--chat-box-color: rgba(136,192,208,0.18);
+			--user-input-background-solid: #1e2127;
+			--cmd-user-bubble-surface: rgba(136,192,208,0.12);
+			--message-surface: rgba(136,192,208,0.12);
+			--message-border-color: rgba(143,188,187,0.4);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #7b88a1;
+			--code-key-words: #81a1c1;
+			--heading-output: #8fbcbb;
+			--bold-output: #d8dee9;
+			--links-output: #8fbcbb;
+			--vertical-chat-lines: #a3be8c;
+			--line-color: rgba(136,192,208,0.22);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = onedark), (@themePreset = "onedark") {
+		:root {
+			--user-input-background: #282c34;
+			--sidebar-surface: #282c34;
+			--sidebar-surface-primary: #282c34;
+			--sidebar-surface-tertiary: #282c34;
+			--bg-elevated-secondary: #282c34;
+			--user-input-text: #61afef;
+			--text-secondary: #61afef;
+			--chat-box-color: rgba(97,175,239,0.18);
+			--user-input-background-solid: #282c34;
+			--cmd-user-bubble-surface: rgba(97,175,239,0.14);
+			--message-surface: rgba(97,175,239,0.14);
+			--message-border-color: rgba(97,175,239,0.4);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #abb2bf;
+			--code-key-words: #c678dd;
+			--heading-output: #e5c07b;
+			--bold-output: #e06c75;
+			--links-output: #61afef;
+			--vertical-chat-lines: #98c379;
+			--line-color: rgba(171,178,191,0.2);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = catppuccin), (@themePreset = "catppuccin") {
+		:root {
+			--user-input-background: #1e1e2e;
+			--sidebar-surface: #1e1e2e;
+			--sidebar-surface-primary: #1e1e2e;
+			--sidebar-surface-tertiary: #1e1e2e;
+			--bg-elevated-secondary: #1e1e2e;
+			--user-input-text: #89b4fa;
+			--text-secondary: #89b4fa;
+			--chat-box-color: rgba(137,180,250,0.18);
+			--user-input-background-solid: #1e1e2e;
+			--cmd-user-bubble-surface: rgba(203,166,247,0.14);
+			--message-surface: rgba(203,166,247,0.14);
+			--message-border-color: rgba(137,180,250,0.42);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #cdd6f4;
+			--code-key-words: #cba6f7;
+			--heading-output: #f9e2af;
+			--bold-output: #f5c2e7;
+			--links-output: #89b4fa;
+			--vertical-chat-lines: #a6e3a1;
+			--line-color: rgba(108,112,134,0.45);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = abyss), (@themePreset = "abyss") {
+		:root {
+			--user-input-background: #000c18;
+			--sidebar-surface: #000c18;
+			--sidebar-surface-primary: #000c18;
+			--sidebar-surface-tertiary: #000c18;
+			--bg-elevated-secondary: #000c18;
+			--user-input-text: #6688cc;
+			--text-secondary: #6688cc;
+			--chat-box-color: rgba(102,136,204,0.2);
+			--user-input-background-solid: #000c18;
+			--cmd-user-bubble-surface: rgba(8,40,107,0.45);
+			--message-surface: rgba(8,40,107,0.45);
+			--message-border-color: rgba(89,111,153,0.5);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #6688cc;
+			--code-key-words: #225588;
+			--heading-output: #ffeebb;
+			--bold-output: #ddbb88;
+			--links-output: #bbdaff;
+			--vertical-chat-lines: #596f99;
+			--line-color: rgba(102,136,204,0.28);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = kimbie), (@themePreset = "kimbie") {
+		:root {
+			--user-input-background: #221a0f;
+			--sidebar-surface: #221a0f;
+			--sidebar-surface-primary: #221a0f;
+			--sidebar-surface-tertiary: #221a0f;
+			--bg-elevated-secondary: #221a0f;
+			--user-input-text: #d3af86;
+			--text-secondary: #d3af86;
+			--chat-box-color: rgba(211,175,134,0.2);
+			--user-input-background-solid: #221a0f;
+			--cmd-user-bubble-surface: rgba(124,80,33,0.35);
+			--message-surface: rgba(124,80,33,0.35);
+			--message-border-color: rgba(165,122,76,0.48);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #d3af86;
+			--code-key-words: #f06431;
+			--heading-output: #8ab1b0;
+			--bold-output: #e4c6a0;
+			--links-output: #8ab1b0;
+			--vertical-chat-lines: #a57a4c;
+			--line-color: rgba(211,175,134,0.26);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+
+	& when (@themePreset = tomorrowNightBlue), (@themePreset = "tomorrowNightBlue") {
+		:root {
+			--user-input-background: #002451;
+			--sidebar-surface: #002451;
+			--sidebar-surface-primary: #002451;
+			--sidebar-surface-tertiary: #002451;
+			--bg-elevated-secondary: #002451;
+			--user-input-text: #bbdaff;
+			--text-secondary: #bbdaff;
+			--chat-box-color: rgba(187,218,255,0.18);
+			--user-input-background-solid: #002451;
+			--cmd-user-bubble-surface: rgba(187,218,255,0.12);
+			--message-surface: rgba(187,218,255,0.12);
+			--message-border-color: rgba(187,218,255,0.4);
+			--assistant-message-surface: rgba(0,0,0,0);
+			--main-body-output-text-color: #ffffff;
+			--code-key-words: #ebbbff;
+			--heading-output: #bbdaff;
+			--bold-output: #ffffff;
+			--links-output: #bbdaff;
+			--vertical-chat-lines: #7285b7;
+			--line-color: rgba(187,218,255,0.24);
+			--user-input-text-less-transparent: color-mix(in srgb, var(--user-input-text) 40%, transparent);
+			--lineColorAlpha20: color-mix(in srgb, var(--line-color) 20%, transparent);
+			--lineColorAlpha30: color-mix(in srgb, var(--line-color) 30%, transparent);
+			--assistant-response-border: 0;
+			--assistant-response-radius: 0;
+			--assistant-response-padding: 0;
+		}
+	}
+	/* END GENERATED THEME PRESETS */
 
 	/*********************************************************************************/
 	/**************HOME PAGE WHEN NEW CHAT STARTING **********************************/
@@ -3083,6 +3985,59 @@ body:has(#root) [data-app-navigation-rail="true"] button:is(:hover, :focus-visib
 	color: var(--user-input-text) !important;
 }
 
+body:has(#root) .cmd-sidebar-collapse-button,
+body:has(#root) .cmd-sidebar-restore-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border: 1px solid var(--line-color) !important;
+	border-radius: 10px !important;
+	background: var(--user-input-background-solid) !important;
+	color: var(--user-input-text) !important;
+	cursor: pointer;
+}
+
+body:has(#root) .cmd-sidebar-collapse-button:hover,
+body:has(#root) .cmd-sidebar-restore-button:hover {
+	background: color-mix(in srgb, var(--user-input-text) 18%, var(--user-input-background-solid)) !important;
+}
+
+body:has(#root) .cmd-sidebar-collapse-button:focus-visible,
+body:has(#root) .cmd-sidebar-restore-button:focus-visible {
+	outline: 2px solid var(--user-input-text);
+	outline-offset: 2px;
+}
+
+body:has(#root) .cmd-sidebar-collapse-button svg,
+body:has(#root) .cmd-sidebar-restore-button svg {
+	width: 18px;
+	height: 18px;
+}
+
+body:has(#root) .cmd-sidebar-restore-button {
+	display: none;
+	position: fixed;
+	top: 12px;
+	left: 12px;
+	z-index: 10000;
+	box-shadow: 0 4px 14px color-mix(in srgb, black 45%, transparent);
+}
+
+body.cmd-sidebar-collapsed [data-app-shell-frame="true"] {
+	--app-shell-animated-left-panel-width: 0px !important;
+	--app-shell-left-panel-width: 0px !important;
+}
+
+body.cmd-sidebar-collapsed [data-app-shell-workspace-row="true"] > aside[data-app-shell-left-panel-appearance] {
+	display: none !important;
+}
+
+body.cmd-sidebar-collapsed .cmd-sidebar-restore-button {
+	display: inline-flex !important;
+}
+
 body:has(#root) [data-user-message-bubble="true"] {
 	background: var(--cmd-user-bubble-surface) !important;
 	background-image: none !important;
@@ -3152,6 +4107,14 @@ body:has(#root) [data-composer-dark][data-composer-layout] {
 	border: 1px solid var(--line-color) !important;
 	border-radius: 1.5rem !important;
 	color: var(--main-body-output-text-color) !important;
+}
+
+body:has(#root) [class*="ComposerModeSurface-"] {
+	background: linear-gradient(to left, var(--chat-box-color), transparent), var(--user-input-background-solid) !important;
+	border: 1px solid var(--line-color) !important;
+	border-radius: 1.5rem !important;
+	box-shadow: none !important;
+	overflow: hidden;
 }
 
 body:has(#root) main[data-app-shell-main-surface] {
